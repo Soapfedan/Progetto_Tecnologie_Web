@@ -1,0 +1,42 @@
+<ul>
+	<li class="active"><a href=" <?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'viewstatic',
+                        'staticPage' => 'index'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>"
+		accesskey="1" title="">Homepage</a></li>
+	<li><a
+		href="
+                <?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'viewstatic',
+                        'staticPage' => 'who'), 
+                        'default',true
+                    ); 
+                 ?>"
+		accesskey="2" title="">Chi siamo</a></li>
+	<li><a
+		href="
+                <?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'viewstatic',
+                        'staticPage' => 'where'), 
+                        'default',true
+                    ); 
+                 ?>"
+		accesskey="3" title="">Dove Siamo</a></li>
+	<li><a
+        href="
+                <?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'viewstatic',
+                        'staticPage' => 'faq'), 
+                        'default',true
+                    ); 
+                 ?>"
+        accesskey="4" title="">FAQ</a></li>
+   
+</ul>

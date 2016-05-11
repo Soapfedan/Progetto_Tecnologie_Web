@@ -1,0 +1,30 @@
+<?php echo $this->doctype() ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <?= $this->headMeta(); ?>
+    <?= $this->headLink(); ?>
+    <?= $this->headTitle(); ?>
+</head>
+<body>
+<div id="header-wrapper">
+	<div id="header" class="container">
+		<div id="logo">
+			<h1><a href="#">WebProject</a></h1>
+		</div>
+		<div id="menu">
+		    <?= $this->render('_topnavmain.phtml') ?>
+		
+	</div>
+	<div id="banner" class="container"><span>Maecenas vitae orci vitae<br />
+		tellus feugiat eleifend</span></div>
+</div>
+<div id="wrapper">
+	<?php echo $this->layout()->content; ?>
+</div>
+<div id="copyright" class="container">
+	<p>&copy; Untitled. All rights reserved. | Photos by <a href="http://fotogrph.com/">Fotogrph</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p>
+</div>
+</body>
+</html>
