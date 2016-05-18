@@ -2,17 +2,18 @@
 
 class Application_Resource_Faq extends Zend_Db_Table_Abstract
 {
-    protected $_name    = 'faq';
+    protected $_name     = 'faq';
     protected $_primary  = 'ID';
     protected $_rowClass = 'Application_Resource_Faq_Item';
     
 	public function init()
     {
+    	$i=0;
     }
 /*
 	// Estrae i dati della categoria $id
     public function getCatById($id)
-    {
+    {gfgf
         return $this->find($id)->current();
     }
     
