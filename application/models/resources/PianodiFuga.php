@@ -19,15 +19,16 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
                          array('Piano_di_fuga', 'Piano_di_fuga_alternativo'))
                         ->where('Zona =?',$zone)
                         ->where('Id_piano =?',$floor);
-        $result= $this->fetchAll($select);
-        $escapeplan=$result[0]['Piano_di_fuga'];
-        if($result[0]['Piano_di_fuga_alternativo']!=null){
-            $escapeplan=$result[0]['Piano_di_fuga_alternativo'];
+        $result= $this->fetch($select);
+        $escapeplan=$result['Piano_di_fuga'];
+        if($result['Piano_di_fuga_alternativo']!=null){
+            $escapeplan=$result['Piano_di_fuga_alternativo'];
         }
         
          return $escapeplan;   
             
     }
+   
 
 }
 

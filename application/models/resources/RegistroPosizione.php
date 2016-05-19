@@ -18,7 +18,7 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
                        ->from("registro_posizione", array("Num"=>"COUNT(*)"))
                        ->where('Id_piano =?',$floor);                       
                        
-         $result=$this->fetchAll($select);
+         $result=$this->fetch($select);
         
          return $result["Num"];
         
@@ -29,12 +29,14 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
     public function getZoneNumPeople($zone,$floor){
             
         $select = $this->select()
-                       ->from("registro_posizione", array("Num"=>"COUNT(*)"))
+                       ->from("registro_posizione", array("Num"=>"COUNT(Zona)"))
                        ->where('Id_piano =?',$floor)                       
-                       ->where('Zona =?',$zone); 
-         $result=$this->fetchAll($select);
+                       ->where('Zona =?',$zone)
+                       ->group('Zona')
+                       ->order('Zona'); 
+         return $this->fetchAll($select);
         
-         return $result["Num"];
+         
     }
     
     //Estrae la posizione di un utente
@@ -44,7 +46,7 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
         $select = $this->select()
                        ->where('Utente =?',$username);                       
                        
-        return $this->fetchAll($select);
+        return $this->fetch($select);
         
         
     }
