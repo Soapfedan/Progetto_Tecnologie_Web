@@ -9,53 +9,32 @@ class Application_Resource_Segnalazione extends Zend_Db_Table_Abstract
 	public function init()
     {
     }
-
-	// Estrae i dati della categoria $id
-    public function getCatById($id)
-    {
-        return $this->find($id)->current();
-    }
     
-	// Estrae tutte le categorie Top
-    public function getTopCats()
-    {
-		$select = $this->select()
-					   ->where('parId = 0')
-                       ->order('name');
-        return $this->fetchAll($select);
-    }
-
-	// Estrae tutte le Sottocategorie
-    public function getSubCats()
-    {
-		$select = $this->select()
-					   ->where('parId != 0')
-                       ->order('name');
-        return $this->fetchAll($select);
-    }
+    //estrae tutte le segnalazioni per quella zona catalogate per segnalazione
     
-	// Estrae le categorie figlie dirette ($deep===false) o discendenti ($deep===true) di $catId
-    public function getCatChilIds($catId, $deep = false)
-    {    	
-    	$categories = $this->getCatsByParId($catId);
-    	$cats = array();
-    	
-        foreach ($categories as $cat) {
-            $cats[] = $cat->catId;
-            if (true === $deep) {
-                $cats = array_merge($cats, $this->getCatChilIds($cat->catId, true));
-            }
-        }
-        return $cats;
-    }
-
-	// Estrae le categorie figlie dirette di $parId    
-    public function getCatsByParId($parId)
-    {
+    public function getZonesInformation($floor,$immo,$zone){
         $select = $this->select()
-                        ->where('parId IN(?)', $parId)
-                        ->order('name');
+                        ->where('Id_piano =?',$floor)
+                        ->where('Immobile =?',$immo)
+                        ->where('Codice_Zona =?',$zone)
+                        ->group('Tipo_Catastrofe');
         return $this->fetchAll($select);
-    }       
+    }
+    
+    //estrae il numero di segnalazioni per zona
+    
+    public function getZonesAlertsNumb($floor,$immo){
+        $select = $this->select()
+                        ->from('segnalazione',array("Num"=>"COUNT(Tipo_Catastrofe)","Catastrofe"=>"Tipo_Catastrofe"))
+                        ->where('Id_piano =?',$floor)
+                        ->where('Immobile =?',$immo)
+                        ->where('Codice_Zona =?',$zone)
+                        ->group('Tipo_Catastrofe');
+        
+        $result=$this->fetchAll($select);
+        
+         return array($result["Catastrofe"],$result["Num"]);
+    }
+    
 }
 

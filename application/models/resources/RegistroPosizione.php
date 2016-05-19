@@ -9,53 +9,44 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
 	public function init()
     {
     }
-/*
-	// Estrae i dati della categoria $id
-    public function getCatById($id)
-    {
-        return $this->find($id)->current();
-    }
     
-	// Estrae tutte le categorie Top
-    public function getTopCats()
-    {
-		$select = $this->select()
-					   ->where('parId = 0')
-                       ->order('name');
-        return $this->fetchAll($select);
-    }
-
-	// Estrae tutte le Sottocategorie
-    public function getSubCats()
-    {
-		$select = $this->select()
-					   ->where('parId != 0')
-                       ->order('name');
-        return $this->fetchAll($select);
-    }
+    //Estrae il numero di persone per piano
     
-	// Estrae le categorie figlie dirette ($deep===false) o discendenti ($deep===true) di $catId
-    public function getCatChilIds($catId, $deep = false)
-    {    	
-    	$categories = $this->getCatsByParId($catId);
-    	$cats = array();
-    	
-        foreach ($categories as $cat) {
-            $cats[] = $cat->catId;
-            if (true === $deep) {
-                $cats = array_merge($cats, $this->getCatChilIds($cat->catId, true));
-            }
-        }
-        return $cats;
-    }
-
-	// Estrae le categorie figlie dirette di $parId    
-    public function getCatsByParId($parId)
-    {
+    public function getFloorNumPeople($floor){
+        
         $select = $this->select()
-                        ->where('parId IN(?)', $parId)
-                        ->order('name');
+                       ->from("registro_posizione", array("Num"=>"COUNT(*)"))
+                       ->where('Id_piano =?',$floor);                       
+                       
+         $result=$this->fetchAll($select);
+        
+         return $result["Num"];
+        
+    }
+    
+    //Estrae il numero di persone per zona
+    
+    public function getZoneNumPeople($zone,$floor){
+            
+        $select = $this->select()
+                       ->from("registro_posizione", array("Num"=>"COUNT(*)"))
+                       ->where('Id_piano =?',$floor)                       
+                       ->where('Zona =?',$zone); 
+         $result=$this->fetchAll($select);
+        
+         return $result["Num"];
+    }
+    
+    //Estrae la posizione di un utente
+    
+    public function getPosition($username){
+        
+        $select = $this->select()
+                       ->where('Utente =?',$username);                       
+                       
         return $this->fetchAll($select);
-    }   */    
+        
+        
+    }
 }
 

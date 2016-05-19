@@ -9,53 +9,25 @@ class Application_Resource_User extends Zend_Db_Table_Abstract
 	public function init()
     {
     }
-/*
-	// Estrae i dati della categoria $id
-    public function getCatById($id)
-    {
-        return $this->find($id)->current();
-    }
-    
-	// Estrae tutte le categorie Top
-    public function getTopCats()
-    {
-		$select = $this->select()
-					   ->where('parId = 0')
-                       ->order('name');
-        return $this->fetchAll($select);
-    }
 
-	// Estrae tutte le Sottocategorie
-    public function getSubCats()
-    {
-		$select = $this->select()
-					   ->where('parId != 0')
-                       ->order('name');
-        return $this->fetchAll($select);
-    }
-    
-	// Estrae le categorie figlie dirette ($deep===false) o discendenti ($deep===true) di $catId
-    public function getCatChilIds($catId, $deep = false)
-    {    	
-    	$categories = $this->getCatsByParId($catId);
-    	$cats = array();
-    	
-        foreach ($categories as $cat) {
-            $cats[] = $cat->catId;
-            if (true === $deep) {
-                $cats = array_merge($cats, $this->getCatChilIds($cat->catId, true));
-            }
-        }
-        return $cats;
-    }
+    //Estrazione di tutte le informazioni dell'utente
 
-	// Estrae le categorie figlie dirette di $parId    
-    public function getCatsByParId($parId)
-    {
+    public function getUserInformation($username){
         $select = $this->select()
-                        ->where('parId IN(?)', $parId)
-                        ->order('name');
+                        ->where('Username =?',$username);
+        return $this->fetch($select);
+    }
+    
+    //Estrae tutte le infomazioni di tutti gli utenti
+    public function getAllUsers(){
+        
+        $select = $this->select()
+                       ->order('Cognome')
+                       ->order('Nome')
+                       ->order('Username');
         return $this->fetchAll($select);
-    }    */   
+        
+    }
+   
 }
 

@@ -7,38 +7,92 @@ class Application_Model_ModelHandler extends App_Model_Abstract
     {
 		$this->_logger = Zend_Registry::get('log');  	
 	}
-/*
-    public function getTopCats()
-    {
-		return $this->getResource('Category')->getTopCats();
-    }
-    public function getCatById($id)
-    {
-        return $this->getResource('Category')->getCatById($id);
-    }
 
-    public function getCatsByParId($parId)
+    //FAQ
+
+    public function extractFaq()
     {
-        return $this->getResource('Category')->getCatsByParId($parId);
+		return $this->getResource('Faq')->extractFaq();
     }
-       
-    public function getDiscProds($catId, $paged=null, $order=null, $deep=true)
+   
+    //PIANO DI FUGA
+   
+    public function getEscapePlan($zone,$floor)
     {
-        if (true === $deep) {
-            $ids = $this->getResource('Category')->getCatChilIds($catId, true);                       
-            $ids[] = $catId;
-			$catId = $ids;
-        }       
-    		return $this->getResource('Product')->getDiscProds($catId, $paged, $order);
-    }    
+        return $this->getResource('PianodiFuga')->getEscapePlan($zone,$floor);
+    }
+   
+    //PIANO DELL'IMMOBILE
+   
+    public function  getSociety($imm) 
+    {
+        return $this->getResource('PianoImmobile')-> getSociety($imm);
+    }
+   
     
-    public function getProdsByCat($catId, $paged=null, $order=null, $deep=true)
+    public function  getImms($society)
     {
-        if (true === $deep) {
-            $ids = $this->getResource('Category')->getCatChilIds($catId, true);                       
-            $ids[] = $catId;
-			$catId = $ids;
-        }       
-        return $this->getResource('Product')->getProdsByCat($catId, $paged, $order);
-    }*/
+        return $this->getResource('PianoImmobile')-> getImms($society);
+    }
+   
+   
+      public function  getFloors($imm)
+    {
+        return $this->getResource('PianoImmobile')-> getFloors($imm);
+    }
+    
+     public function  getMap($floor,$imm)
+    {
+        return $this->getResource('PianoImmobile')-> getMap($floor,$imm);
+    }
+    
+     public function  getMapMapped($floor,$imm)
+    {
+        return $this->getResource('PianoImmobile')-> getMapMapped($floor,$imm);
+    }
+    
+     public function  checkEvacuation($floor,$imm)
+    {
+        return $this->getResource('PianoImmobile')-> checkEvacuation($floor,$imm);
+    }
+    
+    //REGISTRO DELLE POSIZIONI
+    
+     public function  getFloorNumPeople($floor)
+    {
+        return $this->getResource('RegistroPosizione')-> getFloorNumPeople($floor);
+    }
+    
+     public function  getZoneNumPeople($zone,$floor)
+    {
+        return $this->getResource('RegistroPosizione')-> getZoneNumPeople($zone,$floor);
+    }
+    
+    
+     public function  getPosition($username)
+    {
+        return $this->getResource('RegistroPosizione')-> getPosition($username);
+    }
+    
+    
+      public function  getZonesInformation($floor,$immo,$zone)
+    {
+        return $this->getResource('Segnalazione')-> getZonesInformation($floor,$immo,$zone);
+    }
+    
+      public function  getPosition($username)
+    {
+        return $this->getResource('Segnalazione')-> getZonesAlertsNumb($floor,$immo);
+    }
+    
+      public function  getUserInformation($username)
+    {
+        return $this->getResource('User')-> getPosition($username);
+    }
+    
+      public function  getAllUsers()
+    {
+        return $this->getResource('User')-> getAllUsers();
+    }
+    
 }
