@@ -2,9 +2,12 @@
         <div class="title">
             <h2>Etiam rhoncus volutpat</h2>
             <span>Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum</span> </div>
-        <div class="boxA"><img src="images/pic01.jpg" width="300" height="450" alt="" /></div>
-        <div class="boxB"><img src="images/pic02.jpg" width="300" height="450" alt="" /></div>
-        <div class="boxC"><img src="images/pic03.jpg" width="300" height="450" alt="" /></div>
+       
+        <div class="boxA"> <?php echo $this->imgRenderer('pic01.jpg',array('width'=>'300','height'=>'450'));?> </div>
+        
+        <div class="boxB"><?php echo $this->imgRenderer('pic02.jpg',array('width'=>'300','height'=>'450'));?> </div>
+        
+        <div class="boxC"> <?php echo $this->imgRenderer('pic03.jpg',array('width'=>'300','height'=>'450'));?> </div>
     </div>
     <div id="page" class="container">
         <div class="boxA">

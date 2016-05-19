@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_ModelHandler extends App_Model_Abstract
+class Application_Model_Admin extends App_Model_Abstract
 { 
 
 	public function __construct()
@@ -14,6 +14,23 @@ class Application_Model_ModelHandler extends App_Model_Abstract
     {
 		return $this->getResource('Faq')->extractFaq();
     }
+    
+    public function insertFaq($faq)
+    {
+        return $this->getResource('Faq')->insertFaq($faq);
+    }
+    
+      public function modifyFaq($faq,$id)
+    {
+        return $this->getResource('Faq')->modifyFaq($faq,$id);
+    }
+    
+    
+      public function deleteFaq($faq)
+    {
+        return $this->getResource('Faq')->deleteFaq($faq);
+    }
+    
    
     //PIANO DI FUGA
    
