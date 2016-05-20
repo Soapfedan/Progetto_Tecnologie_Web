@@ -7,8 +7,6 @@ class IndexController extends Zend_Controller_Action
     }
     public function indexAction()
     {
-                echo 1;
-
-		$this->_helper->redirector('index','public');
+        $this->_helper->redirector('index','public');
     }
  }
