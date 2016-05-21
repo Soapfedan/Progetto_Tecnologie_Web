@@ -7,30 +7,54 @@ class Application_Model_Staff extends App_Model_Abstract
     {
 		$this->_logger = Zend_Registry::get('log');  	
 	}
-
-    //FAQ
-
-    public function extractFaq()
+    
+    /*
+     * -------------------CATASTROFE---------------------
+     */
+    
+     //estrae tutte le catastrofi
+    
+    public function extractDisaster()
     {
-		return $this->getResource('Faq')->extractFaq();
-    }
-   
-    //PIANO DI FUGA
-   
-    public function getEscapePlan($zone,$floor)
+        return $this->getResource('Catastrofe')->extractDisaster();
+    }  
+    
+     //modifica una catastrofe
+    
+    public function modifyDisaster($cat,$id)
     {
-        return $this->getResource('PianodiFuga')->getEscapePlan($zone,$floor);
+        return $this->getResource('Catastrofe')->modifyDisaster($cat,$id);
     }
-   
-    //PIANO DELL'IMMOBILE
-   
-    public function  getSociety($imm) 
+    
+    //elimina una catastrofe
+    
+    public function deleteDisaster($id)
+    {
+        return $this->getResource('Catastrofe')->deleteDisaster($id);
+    }       
+    
+    
+    
+    /*
+     * --------------------------PIANO DI FUGA--------------------------
+     */    
+     
+     
+     public function setAlternativePlan($zone,$floor,$plan=null) 
+    {
+        return $this->getResource('Catastrofe')->setAlternativePlan($zone,$floor,$plan);
+    }
+    
+    /*
+     * -------------------------PIANO DELL'IMMOBILE----------------------------------
+     */ 
+     
+      public function  getSociety($imm) 
     {
         return $this->getResource('PianoImmobile')-> getSociety($imm);
     }
-   
     
-    public function  getImms($society)
+     public function  getImms($society)
     {
         return $this->getResource('PianoImmobile')-> getImms($society);
     }
@@ -49,50 +73,6 @@ class Application_Model_Staff extends App_Model_Abstract
      public function  getMapMapped($floor,$imm)
     {
         return $this->getResource('PianoImmobile')-> getMapMapped($floor,$imm);
-    }
-    
-     public function  checkEvacuation($floor,$imm)
-    {
-        return $this->getResource('PianoImmobile')-> checkEvacuation($floor,$imm);
-    }
-    
-    //REGISTRO DELLE POSIZIONI
-    
-     public function  getFloorNumPeople($floor)
-    {
-        return $this->getResource('RegistroPosizione')-> getFloorNumPeople($floor);
-    }
-    
-     public function  getZoneNumPeople($zone,$floor)
-    {
-        return $this->getResource('RegistroPosizione')-> getZoneNumPeople($zone,$floor);
-    }
-    
-    
-     public function  getPosition($username)
-    {
-        return $this->getResource('RegistroPosizione')-> getPosition($username);
-    }
-    
-    
-      public function  getZonesInformation($floor,$immo,$zone)
-    {
-        return $this->getResource('Segnalazione')-> getZonesInformation($floor,$immo,$zone);
-    }
-    
-      public function  getPosition($username)
-    {
-        return $this->getResource('Segnalazione')-> getZonesAlertsNumb($floor,$immo);
-    }
-    
-      public function  getUserInformation($username)
-    {
-        return $this->getResource('User')-> getPosition($username);
-    }
-    
-      public function  getAllUsers()
-    {
-        return $this->getResource('User')-> getAllUsers();
     }
     
 }

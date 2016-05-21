@@ -8,7 +8,9 @@ class Application_Model_Admin extends App_Model_Abstract
 		$this->_logger = Zend_Registry::get('log');  	
 	}
 
-    //FAQ
+    /*
+     * --------------------FAQ-------------------
+     */
 
     public function extractFaq()
     {
@@ -32,46 +34,39 @@ class Application_Model_Admin extends App_Model_Abstract
     }
     
    
-    //PIANO DI FUGA
+    /*
+     * ----------------------PIANO DI FUGA-----------------------
+     */
    
-    public function getEscapePlan($zone,$floor)
+   public function getZone($zone,$floor)
     {
-        return $this->getResource('PianodiFuga')->getEscapePlan($zone,$floor);
+        return $this->getResource('PianodiFuga')->getZone($zone,$floor);
+    }
+   
+   
+    //inserisce una nuova zona con un nuovo piano di fuga
+    public function insertNewZonePlan($zonedata){
+         
+         return $this->getResource('PianodiFuga')->insertNewZonePlan($zonedata);
+    }
+   
+   //elimina un percorso di fuga per zona
+    public function deletePlanbyZone($zone)
+    {
+        return $this->getResource('PianodiFuga')->deletePlanbyZone($zone);
+    }
+
+
+    //elimina un percorso di fuga per piano
+    public function deletePlanbyFloor($floor)
+    {
+       return $this->getResource('PianodiFuga')->deletePlanbyFloor($floor);
     }
    
     //PIANO DELL'IMMOBILE
    
-    public function  getSociety($imm) 
-    {
-        return $this->getResource('PianoImmobile')-> getSociety($imm);
-    }
-   
-    
-    public function  getImms($society)
-    {
-        return $this->getResource('PianoImmobile')-> getImms($society);
-    }
    
    
-      public function  getFloors($imm)
-    {
-        return $this->getResource('PianoImmobile')-> getFloors($imm);
-    }
-    
-     public function  getMap($floor,$imm)
-    {
-        return $this->getResource('PianoImmobile')-> getMap($floor,$imm);
-    }
-    
-     public function  getMapMapped($floor,$imm)
-    {
-        return $this->getResource('PianoImmobile')-> getMapMapped($floor,$imm);
-    }
-    
-     public function  checkEvacuation($floor,$imm)
-    {
-        return $this->getResource('PianoImmobile')-> checkEvacuation($floor,$imm);
-    }
     
     //REGISTRO DELLE POSIZIONI
     

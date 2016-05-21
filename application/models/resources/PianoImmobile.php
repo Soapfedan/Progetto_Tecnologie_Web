@@ -22,10 +22,10 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     
     //estrae tutti gli immobili di quella società
     
-    public function getImms($society){
+    public function getImms($company){
         $select = $this->select()
                         ->from('piano_immobile','Immobile')
-                        ->where('Societa =?',$society);
+                        ->where('Societa =?',$company);
         return $this->fetchAll($select);
     }
     
@@ -61,7 +61,7 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     }
     
     //Verifica se su un piano è stata dichiarata l'evacuazione
-    public function checkEvacuation($floor,$imm){
+    public function checkEvacuationState($floor,$imm){
         
         $select = $this->select()
                         ->from('piano_immobile','Evacuazione')
@@ -69,6 +69,36 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
                         ->where('Id_piano =?',$floor);
         return $this->fetch($select);
         
+    }
+    
+    //va a cambiare la mappa di un piano e la sua mappatura
+    public function setMap($map,$mapschema,$floor,$imm){
+        
+            $data=array('Mappa'=>$map,'Mappatura_zone'=>$mapschema);
+            $where[] = $table->getAdapter()->quoteInto('Immobile = ?', $imm);
+            $where[] = $table->getAdapter()->quoteInto('Id_piano = ?', $floor);
+            $this->update($data,$where);
+    }
+    
+    //setta lo stato di evacuazione di un piano
+    public function setEvacuationState($floor,$imm,$state=0){
+                
+            $where[] = $table->getAdapter()->quoteInto('Immobile = ?', $imm);
+            $where[] = $table->getAdapter()->quoteInto('Id_piano = ?', $floor);
+            $this->update($state,$where);
+    }
+    
+    //elimina un piano
+    public function deleteFloor($floor,$imm){
+        $where[] = $table->getAdapter()->quoteInto('Immobile = ?', $imm);
+        $where[] = $table->getAdapter()->quoteInto('Id_piano = ?', $floor);
+        $this->delete($where);
+    }
+    
+    
+    //inserisce un nuovo piano
+    public function insertFloor($floordata){
+        $this->insert($floordata);
     }
 }
 

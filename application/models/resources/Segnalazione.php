@@ -36,5 +36,17 @@ class Application_Resource_Segnalazione extends Zend_Db_Table_Abstract
          return array($result["Catastrofe"],$result["Num"]);
     }
     
+    //inserisce una nuova segnalazione
+    public function insertAlert($data){
+        
+        $data[0]=$this->lastSequenceId('ID');
+        $this->insert($data);
+    }
+
+    public function deleteAlert($cod){
+        
+        $where = $table->getAdapter()->quoteInto('Codice_Segnalazione = ?', $cod);
+        $this->delete($where);
+    }
 }
 
