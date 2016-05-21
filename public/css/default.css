@@ -260,11 +260,19 @@ ul.contact li a.icon-rss:before
 }
 
 #usermenu{
-	float: left;
+    width: 14em;
+    padding: 1em 0.5em;
+    float: left;
+    margin-left: -15em;
+}
+
+#wrapper-content{
+	text-align: center;
 }
 
 #wrapper
 {
+	margin-left: 15em;
 	background: #FFF;
 }
 
