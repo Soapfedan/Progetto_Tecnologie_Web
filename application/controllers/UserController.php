@@ -8,12 +8,13 @@ class UserController extends Zend_Controller_Action
     {
 		//$this->_catalogModel = new Application_Model_Admin();  
         $this->view->productForm = $this->getProductForm();
+        $this->view->menu = '_usermenu.phtml';
     }
 
     public function indexAction()
     {
         $this->_helper->layout->setLayout('login');
-         $this->render("index");
+        $this->render("index");
     }
  	
     public function viewstaticAction () {

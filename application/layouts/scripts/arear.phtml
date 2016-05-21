@@ -15,11 +15,15 @@
 		</div>
 		<div id="menu">
 		    <?= $this->render('_topnavmain.phtml') ?>
-		
-	</div>
+	    </div>
 	
 <div id="wrapper">
-	<?php echo $this->layout()->content; ?>
+    <div id="usermenu">
+        <?= $this->render($this->menu) ?>
+    </div>
+    <div id="wrapper-content"
+	   <?php echo $this->layout()->content; ?>
+    </div>
 </div>
 <div id="copyright" class="container">
 	<p>&copy; Untitled. All rights reserved. | Progetto di Tecnologie Web Gruppo_08</p>

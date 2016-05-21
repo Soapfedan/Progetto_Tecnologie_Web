@@ -259,6 +259,10 @@ ul.contact li a.icon-rss:before
 	float: right;
 }
 
+#usermenu{
+	float: left;
+}
+
 #wrapper
 {
 	background: #FFF;
