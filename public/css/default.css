@@ -260,20 +260,37 @@ ul.contact li a.icon-rss:before
 }
 
 #usermenu{
-    width: 14em;
-    padding: 1em 0.5em;
+    padding: 0.5em;
+    
     float: left;
     margin-left: -15em;
+    width:30%;
+    height:500px;
+    background: #FFF;
+    background:#FFC31F;
+}
+
+#wrapper-content{
+		
 }
 
 .container{
 	text-align: center;
 }
 
-#wrapper
+#wrapper{
+	background:#FFFFFF;
+	width:90%;
+	margin:0 auto;
+}
+
+#wrapper-arear
 {
 	margin-left: 15em;
 	background: #FFF;
+	height:500px;
+	background:#CC0000;
+	padding: 0.5em;
 }
 
 /*********************************************************************************/
