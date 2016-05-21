@@ -21,7 +21,7 @@ class Application_Form_Admin_Product_Add extends Zend_Form
 
 	
 		$this->addElement('submit', 'add', array(
-            'label' => 'Aggiungi Prodotto',
+            'label' => 'Accedi',
 		));
 	}
 }

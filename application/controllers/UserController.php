@@ -31,9 +31,8 @@ class UserController extends Zend_Controller_Action
         $urlHelper = $this->_helper->getHelper('url');
         $this->_form = new Application_Form_Admin_Product_Add();
         $this->_form->setAction($urlHelper->url(array(
-                        'controller' => 'public',
-                        'action'     => 'viewstatic',
-                        'staticPage' => 'index'
+                        'controller' => 'user',
+                        'action'     => 'logged'
                         ), 
                         'default',true
                     ));

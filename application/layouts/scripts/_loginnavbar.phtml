@@ -1,5 +1,5 @@
 <ul>
-	<li class="active"><a href=" <?= $this->url(array(
+	<li><a href=" <?= $this->url(array(
                         'controller' => 'public',
                         'action'     => 'viewstatic',
                         'staticPage' => 'index'
@@ -8,12 +8,11 @@
                     ); 
                  ?>"
 		accesskey="1" title="">Homepage</a></li>
-		<li><a href=" <?= $this->url(array(
+		<li class="active"><a href=" <?= $this->url(array(
                         'controller' => 'user',
-                        'action'     => 'logged'), 
+                        'action'     => 'index'), 
                         'default',true
                     ); 
                  ?>"
-        accesskey="2" title="">Logout</a></li>
-	
+        accesskey="2" title="">Login</a></li>
 </ul>
