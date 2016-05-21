@@ -30,10 +30,77 @@ class Application_Model_User extends App_Model_Abstract
      * ---------------------PIANO DELL'IMMOBILE-----------------------
      */
      
-     //Verifica se su un piano è stata dichiarata l'evacuazione
     public function checkEvacuationState($floor,$imm){
         
        return $this->getResource('PianoImmobile')->checkEvacuationState($floor,$imm);
         
     }
+    
+     /*
+     * ---------------------REGISTRO DELLA POSIZIONE----------------------
+     */
+     
+      public function  getPosition($username)
+    {
+        return $this->getResource('RegistroPosizione')->getPosition($username);
+    }
+    
+    
+    //inserisce la posizione iniziale di un utente
+    public function insertPosition($data){
+        
+       return $this->getResource('RegistroPosizione')->insertPosition($data);
+             
+    }
+    //modifica la posizione dell'utente
+     public function updatePosition($data){
+        
+        return $this->getResource('RegistroPosizione')->updatePosition($data);
+               
+        
+    }
+     //elimina la posizione di quell'utente
+      public function deletePosition($username){
+        
+       return $this->getResource('RegistroPosizione')->deletePosition($username);
+        
+    }
+      
+      /*
+       * -------------------SEGNALAZIONE-------------------
+       */
+       
+        public function insertAlert($data){
+        
+          return $this->getResource('Segnalazione')->insertAlert($data);
+        }
+        
+       /*
+        * ------------------UTENTE-------------------------
+        */
+        
+        public function getUserInformation($username){
+       
+            return $this->getResource('User')->getUserInformation($username);
+        }
+        
+        //da la possibilita' all'utente (registrato e staff) di modificare i propri dati (eccetto l'username,la password,
+        // il nome, il cognome, la societa' di appartenenza e la categoria)
+        public function updateUserInformation($form){
+        
+              return $this->getResource('User')->updateUserInformation($form);
+         }
+        
+        //inserisce un nuovo utente
+         public function insertNewUser($data){
+        
+            return $this->getResource('User')->insertNewUser($data);
+        
+        } 
+         
+         public function updatePassword($form){
+            
+            return $this->getResource('User')->updatePassword($form);
+        } 
+        
 }

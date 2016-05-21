@@ -51,28 +51,68 @@ class Application_Model_Staff extends App_Model_Abstract
      
       public function  getSociety($imm) 
     {
-        return $this->getResource('PianoImmobile')-> getSociety($imm);
+        return $this->getResource('PianoImmobile')->getSociety($imm);
     }
     
      public function  getImms($society)
     {
-        return $this->getResource('PianoImmobile')-> getImms($society);
+        return $this->getResource('PianoImmobile')->getImms($society);
     }
    
    
       public function  getFloors($imm)
     {
-        return $this->getResource('PianoImmobile')-> getFloors($imm);
+        return $this->getResource('PianoImmobile')->getFloors($imm);
     }
     
      public function  getMap($floor,$imm)
     {
-        return $this->getResource('PianoImmobile')-> getMap($floor,$imm);
+        return $this->getResource('PianoImmobile')->getMap($floor,$imm);
     }
     
      public function  getMapMapped($floor,$imm)
     {
-        return $this->getResource('PianoImmobile')-> getMapMapped($floor,$imm);
+        return $this->getResource('PianoImmobile')->getMapMapped($floor,$imm);
+    }
+    
+    
+    public function setEvacuationState($floor,$imm,$state=0){
+                
+           return $this->getResource('PianoImmobile')->setEvacuationState($floor,$imm,$state);
+    }
+    
+    /*
+     * ---------------------REGISTRO DELLA POSIZIONE----------------------
+     */
+     
+      public function  getFloorNumPeople($floor)
+    {
+        return $this->getResource('RegistroPosizione')-> getFloorNumPeople($floor);
+    }
+    
+     public function  getZoneNumPeople($zone,$floor)
+    {
+        return $this->getResource('RegistroPosizione')-> getZoneNumPeople($zone,$floor);
+    }
+    
+    /*
+     * ------------------------SEGNALAZIONE--------------------
+     */
+    
+     public function  getZonesInformation($floor,$immo,$zone)
+    {
+        return $this->getResource('Segnalazione')-> getZonesInformation($floor,$immo,$zone);
+    }
+    
+      public function  getPosition($username)
+    {
+        return $this->getResource('Segnalazione')-> getZonesAlertsNumb($floor,$immo);
+    }
+    
+        
+     public function deleteAlert($cod){
+        
+        return $this->getResource('Segnalazione')->deleteAlert($cod);
     }
     
 }

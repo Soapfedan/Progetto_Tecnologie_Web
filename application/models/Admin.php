@@ -63,48 +63,65 @@ class Application_Model_Admin extends App_Model_Abstract
        return $this->getResource('PianodiFuga')->deletePlanbyFloor($floor);
     }
    
-    //PIANO DELL'IMMOBILE
+    /*
+     * ---------------------PIANO DELL'IMMOBILE-------------------
+     */
    
+   //va a cambiare la mappa di un piano e la sua mappatura
+    public function setMap($map,$mapschema,$floor,$imm){
+        
+        return $this->getResource('PianoImmobile')->setMap($map,$mapschema,$floor,$imm);
+           
+    }
+     
+    //elimina un piano
+    public function deleteFloor($floor,$imm){
+       
+       return $this->getResource('PianoImmobile')->deleteFloor($floor,$imm);
+    }
+    
+    
+    //inserisce un nuovo piano
+    public function insertFloor($floordata){
+       
+       return $this->getResource('PianoImmobile')->insertFloor($floordata);
+    }
    
-   
     
-    //REGISTRO DELLE POSIZIONI
-    
-     public function  getFloorNumPeople($floor)
-    {
-        return $this->getResource('RegistroPosizione')-> getFloorNumPeople($floor);
-    }
-    
-     public function  getZoneNumPeople($zone,$floor)
-    {
-        return $this->getResource('RegistroPosizione')-> getZoneNumPeople($zone,$floor);
-    }
+    /*
+     * ---------------------------REGISTRO DELLE POSIZIONI--------------------
+     */
     
     
-     public function  getPosition($username)
-    {
-        return $this->getResource('RegistroPosizione')-> getPosition($username);
-    }
     
     
-      public function  getZonesInformation($floor,$immo,$zone)
-    {
-        return $this->getResource('Segnalazione')-> getZonesInformation($floor,$immo,$zone);
-    }
     
-      public function  getPosition($username)
-    {
-        return $this->getResource('Segnalazione')-> getZonesAlertsNumb($floor,$immo);
-    }
+    /*
+     * ---------------------------SEGNALAZIONI--------------------
+     */
     
-      public function  getUserInformation($username)
-    {
-        return $this->getResource('User')-> getPosition($username);
-    }
+     
+    /*
+     * ------------------------------UTENTI-------------------------
+     */
+    //Estrae tutte le infomazioni di tutti gli utenti
+    
     
       public function  getAllUsers()
     {
-        return $this->getResource('User')-> getAllUsers();
+        return $this->getResource('User')->getAllUsers();
     }
+    
+     //permette all'amministratore di modificare i dati di un utente 
+    
+    public function updateAllUserInformation($form){
+            
+       return $this->getResource('User')->updateAllUserInformation($form);
+    } 
+    
+    public function deleteUser($username){
+        
+        return $this->getResource('User')->deleteUser($username);
+    }  
     
 }
