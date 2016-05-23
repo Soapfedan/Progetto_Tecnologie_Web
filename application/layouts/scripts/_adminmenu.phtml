@@ -1,16 +1,93 @@
 <br/>
 <ul>
-	<li id='0'><a href="" accesskey="1" title="">Invia Segnalazione</a></li>
-	<li id='1'><a href="" accesskey="2" title="">Cambia Posizione</a></li>
-	<li id='2'><a href="" accesskey="3" title="">Modifica Profilo</a></li>
-	<li id='3'><a href="" accesskey="4" title="">Vedi Percorso di Fuga</a></li> 
+    
+    <!-- Sezione Utenti -->
+    
+	<li id='0'><a href="<?= $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'sendalert'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="1" title="">Invia Segnalazione</a></li>
+	<li id='1'><a href="<?= $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'changeposition'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="2" title="">Cambia Posizione</a></li>
+	<li id='2'><a href="<?= $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'editprofile'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="3" title="">Modifica Profilo</a></li>
+	<li id='3'><a href="<?= $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'viewescapeplan'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="4" title="">Vedi Percorso di Fuga</a></li> 
 	<hr/>
-	<li id='4'><a href="" accesskey="5" title="">Pannello di Controllo</a></li>
-	<li id='5'><a href="" accesskey="6" title="">Assegna Percorsi</a></li>  
-	<li id='6'><a href="" accesskey="7" title="">Gestisci Segnalazioni</a></li> 
-	<li id='7'><a href="" accesskey="8" title="">Attiva l'Evacuazione</a></li> 
+	
+	
+    <!-- Sezione Staff -->
+    
+	<li id='4'><a href="<?= $this->url(array(
+                        'controller' => 'staff',
+                        'action'     => 'panel'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="5" title="">Pannello di Controllo</a></li>
+	<li id='5'><a href="<?= $this->url(array(
+                        'controller' => 'staff',
+                        'action'     => 'assignescapeplan'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="6" title="">Assegna Percorsi</a></li>  
+	<li id='6'><a href="<?= $this->url(array(
+                        'controller' => 'staff',
+                        'action'     => 'managealert'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="7" title="">Gestisci Segnalazioni</a></li> 
+	<li id='7'><a href="<?= $this->url(array(
+                        'controller' => 'staff',
+                        'action'     => 'evacuation'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="8" title="">Attiva l'Evacuazione</a></li> 
 	<hr/>
-	<li id='8'><a href="" accesskey="9" title="">Gestisci Immobili</a></li>
-    <li id='9'><a href="" accesskey="10" title="">Gestisci Utenti</a></li>  
-    <li id='10'><a href="" accesskey="" title="">Gestisci FAQ</a></li> 
+	
+	
+	<!-- Sezione Amministratore -->
+	
+	<li id='8'><a href="<?= $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'imm'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="9" title="">Gestisci Immobili</a></li>
+    <li id='9'><a href="<?= $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'user'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="10" title="">Gestisci Utenti</a></li>  
+    <li id='10'><a href="<?= $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'faq'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="" title="">Gestisci FAQ</a></li> 
 </ul>

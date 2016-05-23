@@ -7,6 +7,7 @@ class PublicController extends Zend_Controller_Action
     public function init()
     {
 		$this->_helper->layout->setLayout('main');
+        $this->view->productForm = $this->getProductForm();
         //$this->_catalogModel = new Application_Model_Admin();
     }
 
@@ -51,11 +52,31 @@ class PublicController extends Zend_Controller_Action
             		'products' => $prods
             		)
         );*/
+        
+        
     }
  	
     public function viewstaticAction () {
     	$page = $this->_getParam('staticPage');
         $this->render($page);
+    }
+    
+    private function getProductForm()
+    {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_form = new Application_Form_Admin_Product_Add();
+        $this->_form->setAction($urlHelper->url(array(
+                        'controller' => 'user',
+                        'action'     => 'welcome'
+                        ), 
+                        'default',true
+                    ));
+        return $this->_form;
+    }
+
+    public function loginAction(){
+        $this->_helper->layout->setLayout('login');
+       
     }
 }
 
