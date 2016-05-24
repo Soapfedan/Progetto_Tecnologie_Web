@@ -1,6 +1,6 @@
 <?php
 
-class Application_Service_Auth
+class Application_Service_Authentication
 {
     protected $_adminModel;
     protected $_auth;
