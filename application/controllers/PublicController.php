@@ -2,6 +2,11 @@
 
 class PublicController extends Zend_Controller_Action
 {
+    /*
+     * L'oggetto di tipo Application_Model_Admin è istanziato
+     * nella classe Authentication. Qui si può cancellare quindi
+     * $_catalogModel
+     */
 	protected $_catalogModel;
     protected $_authentication;
 	
@@ -70,7 +75,7 @@ class PublicController extends Zend_Controller_Action
         $this->_form = new Application_Form_Public_Auth_Login();
         $this->_form->setAction($urlHelper->url(array(
                         'controller' => 'public',
-                        'action'     => 'login'
+                        'action'     => 'authenticate'
                         ), 
                         'default',true
                     ));
@@ -83,12 +88,11 @@ class PublicController extends Zend_Controller_Action
     
     public function authenticateAction()
     {
-        
+        /* Setto anche il layout del login oltre al reindirizzamento */
+        $this->_helper->layout->setLayout('login');
         $request = $this->getRequest();
         if (!$request->isPost()) {
-            /* Setto anche il layout del login oltre al reindirizzamento */
-            $this->_helper->layout->setLayout('login');
-            return $this->_helper->redirector('login');
+            return $this->_helper->redirector('authenticate');
         }
         $form = $this->getLoginForm();
         if (!$form->isValid($request->getPost())) {
