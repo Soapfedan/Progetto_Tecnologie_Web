@@ -1,5 +1,5 @@
 <?php
-class Zend_View_Helper_ImgRenderer extends Zend_View_Helper_Abstract
+class Zend_View_Helper_ImgRenderer extends Zend_View_Helper_HtmlElement
 {
 	private $_attrs;
 	
