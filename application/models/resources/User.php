@@ -15,7 +15,7 @@ class Application_Resource_User extends Zend_Db_Table_Abstract
     public function getUserInformation($username){
         $select = $this->select()
                         ->where('Username =?',$username);
-        return $this->fetch($select);
+        return $this->fetchRow($select);
     }
     
     //Estrae tutte le infomazioni di tutti gli utenti

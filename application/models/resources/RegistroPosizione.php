@@ -18,7 +18,7 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
                        ->from("registro_posizione", array("Num"=>"COUNT(*)"))
                        ->where('Id_piano =?',$floor)                       
                        ->where('Immobile =?',$imm);
-         $result=$this->fetch($select);
+         $result=$this->fetchRow($select);
         
          return $result["Num"];
         
@@ -47,7 +47,7 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
         $select = $this->select()
                        ->where('Utente =?',$username);                       
                        
-        return $this->fetch($select);
+        return $this->fetchRow($select);
         
         
     }

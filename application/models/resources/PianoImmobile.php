@@ -16,7 +16,7 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
         $select = $this->select()
                         ->from('piano_immobile','Societa')
                         ->where('Immobile =?',$imm);
-        return $this->fetch($select);
+        return $this->fetchRow($select);
         
     }
     
@@ -46,7 +46,7 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
                         ->from('piano_immobile','Mappa')
                         ->where('Immobile =?',$imm)
                         ->where('Id_piano =?',$floor);
-        return $this->fetch($select);
+        return $this->fetchRow($select);
     }
     
     //Estrae la cartina del piano di quell'immobile con il relativo codice html della mappatura
@@ -56,7 +56,7 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
                         ->from('piano_immobile',array('Mappa','Mappatura_zone'))
                         ->where('Immobile =?',$imm)
                         ->where('Id_piano =?',$floor);
-        return $this->fetch($select);
+        return $this->fetchRow($select);
         
     }
     
@@ -67,7 +67,7 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
                         ->from('piano_immobile','Evacuazione')
                         ->where('Immobile =?',$imm)
                         ->where('Id_piano =?',$floor);
-        return $this->fetch($select);
+        return $this->fetchRow($select);
         
     }
     
