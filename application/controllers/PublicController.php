@@ -22,13 +22,26 @@ class PublicController extends Zend_Controller_Action
 
  
     public function indexAction()
-    {           
+    {$db = $this->getInvokeArg('bootstrap')->getResource('db');
+        if($db->isConnected()){
+           /*  //  Estrae le faq               
+        $datafaq=$this->_publicModel->extractFaq();
+                 
+        // Definisce le variabili per il viewer
+        $this->view->assign(array('faqs' => $datafaq));*/
+        $this->render('who');
+        } else {
+            $this->render('where');
+        }          
+       
+   
+    }
+    public function faqAction(){
         //  Estrae le faq               
         $datafaq=$this->_publicModel->extractFaq();
                  
         // Definisce le variabili per il viewer
         $this->view->assign(array('faqs' => $datafaq));
-   
     }
     
     public function viewstaticAction () {
