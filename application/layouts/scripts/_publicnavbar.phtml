@@ -1,8 +1,8 @@
 <ul>
 	<li id='0', class="active"><a href=" <?= $this->url(array(
                         'controller' => 'public',
-                        'action'     => 'viewstatic',
-                        'staticPage' => 'index'
+                        'action'     => 'index'
+                        
                         ), 
                         'default',true
                     ); 
@@ -12,8 +12,7 @@
 		href="
                 <?= $this->url(array(
                         'controller' => 'public',
-                        'action'     => 'viewstatic',
-                        'staticPage' => 'who'), 
+                        'action'     => 'who'), 
                         'default',true
                     ); 
                  ?>"
@@ -22,8 +21,7 @@
 		href="
                 <?= $this->url(array(
                         'controller' => 'public',
-                        'action'     => 'viewstatic',
-                        'staticPage' => 'where'), 
+                        'action'     => 'where'), 
                         'default',true
                     ); 
                  ?>"
@@ -38,10 +36,33 @@
                  ?>"
         accesskey="4" title="">FAQ</a></li>
     <li id='4'><a
-        href="
-                <?= $this->url(array(
-                        'controller' => 'public',
-                        'action'     => 'login'), 
+        href="<?php
+            
+                $cat = $this->authInfo('Categoria'); 
+       
+                switch ($cat) {
+                    case 1:
+                       $controller='user';
+                        $action='welcome'; 
+                        break;
+                    case 2:
+                        $controller='staff';
+                        $action='welcome';
+                        break;
+                    case 3:
+                        $controller='admin';
+                        $action='welcome';
+                        break;
+                    default:
+                        $controller='public';
+                        $action='login';
+                        break;
+                        
+                }
+  
+                echo $this->url(array(
+                        'controller' => $controller,
+                        'action'     => $action), 
                         'default',true
                     ); 
                  ?>"

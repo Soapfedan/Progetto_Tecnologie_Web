@@ -1,0 +1,65 @@
+<ul>
+    <li id='0', class="active"><a href=" <?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'index'
+                        
+                        ), 
+                        'default',true
+                    ); 
+                 ?>"
+        accesskey="1" title="">Homepage</a></li>
+    <li id='1'><a
+        href="
+                <?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'who'), 
+                        'default',true
+                    ); 
+                 ?>"
+        accesskey="2" title="">Chi siamo</a></li>
+    <li id='2'><a
+        href="
+                <?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'where'), 
+                        'default',true
+                    ); 
+                 ?>"
+        accesskey="3" title="">Dove Siamo</a></li>
+    <li id='3'><a
+        href="
+                <?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'faq'), 
+                        'default',true
+                    ); 
+                 ?>"
+        accesskey="4" title="">FAQ</a></li>
+    <li id='4'><a
+        href="
+                <?php
+                $cat = $this->authInfo('Categoria'); 
+       
+                switch ($cat) {
+                    case 1:
+                       $controller='user'; 
+                        break;
+                    case 2:
+                        $controller='staff';
+                        break;
+                    case 3:
+                        $controller='admin';
+                        break;
+                }
+                        
+                
+                
+                 echo $this->url(array(
+                        'controller' => $controller,
+                        'action'     => 'welcome'), 
+                        'default',true
+                    ); 
+                 ?>"
+        accesskey="5" title="">Area Riservata</a></li>
+   
+</ul>

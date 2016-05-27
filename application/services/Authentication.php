@@ -2,12 +2,12 @@
 
 class Application_Service_Authentication
 {
-    protected $_adminModel;
+    protected $_userModel;
     protected $_auth;
 
     public function __construct()
     {
-        $this->_adminModel = new Application_Model_Admin();
+        $this->_userModel = new Application_Model_User();
     }
     
     public function authenticate($credentials)
@@ -19,7 +19,7 @@ class Application_Service_Authentication
         if (!$result->isValid()) {
             return false;
         }
-        $user = $this->_adminModel->getUserByName($credentials['username']);
+        $user = $this->_userModel->getUserInformation($credentials['Username']);
         $auth->getStorage()->write($user);
         return true;
     }
@@ -51,11 +51,11 @@ class Application_Service_Authentication
 		$authAdapter = new Zend_Auth_Adapter_DbTable(
 			Zend_Db_Table_Abstract::getDefaultAdapter(),
 			'user',
-			'username',
-			'passwd'
+			'Username',
+			'Password'
 		);
-		$authAdapter->setIdentity($values['username']);
-		$authAdapter->setCredential($values['passwd']);
+		$authAdapter->setIdentity($values['Username']);
+		$authAdapter->setCredential($values['Password']);
         return $authAdapter;
     }
 }

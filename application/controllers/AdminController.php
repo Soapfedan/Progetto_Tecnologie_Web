@@ -5,7 +5,7 @@ class AdminController extends Zend_Controller_Action
     public function init()
     {
         $this->_helper->layout->setLayout('arear');
-        $this->view->menu = '_adminmenu.phtml';
+       // $this->view->menu = '_adminmenu.phtml';
     }
     public function indexAction()
     {

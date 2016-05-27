@@ -14,12 +14,27 @@
 			<h1><a href="#">Area Riservata</a></h1>
 		</div>
 		<div id="menu">
-		    <?= $this->render('_topnavmain.phtml') ?>
+		    <?= $this->render('_loggednavbar.phtml') ?>
 	    </div>
 	
 <div id="wrapper-arear">
     <div id="usermenu">
-        <?= $this->render($this->menu) ?>
+        <?php $cat= $this->authInfo('Categoria'); 
+       
+        switch ($cat) {
+            case 1:
+               $menu='user'; 
+                break;
+            case 2:
+                $menu='staff';
+                break;
+            case 3:
+                $menu='admin';
+                break;
+        }
+        $menuout='_'.$menu.'menu.phtml';
+        echo $this->render($menuout) ?>
+        
     </div>
     <div id="wrapper-content"
 	   <?php echo $this->layout()->content; ?>

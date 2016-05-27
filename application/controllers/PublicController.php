@@ -22,20 +22,16 @@ class PublicController extends Zend_Controller_Action
 
  
     public function indexAction()
-    {$db = $this->getInvokeArg('bootstrap')->getResource('db');
-        if($db->isConnected()){
-           /*  //  Estrae le faq               
-        $datafaq=$this->_publicModel->extractFaq();
-                 
-        // Definisce le variabili per il viewer
-        $this->view->assign(array('faqs' => $datafaq));*/
-        $this->render('who');
-        } else {
-            $this->render('where');
-        }          
+    {
+    }         
        
-   
-    }
+   public function whoAction()
+    {
+    } 
+    
+    public function whereAction()
+    {
+    } 
     public function faqAction(){
         //  Estrae le faq               
         $datafaq=$this->_publicModel->extractFaq();
@@ -43,12 +39,13 @@ class PublicController extends Zend_Controller_Action
         // Definisce le variabili per il viewer
         $this->view->assign(array('faqs' => $datafaq));
     }
-    
-    public function viewstaticAction () {
-    	$page = $this->_getParam('staticPage');
-        $this->render($page);
-    }
-    
+     
+      public function verifyauthAction()
+    {
+        
+    } 
+     
+     
     private function getLoginForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
@@ -83,7 +80,22 @@ class PublicController extends Zend_Controller_Action
             $form->setDescription('Autenticazione fallita. Riprova');
             return $this->render('login');
         }
-        return $this->_helper->redirector('index', $this->_authentication->getIdentity()->role);
+        $controller='user';
+        switch ($this->_authentication->getIdentity()->Categoria) {
+            case 1:
+               $controller='user'; 
+                break;
+             case 2:
+                $controller='staff';
+                break;
+                  case 3:
+                $controller='admin';
+                break;
+            default:
+                
+                break;
+        }
+        return $this->_helper->redirector('welcome', $controller);
     }
 }
 

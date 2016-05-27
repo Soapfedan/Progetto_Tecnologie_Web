@@ -8,7 +8,7 @@ class UserController extends Zend_Controller_Action
     {
 		//$this->_catalogModel = new Application_Model_Admin();  
          $this->_helper->layout->setLayout('arear');
-        $this->view->menu = '_adminmenu.phtml';
+       //$this->view->menu = '_usermenu.phtml';
     }
 
     public function indexAction()
