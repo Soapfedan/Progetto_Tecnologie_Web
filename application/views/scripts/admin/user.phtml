@@ -4,7 +4,7 @@
   <table id="tableusers">
       <thead>
         <tr>
-            <th>Username</th>     <th>Password</th>
+            <th>Username</th>     
             <th>Nome</th>         <th>Cognome</th>
             <th>Data Nascita</th> <th>Città</th>
             <th>Provincia</th>    <th>Genere</th>
@@ -14,8 +14,8 @@
       </thead>
       <?php foreach ($this->users as $user) :?>
         <tr>
-            <?php foreach ($user as $v) :?>
-                <td><?php echo $v ?></td>
+            <?php foreach ($user as $v) :?> 
+                <?php if($v != $user->Password) echo "<td> $v </td>" ?>
             <?php endforeach ?>  
         </tr>      
       <?php endforeach ?>
