@@ -2,15 +2,19 @@
 class Application_Form_User_Profilo_Profile extends App_Form_Abstract
 {
 	protected $_userModel;
+        
+    public function init(){
+        
+    }
     
-    public function init($completed,$filled,$username)
+    public function createForm($completed,$filled,$username)
     {
-    	$this->_userModel = new Application_Model_User();
+        $this->_userModel = new Application_Model_User();
         $this->setMethod('post');
         $this->setName('formprofile');
         $this->setAction('');
         
-     if($complete){ 
+     if($completed==true){ 
        $this->addElement('text', 'Username', array(
             'label' => 'Username',
             'filters' => array('StringTrim'),
@@ -98,7 +102,7 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
             'validators' => array(array('StringLength',true, array(15))),
             'decorators' => $this->elementDecorators,
         ));
-        if($complete){
+        if($completed==true){
         $this->addElement('select', 'Categoria', array(
             'label' => 'Categoria',            
             'required' => true,
@@ -115,8 +119,7 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
         ));
         }
 
-        if($filled){
-            $values = array();
+        if($filled==true){
             $values = $this->_userModel->getUserInformation($username);
             $this->populate($values->toArray());
         }
@@ -132,4 +135,6 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
             'Form'
         ));
     }
+
+
 }

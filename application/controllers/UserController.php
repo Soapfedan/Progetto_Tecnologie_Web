@@ -4,6 +4,10 @@ class UserController extends Zend_Controller_Action
 {
 	protected $_userModel;
 	protected $_auth;
+    protected $_username;
+    protected $_completed;
+    protected $_filled;
+    protected $_form;
     
     public function init()
     {
@@ -42,12 +46,12 @@ class UserController extends Zend_Controller_Action
      public function editprofileAction(){
         
         $this->view->msg = 'editProfile';
-        $completed = $this->_getParam('staticPage');
-        $filled = $this->_getParam('staticPage');
-        $username = $this->_getParam('staticPage');
-        $this->view->profileForm = $this->getProfileForm(($completed==false ? false : true),
-                                                         ($filled==false ? false : true),
-                                                         ($username==null ? null : $username)); 
+        $this->_completed = $this->_getParam('completed');
+        $this->_filled = $this->_getParam('filled');
+        $this->_username = $this->_getParam('username');
+        $this->view->profileForm = $this->getProfileForm(($this->_completed==false ? false : true),
+                                                         ($this->_filled==false ? false : true),
+                                                         ($this->_username==null ? null : $this->_username)); 
         
         
     }
@@ -56,6 +60,40 @@ class UserController extends Zend_Controller_Action
           
         $this->view->msg = 'viewEscapePlan';
     } 
+      
+      public function updateprofileAction(){
+          
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('index');
+        }
+        $form=$this->_form;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('editprofile/completed'.$this->_completed.'/filled/'.$this->_filled.'/username/'.$this->_username);
+        }
+        $values = $form->getValues();
+        $this->_userModel->insertNewUser($values);
+        $identity = $this->_authService->getIdentity();
+        if($identity!=false){
+            $controller='user';
+         switch ($identity->Categoria) {
+            case 1:
+               $controller='user'; 
+                break;
+             case 2:
+                $controller='staff';
+                break;
+                  case 3:
+                $controller='admin';
+                break;
+            default:
+                
+                break;
+        }
+        $this->_helper->redirector($controller.'/welcome'); 
+        }
+          
+      }
       
        private function getProfileForm($completed,$filled,$username)
     {
@@ -79,9 +117,10 @@ class UserController extends Zend_Controller_Action
             
         $urlHelper = $this->_helper->getHelper('url');
         $this->_form = new Application_Form_User_Profilo_Profile();
+        $this->_form->createForm($completed,$filled,$username);
         $this->_form->setAction($urlHelper->url(array(
-                        'controller' => $controller,
-                        'action'     => 'index'
+                        'controller' => 'user',
+                        'action'     => 'updateprofile'
                         ), 
                         'default',true
                     ));
