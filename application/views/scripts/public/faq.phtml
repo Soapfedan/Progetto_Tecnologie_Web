@@ -1,13 +1,15 @@
 <div id="staff" class="container">
 
-    <table id="tablefaq">
-        <tr><td><thead>Question</thead></td><td><thead>Answer</thead></td></tr>
-        <?php  foreach ($this->faqs as $faq) :?>
-        <tr>
-        <td><?php echo $faq->Question ?></td>
-        <td><?php echo $faq->Answer ?></td>      
-        </tr>   
-      <?php endforeach ?>
-      
-    </table>
+    <div id="tablefaq" align="left">
+        <div ><h1 id="faq"> F.A.Q.</h1></div> <br />
+        <div>
+        	<?php  foreach ($this->faqs as $faq) :?>
+        	<h4><?php echo $faq->Question ?></h4>
+        	<p id="answer"><?php echo $faq->Answer ?></p>
+        <hr>   
+        
+      	<?php endforeach ?>
+      	
+      </div>
     </div>
+</div>

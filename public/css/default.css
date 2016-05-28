@@ -21,6 +21,8 @@ h1, h2, h3
 	padding: 0;
 }
 
+
+
 p, ol, ul
 {
 	margin-top: 0;
@@ -636,6 +638,14 @@ ul.style4 .first
 /* Faq                                                                         */
 /*********************************************************************************/
 
-#tablefaq{
-	border-color: red;
+#faq{
+	color:#CC0000;
 }
+
+#answer{
+	color:#6F6F6F
+}
+
+
+
+
