@@ -1,5 +1,26 @@
 <br/> 
   <h3><?php echo $this->msg; ?></h3>
+  
+  <table id="tableusers">
+      <thead>
+        <tr>
+            <th>Username</th>     <th>Password</th>
+            <th>Nome</th>         <th>Cognome</th>
+            <th>Data Nascita</th> <th>Città</th>
+            <th>Provincia</th>    <th>Genere</th>
+            <th>Cod Fiscale</th>  <th>Email</th>
+            <th>Telefono</th>     <th>Categoria</th>  <th>Società</th>
+        </tr>
+      </thead>
+      <?php foreach ($this->users as $user) :?>
+        <tr>
+            <?php foreach ($user as $v) :?>
+                <td><?php echo $v ?></td>
+            <?php endforeach ?>  
+        </tr>      
+      <?php endforeach ?>
+  </table> 
+  
   <?php
   for($a=0; $a<6; $a++){
       echo "<br/>";
