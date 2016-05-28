@@ -17,9 +17,12 @@
                         'default',true
                     ); 
                  ?>" accesskey="2" title="">Cambia Posizione</a></li>
-    <li class="menu"><a href="<?= $this->url(array(
+<li class="menu"><a href="<?php echo $this->url(array(
                         'controller' => 'user',
-                        'action'     => 'editprofile'
+                        'action'     => 'editprofile',
+                        'username'   => $this->authInfo('Username'),
+                        'filled'     => true,
+                        'completed'  => false
                         ), 
                         'default',true
                     ); 
