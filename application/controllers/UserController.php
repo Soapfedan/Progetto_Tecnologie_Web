@@ -2,13 +2,15 @@
 
 class UserController extends Zend_Controller_Action
 {
-	protected $_catalogModel;
-	
+	protected $_userModel;
+	protected $_auth;
+    
     public function init()
     {
-		//$this->_catalogModel = new Application_Model_Admin();  
+		$this->_userModel = new Application_Model_User();  
          $this->_helper->layout->setLayout('arear');
-       //$this->view->menu = '_usermenu.phtml';
+         $this->_authService = new Application_Service_Authentication();
+       
     }
 
     public function indexAction()
@@ -19,11 +21,13 @@ class UserController extends Zend_Controller_Action
         
     }
  	
-    public function viewstaticAction () {
-    	$page = $this->_getParam('staticPage');
-    	$this->render($page);
+    public function logoutAction()
+    {
+        $this->_authService->clear();
+        return $this->_helper->redirector('index','public');    
     }
     
+   
       public function sendalertAction(){
         
         $this->view->msg = 'sendalert';
