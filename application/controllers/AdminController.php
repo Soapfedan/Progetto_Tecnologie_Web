@@ -7,7 +7,8 @@ class AdminController extends Zend_Controller_Action
     {
         $this->_helper->layout->setLayout('arear');
         $this->_adminModel = new Application_Model_Admin();
-             
+        //$this->_test = $this->_getParam('test');
+        //$this->_form = $this->getProfileForm(($this->_test==false ? false : true));
     }
     public function indexAction()
     {
@@ -16,6 +17,10 @@ class AdminController extends Zend_Controller_Action
      public function welcomeAction(){
      
     }
+	
+	public function removeFaqAction(){
+		
+	}
     
     public function faqAction(){
       $this->view->msg='faq'; 

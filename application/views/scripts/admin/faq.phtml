@@ -4,13 +4,23 @@
         <div ><h1 id="faq"> F.A.Q.</h1></div> <br />
         <div>
             <table>
-            <?php  foreach (((object)$this->faqs) as $faq) :?>
-            <tr>
-            <td><?php echo $faq ?></td>
-            </tr>   
+            	<?php  foreach (((object)$this->faqs) as $faq) :?>
+            	<tr>
+            		<td><?php echo $faq ?></td>
+            	</tr>   
         
-        <?php endforeach ?>
-        </table>
+        		<?php endforeach ?>
+        	</table>
       </div>
+    </div>
+    <div>
+    	<!--<li class="menu"><a href="<?php echo $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'editprofile',
+                        'completed'  => false
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="3" title="">Modifica Profilo</a></li> -->
     </div>
 </div>

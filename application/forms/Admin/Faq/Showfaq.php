@@ -54,11 +54,8 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
              $subform->populate($faq);
              $this->addSubForm($subform,'subform'.$i);
             
-             }
+		}
             
-            
-            
-       
     }
 
 
