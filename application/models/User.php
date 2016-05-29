@@ -86,7 +86,7 @@ class Application_Model_User extends App_Model_Abstract
         
         //da la possibilita' all'utente (registrato e staff) di modificare i propri dati (eccetto l'username,la password,
         // il nome, il cognome, la societa' di appartenenza e la categoria)
-        public function updateUserInformation($form){
+        public function updateUserInformation($form,$username){
         
               return $this->getResource('User')->updateUserInformation($form);
          }

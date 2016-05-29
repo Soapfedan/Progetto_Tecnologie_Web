@@ -9,13 +9,20 @@ class UserController extends Zend_Controller_Action
     protected $_filled;
     protected $_form;
     
+    
     public function init()
     {
         
-		$this->_userModel = new Application_Model_User();  
+		$this->_userModel = new Application_Model_User();
          $this->_helper->layout->setLayout('arear');
          $this->_authService = new Application_Service_Authentication();
-       
+         $this->_completed = $this->_getParam('completed');
+        $this->_filled = $this->_getParam('filled');
+        $this->_username = $this->_getParam('username');
+        $this->_form = $this->getProfileForm(($this->_completed==false ? false : true),
+                                                         ($this->_filled==false ? false : true),
+                                                         ($this->_username==null ? null : $this->_username));
+       $this->view->profileForm= $this->_form;
     }
 
     public function indexAction()
@@ -46,13 +53,6 @@ class UserController extends Zend_Controller_Action
      public function editprofileAction(){
         
         $this->view->msg = 'editProfile';
-        $this->_completed = $this->_getParam('completed');
-        $this->_filled = $this->_getParam('filled');
-        $this->_username = $this->_getParam('username');
-        $this->view->profileForm = $this->getProfileForm(($this->_completed==false ? false : true),
-                                                         ($this->_filled==false ? false : true),
-                                                         ($this->_username==null ? null : $this->_username)); 
-        
         
     }
      
@@ -62,17 +62,7 @@ class UserController extends Zend_Controller_Action
     } 
       
       public function updateprofileAction(){
-          
-        if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('index');
-        }
-        $form=$this->_form;
-        if (!$form->isValid($_POST)) {
-            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('editprofile/completed'.$this->_completed.'/filled/'.$this->_filled.'/username/'.$this->_username);
-        }
-        $values = $form->getValues();
-        $this->_userModel->insertNewUser($values);
+        
         $identity = $this->_authService->getIdentity();
         if($identity!=false){
             $controller='user';
@@ -90,7 +80,23 @@ class UserController extends Zend_Controller_Action
                 
                 break;
         }
-        $this->_helper->redirector($controller.'/welcome'); 
+          
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('welcome',$controller);
+        }    
+                                              
+        if (!$this->_form->isValid($_POST)) {
+          
+            $this->_form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('editprofile');
+        }
+        $values = $this->_form->getValues();
+        $values['Username']=$this->_authService->getIdentity()->Username;
+        $values['Password']=$this->_authService->getIdentity()->Password;
+        $values['Categoria']=$this->_authService->getIdentity()->Categoria;
+        $values['Societa_staff']=$this->_authService->getIdentity()->Societa_staff;
+        $this->_userModel->updateUserInformation($values);
+        $this->_helper->redirector('welcome',$controller); 
         }
           
       }
@@ -124,6 +130,7 @@ class UserController extends Zend_Controller_Action
                         ), 
                         'default',true
                     ));
+                    
         return $this->_form;
     }
     }

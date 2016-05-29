@@ -99,7 +99,7 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
             'label' => 'Telefono',
             'filters' => array('Digits'),
             'required' => true,
-            'validators' => array(array('StringLength',true, array(15))),
+            'validators' => array(array('StringLength',true, array(1,15))),
             'decorators' => $this->elementDecorators,
         ));
         if($completed==true){
