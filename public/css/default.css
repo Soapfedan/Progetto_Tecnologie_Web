@@ -268,9 +268,9 @@ ul.contact li a.icon-rss:before
     margin-left: -15em;
     width:30%;
     height:500px;
-    background: #FFF;
     background:#FFC31F;
 }
+
 
 #wrapper-content{
 		
@@ -654,3 +654,15 @@ ul.style4 .first
 	font-size: 60%;
 }
 
+.tablefaq{
+	text-align: left;
+	
+}
+
+.tablefaq #answer{
+	color:#000000;
+}
+
+.tablefaq h4{
+	color:#6F6F6F;
+}

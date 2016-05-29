@@ -1,6 +1,16 @@
-<br/> 
-  <h3><?php echo $this->msg; ?></h3>
-  <?php
-  for($a=0; $a<6; $a++){
-      echo "<br/>";
-  }?>
+<div id="staff" class="container">
+
+    <div class="tablefaq">
+        <div ><h1 id="faq"> F.A.Q.</h1></div> <br />
+        <div>
+            <table>
+            <?php  foreach (((object)$this->faqs) as $faq) :?>
+            <tr>
+            <td><?php echo $faq ?></td>
+            </tr>   
+        
+        <?php endforeach ?>
+        </table>
+      </div>
+    </div>
+</div>
