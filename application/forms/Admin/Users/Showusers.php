@@ -1,5 +1,5 @@
 <?php
-class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
+class Application_Form_Admin_Users_Showusers extends App_Form_Abstract
 {
 	protected $_adminModel;
         
@@ -10,39 +10,18 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
             
         $this->_adminModel = new Application_Model_Admin();
         $this->setMethod('post');
-        $this->setName('faqform');
+        $this->setName('usersform');
         $this->setAction('');
-            // Estrae tutte le righe della tabella faq.
-        $values = $this->_adminModel->extractFaq();
+            // Estrae tutte le righe della tabella users.
+        $values = $this->_adminModel->getAllUsers();
             // Formatta tutto in un array.
         $valuarr = $values->toArray();
         $i = 0;
-        foreach ($valuarr as $faq) {
+        foreach ($valuarr as $user) {
           $i = $i + 1;
                 // Crea una subform per ogni riga della tabella delle faq.
             $subform = new Zend_Form_SubForm($i);
-            
-            $subform->addElement('text', 'ID', array(
-                'label' => 'ID',     
-                'decorators' => $this->elementDecorators,
-            ));
-            $subform->addElement('textarea', 'Question', array(
-                'label' => 'Question',
-                'cols' => '60', 'rows' => '2',
-                'filters' => array('StringTrim'),
-                'required' => true,
-                'validators' => array(array('StringLength',true, array(1,2500))),
-                'decorators' => $this->elementDecorators,
-            ));
-            $subform->addElement('textarea', 'Answer', array(
-                'label' => 'Answer',
-                'cols' => '60', 'rows' => '2',
-                'filters' => array('StringTrim'),
-                'required' => true,
-                'validators' => array(array('StringLength',true, array(1,2500))),
-                'decorators' => $this->elementDecorators,
-            ));
-        
+          
                 // Se si è in modalità Modifica.
             if($edit == true){
                 $subform->addElement('submit','Modifica',array(
@@ -52,7 +31,7 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
                 $subform->setAction($this->getView()->url(array(
                     'controller' => 'admin',
                     'action'     => 'editfaq',
-                    'idfaq'      => $faq['ID'],
+                    //'idfaq'      => $user['ID'],
                     'subform'    => 'subform'.$i,
                     'edit'       => true
                     ), 
@@ -69,7 +48,7 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
                 $subform->setAction($this->getView()->url(array(
                     'controller' => 'admin',
                     'action'     => 'deletefaq',
-                    'idfaq'      => $faq['ID'],
+                    //'idfaq'      => $user['ID'],
                     'subform'    => 'subform'.$i
                     ), 
                     'default',true
@@ -77,7 +56,7 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
                 $subform->setMethod('post');
             }
     
-            $subform->populate($faq);
+            $subform->populate($user);
             $this->addSubForm($subform,'subform'.$i);
             $subform->setDecorators(array(
                 'FormElements',

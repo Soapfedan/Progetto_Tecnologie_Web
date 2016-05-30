@@ -1,0 +1,56 @@
+<br/> 
+  <ul><li><a href="<?= $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'insertuser'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="0" title="">Inserisci Utente</a></li>
+                 
+    <li><a href="<?= $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'showusers',
+                        'edituser'       => true
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="1" title="">Modifica Utente</a></li>  
+                 
+    <li><a href="<?= $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'showusers',
+                        'edituser'       => false
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="2" title="">Cancella Utente</a></li> </ul>
+
+<br/> 
+
+  <h3><?php echo $this->msg; ?></h3>
+  <!--
+  <table id="tableusers">
+      <thead>
+        <tr>
+            <th>Username</th>     
+            <th>Nome</th>         <th>Cognome</th>
+            <th>Data Nascita</th> <th>Città</th>
+            <th>Provincia</th>    <th>Genere</th>
+            <th>Cod Fiscale</th>  <th>Email</th>
+            <th>Telefono</th>     <th>Categoria</th>  <th>Società</th>
+        </tr>
+      </thead>
+      <?php foreach ($this->users as $user) :?>
+        <tr>
+            <?php foreach ($user as $v) :?> 
+                <?php if($v != $user->Password) echo "<td> $v </td>" ?>
+            <?php endforeach ?>  
+        </tr>      
+      <?php endforeach ?>
+  </table> 
+  
+  <?php
+  for($a=0; $a<6; $a++){
+      echo "<br/>";
+  }?>
+  --!>

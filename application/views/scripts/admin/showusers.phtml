@@ -1,0 +1,16 @@
+<div id="staff" class="container">
+
+    <div class="tablefaq">
+        <div ><h1> GESTISCI UTENTI.</h1></div> <br />
+        <div>
+            <table>
+            	<?php  foreach (((object)$this->users) as $user) :?>
+            	<tr>
+            	<td><?php echo $user ?></td> 
+            	</tr>   
+        
+        		<?php endforeach ?>
+        	</table>
+      </div>
+    </div>
+</div>
