@@ -53,20 +53,19 @@ class AdminController extends Zend_Controller_Action
                 $this->_helper->redirector('faq','admin');
             }    
                                               
-        if (!$this->getCurrentSubForm()->isValid($_POST)) {
-            $this->getCurrentSubForm()->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('showfaq');
-        }
-        
-        $values = $this->getCurrentSubForm()->getValues();
-        
-        $result = array('ID'        => $values[$this->_subform]['ID'],
-                        'Question'  => $values[$this->_subform]['Question'],
-                        'Answer'    => $values[$this->_subform]['Answer']
-                         );
-        $this->_adminModel->modifyfaq($result);
-        $this->render('welcome'); 
-        
+            if (!$this->getCurrentSubForm()->isValid($_POST)) {
+                $this->getCurrentSubForm()->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+                return $this->render('showfaq');
+            }
+            
+            $values = $this->getCurrentSubForm()->getValues();
+            
+            $result = array('ID'        => $values[$this->_subform]['ID'],
+                            'Question'  => $values[$this->_subform]['Question'],
+                            'Answer'    => $values[$this->_subform]['Answer']
+                             );
+            $this->_adminModel->modifyfaq($result);
+            $this->render('welcome'); 
         }    
     }
     
@@ -88,6 +87,15 @@ class AdminController extends Zend_Controller_Action
     
     public function showusersAction(){
         $this->view->assign(array('users' => $this->_usersform));      
+    }
+    
+    /* Action chiamata quando si preme il bottone relativo alla form di Elimina Utenti */
+    public function deleteuserAction(){
+        if($this->_edituser==false){
+            $user = $this->_getParam('usrid');
+            $this->_adminModel->deleteUser($user);
+            $this->_helper->redirector('getuser','admin');
+        }   
     }
     
     public function immAction(){

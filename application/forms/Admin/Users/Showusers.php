@@ -21,19 +21,19 @@ class Application_Form_Admin_Users_Showusers extends App_Form_Abstract
           $i = $i + 1;
                 // Crea una subform per ogni riga della tabella delle faq.
             $subform = new Zend_Form_SubForm($i);
-          
+
                 // Se si è in modalità Modifica.
             if($edit == true){
                 $subform->addElement('submit','Modifica',array(
-                    'label' => 'Modifica',
-                    'decorators' => $this->buttonDecorators,
+                    'label' => $user['Username'],
+                    'decorators' => $this->elementDecorators,
                 ));
                 $subform->setAction($this->getView()->url(array(
-                    'controller' => 'admin',
-                    'action'     => 'editfaq',
-                    //'idfaq'      => $user['ID'],
+                    'controller' => 'user',
+                    'action'     => 'editprofile',
+                    /*'usrid'      => $user['Username'],
                     'subform'    => 'subform'.$i,
-                    'edit'       => true
+                    'edit'       => true*/
                     ), 
                     'default',true
                 ));
@@ -42,13 +42,13 @@ class Application_Form_Admin_Users_Showusers extends App_Form_Abstract
                 // Se si è in modalità Elimina.
             else{
                 $subform->addElement('submit','Cancella',array(
-                'label' => 'Cancella',
-                'decorators' => $this->buttonDecorators,
+                'label' => $user['Username'],
+                'decorators' => $this->elementDecorators,
                 ));
                 $subform->setAction($this->getView()->url(array(
                     'controller' => 'admin',
-                    'action'     => 'deletefaq',
-                    //'idfaq'      => $user['ID'],
+                    'action'     => 'deleteuser',
+                    'usrid'      => $user['Username'],
                     'subform'    => 'subform'.$i
                     ), 
                     'default',true

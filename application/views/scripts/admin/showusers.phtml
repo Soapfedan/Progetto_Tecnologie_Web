@@ -1,7 +1,13 @@
 <div id="staff" class="container">
-
+    <br/>
     <div class="tablefaq">
-        <div ><h1> GESTISCI UTENTI.</h1></div> <br />
+        <?php 
+        if ($this->_edituser == true)
+            echo "<div ><h1> MODIFICA UTENTI.</h1></div>" ;
+        else
+            echo "<div ><h1> ELIMINA UTENTI.</h1></div>" ;
+        ?>
+        <br />
         <div>
             <table>
             	<?php  foreach (((object)$this->users) as $user) :?>
