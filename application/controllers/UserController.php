@@ -7,7 +7,10 @@ class UserController extends Zend_Controller_Action
     protected $_username;
     protected $_completed;
     protected $_filled;
-    protected $_form;
+    protected $_editform;
+    protected $_insertprofileform;
+    
+    
     
     
     public function init()
@@ -19,10 +22,13 @@ class UserController extends Zend_Controller_Action
          $this->_completed = $this->_getParam('completed');
         $this->_filled = $this->_getParam('filled');
         $this->_username = $this->_getParam('username');
-        $this->_form = $this->getProfileForm(($this->_completed==false ? false : true),
+        $this->_editform = $this->getProfileForm(($this->_completed==false ? false : true),
                                                          ($this->_filled==false ? false : true),
-                                                         ($this->_username==null ? null : $this->_username));
-       $this->view->profileForm= $this->_form;
+                                                         ($this->_username==null ? null : $this->_username),
+                                                          'editprofile');
+        $this->_insertprofileform = $this->getInsertUserForm($this->_username);                                                         
+        
+        
     }
 
     public function indexAction()
@@ -53,7 +59,7 @@ class UserController extends Zend_Controller_Action
      public function editprofileAction(){
         
         $this->view->msg = 'editProfile';
-        
+        $this->view->profileForm= $this->_editform;
     }
      
       public function viewescapeplanAction(){
@@ -85,12 +91,12 @@ class UserController extends Zend_Controller_Action
             $this->_helper->redirector('welcome',$controller);
         }    
                                               
-        if (!$this->_form->isValid($_POST)) {
+        if (!$this->_editform->isValid($_POST)) {
           
-            $this->_form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            $this->_editform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('editprofile');
         }
-        $values = $this->_form->getValues();
+        $values = $this->_editform->getValues();
         $values['Username']=$this->_authService->getIdentity()->Username;
         $values['Password']=$this->_authService->getIdentity()->Password;
         $values['Categoria']=$this->_authService->getIdentity()->Categoria;
@@ -101,9 +107,15 @@ class UserController extends Zend_Controller_Action
           
       }
       
-       private function getProfileForm($completed,$filled,$username)
-    {
-        $identity = $this->_authService->getIdentity();
+       public function insertuserAction()
+       {
+           $this->view->insertForm = $this->_insertprofileform;
+           
+       }
+      
+      public function newuserAction()
+      {
+         $identity = $this->_authService->getIdentity();
         if($identity!=false){
             $controller='user';
          switch ($identity->Categoria) {
@@ -119,20 +131,46 @@ class UserController extends Zend_Controller_Action
             default:
                 
                 break;
+        }   
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('welcome',$controller);
+        }    
+                                              
+        if (!$this->_insertprofileform->isValid($_POST)) {
+          
+            $this->_insertprofileform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('insertuser');
         }
+        $values = $this->_insertprofileform->getValues();
+        $this->_userModel->insertNewUser($values);
+        $this->_helper->redirector('welcome',$controller); 
+        }
+           
+      }
+      
+      
+       private function getProfileForm($completed,$filled,$username,$action)
+    {
+      
             
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_form = new Application_Form_User_Profilo_Profile();
-        $this->_form->createForm($completed,$filled,$username);
-        $this->_form->setAction($urlHelper->url(array(
+        $form = new Application_Form_User_Profilo_Profile();
+        $form->createForm($completed,$filled,$username);
+        $form->setAction($urlHelper->url(array(
                         'controller' => 'user',
-                        'action'     => 'updateprofile'
+                        'action'     => $action
                         ), 
                         'default',true
                     ));
                     
-        return $this->_form;
+        return $form;
     }
-    }
+    
    
+   private function getInsertUserForm($username)
+   {
+       $this->_insertprofileform = $this->getProfileForm(true, false, $username,'newuser');
+       
+       return $this->_insertprofileform;
+   }
 }

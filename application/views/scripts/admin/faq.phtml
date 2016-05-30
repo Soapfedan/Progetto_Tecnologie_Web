@@ -1,13 +1,18 @@
 <br/> 
   <h3><?php echo $this->msg; ?></h3>
-  <ul><li class="faqmenu"><a href="<?= $this->url(array(
+<br />
+<br />
+<br />
+<br />
+<br />
+  <ul><li class="show"><a href="<?= $this->url(array(
                         'controller' => 'admin',
                         'action'     => 'insertfaq'
                         ), 
                         'default',true
                     ); 
                  ?>" accesskey="0" title="">Inserisci Faq</a></li>
-    <li class="faqmenu"><a href="<?= $this->url(array(
+    <li class="show"><a href="<?= $this->url(array(
                         'controller' => 'admin',
                         'action'     => 'showfaq',
                         'edit'       => true
@@ -15,7 +20,7 @@
                         'default',true
                     ); 
                  ?>" accesskey="1" title="">Modifica Faq</a></li>  
-    <li class="faqmenu"><a href="<?= $this->url(array(
+    <li class="show"><a href="<?= $this->url(array(
                         'controller' => 'admin',
                         'action'     => 'showfaq',
                         'edit'       => false

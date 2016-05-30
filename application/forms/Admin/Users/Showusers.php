@@ -31,9 +31,9 @@ class Application_Form_Admin_Users_Showusers extends App_Form_Abstract
                 $subform->setAction($this->getView()->url(array(
                     'controller' => 'user',
                     'action'     => 'editprofile',
-                    /*'usrid'      => $user['Username'],
-                    'subform'    => 'subform'.$i,
-                    'edit'       => true*/
+                    'username'   => $user['Username'],
+                    'filled'     => true,
+                    'completed'  => true
                     ), 
                     'default',true
                 ));
@@ -48,8 +48,7 @@ class Application_Form_Admin_Users_Showusers extends App_Form_Abstract
                 $subform->setAction($this->getView()->url(array(
                     'controller' => 'admin',
                     'action'     => 'deleteuser',
-                    'usrid'      => $user['Username'],
-                    'subform'    => 'subform'.$i
+                    'usrid'      => $user['Username']
                     ), 
                     'default',true
                 ));

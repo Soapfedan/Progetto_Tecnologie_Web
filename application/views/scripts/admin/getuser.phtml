@@ -1,13 +1,19 @@
-<br/> 
-  <ul><li><a href="<?= $this->url(array(
-                        'controller' => 'admin',
+<br/>
+<h3><?php echo $this->msg; ?></h3> 
+<br />
+<br />
+<br />
+<br />
+<br />
+  <ul><li class='show'><a href="<?= $this->url(array(
+                        'controller' => 'user',
                         'action'     => 'insertuser'
                         ), 
                         'default',true
                     ); 
                  ?>" accesskey="0" title="">Inserisci Utente</a></li>
                  
-    <li><a href="<?= $this->url(array(
+    <li class="show"><a href="<?= $this->url(array(
                         'controller' => 'admin',
                         'action'     => 'showusers',
                         'edituser'       => true
@@ -16,7 +22,7 @@
                     ); 
                  ?>" accesskey="1" title="">Modifica Utente</a></li>  
                  
-    <li><a href="<?= $this->url(array(
+    <li class="show"><a href="<?= $this->url(array(
                         'controller' => 'admin',
                         'action'     => 'showusers',
                         'edituser'       => false
@@ -27,7 +33,7 @@
 
 <br/> 
 
-  <h3><?php echo $this->msg; ?></h3>
+  
   <!--
   <table id="tableusers">
       <thead>
