@@ -84,6 +84,7 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
             'FormElements',
             array('HtmlTag', array('tag' => 'dl',
                                    'class' => 'zend_form')),
+            array('Description', array('placement' => 'prepend', 'class' => 'formerror')),                                   
             'Form',
         ));
 		}

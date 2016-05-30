@@ -660,7 +660,7 @@ ul.style4 .first
 }
 
 .tablefaq #answer{
-	color:#000000;
+	text-color:#000000;
 }
 
 .tablefaq h4{
@@ -669,5 +669,5 @@ ul.style4 .first
 
 !important
 .faqmenu{
-	color:#000000;
+	text-color:#000000;
 }
