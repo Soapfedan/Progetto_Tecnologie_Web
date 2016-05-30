@@ -1,26 +1,25 @@
-<div id="staff" class="container">
-
-    <div class="tablefaq">
-        <div ><h1 id="faq"> F.A.Q.</h1></div> <br />
-        <div>
-            <table>
-            	<?php  foreach (((object)$this->faqs) as $faq) :?>
-            	<tr>
-            		<td><?php echo $faq ?></td>
-            	</tr>   
-        
-        		<?php endforeach ?>
-        	</table>
-      </div>
-    </div>
-    <div>
-    	<!--<li class="menu"><a href="<?php echo $this->url(array(
+<br/> 
+  <h3><?php echo $this->msg; ?></h3>
+  <ul><li class="faqmenu"><a href="<?= $this->url(array(
                         'controller' => 'admin',
-                        'action'     => 'editprofile',
-                        'completed'  => false
+                        'action'     => 'insertfaq'
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="3" title="">Modifica Profilo</a></li> -->
-    </div>
-</div>
+                 ?>" accesskey="0" title="">Inserisci Faq</a></li>
+    <li class="faqmenu"><a href="<?= $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'showfaq',
+                        'edit'       => true
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="1" title="">Modifica Faq</a></li>  
+    <li class="faqmenu"><a href="<?= $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'showfaq',
+                        'edit'       => false
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="2" title="">Cancella Faq</a></li> </ul>

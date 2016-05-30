@@ -22,9 +22,9 @@ class Application_Model_Admin extends App_Model_Abstract
         return $this->getResource('Faq')->insertFaq($faq);
     }
     
-      public function modifyFaq($faq,$id)
+      public function modifyFaq($faq)
     {
-        return $this->getResource('Faq')->modifyFaq($faq,$id);
+        return $this->getResource('Faq')->modifyFaq($faq);
     }
     
     

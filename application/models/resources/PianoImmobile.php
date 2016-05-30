@@ -75,23 +75,23 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     public function setMap($map,$mapschema,$floor,$imm){
         
             $data=array('Mappa'=>$map,'Mappatura_zone'=>$mapschema);
-            $where[] = $table->getAdapter()->quoteInto('Immobile = ?', $imm);
-            $where[] = $table->getAdapter()->quoteInto('Id_piano = ?', $floor);
+            $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
+            $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
             $this->update($data,$where);
     }
     
     //setta lo stato di evacuazione di un piano
     public function setEvacuationState($floor,$imm,$state=0){
                 
-            $where[] = $table->getAdapter()->quoteInto('Immobile = ?', $imm);
-            $where[] = $table->getAdapter()->quoteInto('Id_piano = ?', $floor);
+            $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
+            $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
             $this->update($state,$where);
     }
     
     //elimina un piano
     public function deleteFloor($floor,$imm){
-        $where[] = $table->getAdapter()->quoteInto('Immobile = ?', $imm);
-        $where[] = $table->getAdapter()->quoteInto('Id_piano = ?', $floor);
+        $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
+        $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
         $this->delete($where);
     }
     

@@ -45,7 +45,7 @@ class Application_Resource_Segnalazione extends Zend_Db_Table_Abstract
 
     public function deleteAlert($cod){
         
-        $where = $table->getAdapter()->quoteInto('Codice_Segnalazione = ?', $cod);
+        $where = $this->getAdapter()->quoteInto('Codice_Segnalazione = ?', $cod);
         $this->delete($where);
     }
 }

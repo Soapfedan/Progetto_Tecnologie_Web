@@ -32,7 +32,7 @@ class Application_Resource_Catastrofe extends Zend_Db_Table_Abstract
     public function modifyDisaster($cat,$id)
     {
         $data=array('Descrizione'=>$cat);
-        $where = $table->getAdapter()->quoteInto('Id_Catastrofe = ?', $id);
+        $where = $this->getAdapter()->quoteInto('Id_Catastrofe = ?', $id);
         $this->update($data,$where);
     }
     
@@ -40,7 +40,7 @@ class Application_Resource_Catastrofe extends Zend_Db_Table_Abstract
     
     public function deleteDisaster($id)
     {
-        $where = $table->getAdapter()->quoteInto('Id_Catastrofe = ?', $id);
+        $where = $this->getAdapter()->quoteInto('Id_Catastrofe = ?', $id);
         $this->delete($where);
     }
    

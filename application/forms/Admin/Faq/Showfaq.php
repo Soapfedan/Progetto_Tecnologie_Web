@@ -4,14 +4,15 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
 	protected $_adminModel;
         
     public function init(){
-        
+    }
+     
+    public function createForm($edit){    
         $this->_adminModel = new Application_Model_Admin();
         $this->setMethod('post');
         $this->setName('faqform');
         $this->setAction('');
         $values = $this->_adminModel->extractFaq();
         
-        $subforms = array();
        
         $valuarr = $values->toArray();
         $i=0;
@@ -21,6 +22,7 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
             
              $subform->addElement('text', 'ID', array(
             'label' => 'ID',
+            
             'decorators' => $this->elementDecorators,
         ));
             
@@ -41,21 +43,56 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
             'validators' => array(array('StringLength',true, array(1,2500))),
             'decorators' => $this->elementDecorators,
         ));
-             $subform->addElement('button','Modifica',array(
-             'label' => 'Modifica'
+        
+            if($edit==true){
+             $subform->addElement('submit','Modifica',array(
+             'label' => 'Modifica',
+             'decorators' => $this->buttonDecorators,
              ));
-             
-             $subform->addElement('button','Cancella',array(
-             'label' => 'Cancella'
+              $subform->setAction($this->getView()->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'editfaq',
+                        'idfaq'      => $faq['ID'],
+                        'subform'    => 'subform'.$i,
+                        'edit'       => true
+                        ), 
+                        'default',true
+                    ));
+               $subform->setMethod('post');
+            }else{
+             $subform->addElement('submit','Cancella',array(
+             'label' => 'Cancella',
+             'decorators' => $this->buttonDecorators,
              ));
-             
+              $subform->setAction($this->getView()->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'deletefaq',
+                        'idfaq'      => $faq['ID'],
+                        'subform'    => 'subform'.$i
+                        ), 
+                        'default',true
+                    ));
+              $subform->setMethod('post');
+            }
      
         
              $subform->populate($faq);
              $this->addSubForm($subform,'subform'.$i);
             
-		}
             
+            $subform->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'dl',
+                                   'class' => 'zend_form')),
+            'Form',
+        ));
+		}
+           $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'table')),
+            array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            'Form'
+        )); 
     }
 
 

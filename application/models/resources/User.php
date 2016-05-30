@@ -49,19 +49,19 @@ class Application_Resource_User extends Zend_Db_Table_Abstract
     public function updateAllUserInformation($form,$olduser){
             
         
-        $where = $table->getAdapter()->quoteInto('Username = ?',$olduser);
+        $where = $this->getAdapter()->quoteInto('Username = ?',$olduser);
         $this->update($data,$where);
     }   
     
     public function updatePassword($form){
             
-        $where = $table->getAdapter()->quoteInto('Username = ?',$form['username']);
+        $where = $this->getAdapter()->quoteInto('Username = ?',$form['username']);
         $this->update($form['password'],$where);
     }
     
     public function deleteUser($username){
         
-        $where = $table->getAdapter()->quoteInto('Username = ?', $username);
+        $where = $this->getAdapter()->quoteInto('Username = ?', $username);
         $this->delete($where);
     }
 }

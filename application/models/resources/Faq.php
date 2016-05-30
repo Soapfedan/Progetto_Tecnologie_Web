@@ -29,19 +29,18 @@ class Application_Resource_Faq extends Zend_Db_Table_Abstract
     
     //modifica una faq
     
-    public function modifyFaq($faq,$id)
+    public function modifyFaq($faq)
     {
-        $data=array('Question'=>$faq[0],
-                    'Answer'=>$faq[1]);
-        $where = $table->getAdapter()->quoteInto('ID = ?', $id);
-        $this->update($data,$where);
+       
+        $where = $this->getAdapter()->quoteInto('ID = ?', $faq['ID']);
+        $this->update($faq,$where);
     }
     
     //elimina una faq
     
     public function deleteFaq($id)
     {
-        $where = $table->getAdapter()->quoteInto('ID = ?', $id);
+        $where = $this->getAdapter()->quoteInto('ID = ?', $id);
         $this->delete($where);
     }
    

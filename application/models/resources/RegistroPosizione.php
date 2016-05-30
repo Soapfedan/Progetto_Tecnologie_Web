@@ -62,7 +62,7 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
      public function updatePosition($data){
         
         $position=array('Id_piano'=>$data[1],'Zona'=>$data[2],'Immobile'=>$data[3]);
-        $where = $table->getAdapter()->quoteInto('Username = ?', $data[0]);
+        $where = $this->getAdapter()->quoteInto('Username = ?', $data[0]);
         $this->update($position,$where);
                
         
@@ -70,7 +70,7 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
      //elimina la posizione di quell'utente
       public function deletePosition($username){
         
-        $where = $table->getAdapter()->quoteInto('Username = ?', $id);
+        $where = $this->getAdapter()->quoteInto('Username = ?', $id);
         $this->delete($where);     
         
     }

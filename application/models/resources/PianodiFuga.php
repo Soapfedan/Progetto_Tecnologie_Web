@@ -45,8 +45,8 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
     //settta il piano alternativo e se non è passato niente al parametro $plan lo setta a null
     public function setAlternativePlan($zone,$floor,$plan=null){
         $data=array('Piano_di_fuga_alternativo'=>$plan);
-        $where[] = $table->getAdapter()->quoteInto('Zona = ?', $zone);
-        $where[] = $table->getAdapter()->quoteInto('Id_piano = ?', $floor);
+        $where[] = $this->getAdapter()->quoteInto('Zona = ?', $zone);
+        $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
         $this->update($data,$where);
     }
     
@@ -58,7 +58,7 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
    //elimina un percorso di fuga per zona
     public function deletePlanbyZone($zone)
     {
-        $where = $table->getAdapter()->quoteInto('Zona = ?', $zone);
+        $where = $this->getAdapter()->quoteInto('Zona = ?', $zone);
         $this->delete($where);
     }
 
@@ -66,7 +66,7 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
     //elimina un percorso di fuga per piano
     public function deletePlanbyFloor($floor)
     {
-        $where = $table->getAdapter()->quoteInto('Id_piano = ?', $floor);
+        $where = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
         $this->delete($where);
     }
 }
