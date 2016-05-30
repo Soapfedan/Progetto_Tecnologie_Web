@@ -7,6 +7,7 @@ class AdminController extends Zend_Controller_Action
     protected $_edit;
     protected $_faqform;
     protected $_subform;
+	protected $_insertfaqform;
     
     protected $_edituser;
     protected $_usersform;
@@ -21,6 +22,8 @@ class AdminController extends Zend_Controller_Action
         
         $this->_edituser = $this->_getParam('edituser');
         $this->_usersform = $this->getShowUsersForm($this->_edituser == false ? false : true);
+		
+		$this->_insertfaqform=$this->getInsertFaqForm();
     }
     
     public function indexAction(){
@@ -36,7 +39,11 @@ class AdminController extends Zend_Controller_Action
         $this->view->msg='Gestisci le faq';
     }
     
-    public function insertfaqAction(){      
+    public function insertfaqAction(){
+    	$this->view ->msg ='insertfaq'; 
+		$value=$this->_insertfaqform->getValues();
+		$value['ID'] = "";
+		$this->_adminModel->insertFaq($value);
     }
     
      /* Action chiamata quando si preme su Modifica Faq o Elimina Faq */
@@ -137,5 +144,11 @@ class AdminController extends Zend_Controller_Action
         $this->_f = new Application_Form_Admin_Users_Showusers();
         $this->_f->createForm($edit);
         return $this->_f;
-    }   
+    }
+	
+	private function getInsertFaqForm(){
+	$this->_form = new Application_Form_Admin_Faq_Insertfaq();
+	return $this->_form;
+		
+	}   
  }

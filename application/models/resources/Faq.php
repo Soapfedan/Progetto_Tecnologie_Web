@@ -23,7 +23,7 @@ class Application_Resource_Faq extends Zend_Db_Table_Abstract
     
     public function insertFaq($data)
     {
-         $data[0]=$this->lastSequenceId('ID');
+         $data['ID']=$this->lastSequenceId('ID');
         $this->insert($data);
     }
     
