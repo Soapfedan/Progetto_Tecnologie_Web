@@ -9,14 +9,17 @@ class PublicController extends Zend_Controller_Action
      */
 	protected $_publicModel;
     protected $_authentication;
+    protected $_loginform;
+    protected $_newuserform;
 	
     public function init()
     {
 		$this->_helper->layout->setLayout('main');
-        $this->view->loginForm = $this->getLoginForm();
+        $this->_loginform = $this->getLoginForm();
         /* istanzia la classe per l'autenticazione degli utenti */
         $this->_authentication = new Application_Service_Authentication();
         $this->_publicModel = new Application_Model_Public();
+        $this->_newuserform = $this->getNewUserForm();
         
     }
 
@@ -49,18 +52,19 @@ class PublicController extends Zend_Controller_Action
     private function getLoginForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_form = new Application_Form_Public_Auth_Login();
-        $this->_form->setAction($urlHelper->url(array(
+        $form = new Application_Form_Public_Auth_Login();
+        $form->setAction($urlHelper->url(array(
                         'controller' => 'public',
                         'action'     => 'authenticate'
                         ), 
                         'default',true
                     ));
-        return $this->_form;
+        return $form;
     }
 
     public function loginAction(){
-        $this->_helper->layout->setLayout('login');       
+        $this->_helper->layout->setLayout('login');
+        $this->view->loginForm = $this->_loginform;       
     }
     
     public function authenticateAction()
@@ -71,7 +75,7 @@ class PublicController extends Zend_Controller_Action
         if (!$request->isPost()) {
             return $this->_helper->redirector('authenticate');
         }
-        $form = $this->getLoginForm();
+        $form = $this->_loginform;
         if (!$form->isValid($request->getPost())) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('login');
@@ -96,6 +100,58 @@ class PublicController extends Zend_Controller_Action
                 break;
         }
         return $this->_helper->redirector('welcome', $controller);
+    }
+
+    public function signupAction()
+    {
+        $this->_helper->layout->setLayout('login');
+        $this->view->signupForm = $this->_newuserform;    
+    }
+    
+    public function insertnewuserAction()
+    {
+         $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return $this->_helper->redirector('index');
+        }
+        $form = $this->_newuserform;
+        if (!$form->isValid($request->getPost())) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('signup');
+        }
+            $values=$form->getValues();
+           
+        $results = array('Username'         => $values['Username'],
+                         'Password'         => $values['Password'],
+                         'Nome'             => $values['Nome'],
+                         'Cognome'          => $values['Cognome'],
+                         'Data_di_Nascita'  => $values['Data_di_Nascita'],
+                         'Citta'            => $values['Citta'],
+                         'Provincia'        => $values['Provincia'],
+                         'Genere'           => $values['Genere'], 
+                         'Codice_fiscale'   => $values['Codice_fiscale'],
+                         'Email'            => $values['Email'],
+                         'Telefono'         => $values['Telefono'],
+                         'Categoria'        => 1,   
+                         'Societa_staff'    => $values['Societa_staff'],
+             );
+            
+            $this->_publicModel->insertNewUser($results);
+         return $this->_helper->redirector('index', 'public');
+    }
+    
+    private function getNewUserForm()
+    {
+         $urlHelper = $this->_helper->getHelper('url');
+        $form = new Application_Form_Public_Signup_Newuser();
+        $form->setAction($urlHelper->url(array(
+                        'controller' => 'public',
+                        'action'     => 'insertnewuser'
+                        ), 
+                        'default',true
+                    ));
+                    
+        return $form;
     }
 }
 

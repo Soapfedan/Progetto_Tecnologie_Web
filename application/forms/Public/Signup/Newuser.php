@@ -1,20 +1,16 @@
 <?php
-class Application_Form_User_Profilo_Profile extends App_Form_Abstract
+class Application_Form_Public_Signup_Newuser extends App_Form_Abstract
 {
 	protected $_userModel;
         
     public function init(){
         
-    }
-    
-    public function createForm($completed,$filled,$username)
-    {
         $this->_userModel = new Application_Model_User();
         $this->setMethod('post');
-        $this->setName('formprofile');
+        $this->setName('newuser');
         $this->setAction('');
         
-     if($completed==true){ 
+     
        $this->addElement('text', 'Username', array(
             'label' => 'Username',
             'filters' => array('StringTrim'),
@@ -30,7 +26,15 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
             'validators' => array(array('StringLength',true, array(5,30))),
             'decorators' => $this->elementDecorators,
         ));
-     } 
+       
+       $this->addElement('password', 'Ripetipassword', array(
+            'label' => 'Ripeti Password',
+            'filters' => array('StringTrim'),
+            'required' => true,
+            'validators' => array(array('StringLength',true, array(5,30))),
+            'decorators' => $this->elementDecorators,
+        )); 
+     
       $this->addElement('text', 'Nome', array(
             'label' => 'Nome',
             'filters' => array('StringTrim'),
@@ -48,7 +52,7 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
         ));
         
          $this->addElement('text', 'Data_di_Nascita', array(
-            'label' => 'Data di nascita (YYYY-MM-DD)',
+            'label' => 'Data di nascita  (YYYY-MM-DD)',
             'format' => 'Y-m-d\TH:iP',
             'required' => true,
             'validators' => array(array('StringLength',true, array(1,25))),
@@ -102,27 +106,18 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
             'validators' => array(array('StringLength',true, array(1,15))),
             'decorators' => $this->elementDecorators,
         ));
-        if($completed==true){
-        $this->addElement('select', 'Categoria', array(
-            'label' => 'Categoria',            
-            'required' => true,
-            'multiOptions' => array('1' => 'Utente', '2' => 'Staff','3' => 'Amministratore'),
-            'decorators' => $this->elementDecorators,
-        ));
+        
+       
         
        $this->addElement('text', 'Societa_staff', array(
-            'label' => 'Società Staff',
+            'label' => 'Società Staff (opzionale)',
             'filters' => array('Digits'),
-            'required' => true,
+            'required' => false,
             'validators' => array(array('StringLength',true, array(1))),
             'decorators' => $this->elementDecorators,
         ));
-        }
+        
 
-        if($filled==true){
-            $values = $this->_userModel->getUserInformation($username);
-            $this->populate($values->toArray());
-        }
         $this->addElement('submit', 'add', array(
             'label' => 'Invia dati',
         	'decorators' => $this->buttonDecorators,

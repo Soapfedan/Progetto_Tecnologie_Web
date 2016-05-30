@@ -17,4 +17,11 @@ class Application_Model_Public extends App_Model_Abstract
 		return $this->getResource('Faq')->extractFaq();
     }
     
+       //inserisce un nuovo utente
+       public function insertNewUser($data){
+        
+            return $this->getResource('User')->insertNewUser($data);
+        
+        } 
+         
 }

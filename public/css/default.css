@@ -268,14 +268,20 @@ ul.contact li a.icon-rss:before
     margin-left: -15em;
     width:30%;
     height:500px;
-    background:#FFC31F;
+    background-color:transparent;
 }
 
+#usermenu a{
+	color:#FFC31F;
+}
 
 #wrapper-content{
 	color: black;
+	
 }
-
+.container h3{
+	text-align:left;
+}
 .container{
 	text-align: center;
 }
@@ -293,6 +299,10 @@ ul.contact li a.icon-rss:before
 	height:500px;
 	background:#CC0000;
 	padding: 0.5em;
+}
+
+.reduced{
+	background-color:#CC0000;
 }
 
 /*********************************************************************************/
@@ -654,19 +664,38 @@ ul.style4 .first
 	font-size: 60%;
 }
 
+
+/*********************************************************************************/
+/* Tabella FAQ                                                                         */
+/*********************************************************************************/
+
 .tablefaq{
 	text-align: left;
 	
 }
 
-.tablefaq #answer{
-	text-color:#000000;
+.tablefaq #answer {
+	color:#000000;
 }
 
 .tablefaq h4{
 	color:#6F6F6F;
 }
 
+
+/*********************************************************************************/
+/* Menu vari                                                                       */
+/*********************************************************************************/
+
 .show a{
 	color:#000000;
+}
+
+/*********************************************************************************/
+/* Div void                                                                        */
+/*********************************************************************************/
+
+#void{
+	height:50px;
+	background-color:transparent;
 }
