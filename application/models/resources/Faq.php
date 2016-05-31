@@ -23,8 +23,16 @@ class Application_Resource_Faq extends Zend_Db_Table_Abstract
     
     public function insertFaq($data)
     {
-         $data['ID']=$this->lastSequenceId('ID');
+        // devo estrarre il numero di elementi della tabella e
+        // genero l'id aumentandolo di uno
+        $maxid = $this -> select()
+                       -> from('faq', array("id" => "MAX(ID)"));
+        $result = $this->fetchRow($maxid);
+        
+        $data['ID']= $result['id'] + 1;
+        //var_dump($data);
         $this->insert($data);
+        
     }
     
     //modifica una faq
