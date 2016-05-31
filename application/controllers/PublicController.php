@@ -95,7 +95,7 @@ class PublicController extends Zend_Controller_Action
         if (false === $this->_authentication->authenticate($form->getValues())) {
             $form->setDescription('Autenticazione fallita. Riprova');
             return $this->render('login');
-        }/*
+        }
         $controller='user';
         switch ($this->_authentication->getIdentity()->Categoria) {
             case 1:
@@ -110,8 +110,8 @@ class PublicController extends Zend_Controller_Action
             default:
                 
                 break;
-        }*/
-        return $this->_helper->redirector('setposition', 'user');
+        }
+        return $this->_helper->redirector('welcome', $controller);
     }
 
     public function signupAction()
