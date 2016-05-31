@@ -1,63 +1,6 @@
 <br/>
 <ul>
-    
-    <!-- Sezione Utenti -->
-    
-    <li class="menu"><a href="<?= $this->url(array(
-                        'controller' => 'user',
-                        'action'     => 'sendalert'
-                        ), 
-                        'default',true
-                    ); 
-                 ?>" accesskey="1" title="">Invia Segnalazione</a></li>
-    <li class="menu"><a href="<?= $this->url(array(
-                        'controller' => 'user',
-                        'action'     => 'changeposition'
-                        ), 
-                        'default',true
-                    ); 
-                 ?>" accesskey="2" title="">Cambia Posizione</a></li>
-<li class="menu"><a href="<?php echo $this->url(array(
-                        'controller' => 'user',
-                        'action'     => 'editprofile',
-                        'username'   => $this->authInfo('Username'),
-                        'filled'     => true,
-                        'completed'  => false
-                        ), 
-                        'default',true
-                    ); 
-                 ?>" accesskey="3" title="">Modifica Profilo</a></li>
-                 
-    <li class="menu"><a href="<?php echo $this->url(array(
-                        'controller' => 'user',
-                        'action'     => 'changepasswordform',
-                        'username'   => $this->authInfo('Username'),
-                        'filled'     => false,
-                        'completed'  => false
-                        ), 
-                        'default',true
-                    ); 
-                 ?>" accesskey="4" title=""> Modifica Password</a></li>
-                 
-    <li class="menu"><a href="<?= $this->url(array(
-                        'controller' => 'user',
-                        'action'     => 'viewescapeplan'
-                        ), 
-                        'default',true
-                    ); 
-                 ?>" accesskey="4" title="">Vedi Percorso di Fuga</a></li> 
-                 
-                 
-         <li class="menu"><a href="<?= $this->url(array(
-                        'controller' => 'user',
-                        'action'     => 'logout'
-                        ), 
-                        'default',true
-                    ); 
-               ?>" accesskey="5" title="">Logout</a></li> 
-    <hr/>
-    
-    
+  
     <!-- Sezione Staff -->
     
     <li class="menu"><a href="<?= $this->url(array(
@@ -66,26 +9,26 @@
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="6" title="">Pannello di Controllo</a></li>
+                 ?>" accesskey="0" title="">Pannello di Controllo</a></li>
     <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'staff',
                         'action'     => 'assignescapeplan'
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="7" title="">Assegna Percorsi</a></li>  
+                 ?>" accesskey="1" title="">Assegna Percorsi</a></li>  
     <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'staff',
                         'action'     => 'managealert'
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="8" title="">Gestisci Segnalazioni</a></li> 
+                 ?>" accesskey="2" title="">Gestisci Segnalazioni</a></li> 
     <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'staff',
                         'action'     => 'evacuation'
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="9" title="">Attiva l'Evacuazione</a></li> 
+                 ?>" accesskey="3" title="">Attiva l'Evacuazione</a></li> 
 </ul>
