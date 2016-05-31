@@ -47,7 +47,19 @@ class PublicController extends Zend_Controller_Action
     {
         
     } 
-     
+    
+    // Validazione AJAX
+    public function validateloginAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+            $this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Public_Auth_Login();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+            $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);         
+        }
+    } 
      
     private function getLoginForm()
     {
@@ -83,7 +95,7 @@ class PublicController extends Zend_Controller_Action
         if (false === $this->_authentication->authenticate($form->getValues())) {
             $form->setDescription('Autenticazione fallita. Riprova');
             return $this->render('login');
-        }
+        }/*
         $controller='user';
         switch ($this->_authentication->getIdentity()->Categoria) {
             case 1:
@@ -98,8 +110,8 @@ class PublicController extends Zend_Controller_Action
             default:
                 
                 break;
-        }
-        return $this->_helper->redirector('welcome', $controller);
+        }*/
+        return $this->_helper->redirector('setposition', 'user');
     }
 
     public function signupAction()
