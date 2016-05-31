@@ -3,13 +3,14 @@
 	    
     <!-- Sezione Utenti -->
     
-    <li class="menu"><a href="<?= $this->url(array(
+    <li class="menu"><a href= " <?= $this->url(array(
                         'controller' => 'user',
                         'action'     => 'sendalert'
                         ), 
                         'default',true
-                    ); 
-                 ?>" accesskey="1" title="">Invia Segnalazione</a></li>
+                        ); ?>" 
+                     accesskey="1" title="">Invia Segnalazione</a></li>    
+                         
     <li ><a href="<?= $this->url(array(
                         'controller' => 'user',
                         'action'     => 'changeposition'
@@ -17,7 +18,8 @@
                         'default',true
                     ); 
                  ?>" accesskey="2" title="">Cambia Posizione</a></li>
-<li class="menu"><a href="<?php echo $this->url(array(
+                 
+    <li class="menu"><a href="<?php echo $this->url(array(
                         'controller' => 'user',
                         'action'     => 'editprofile',
                         'username'   => $this->authInfo('Username'),
@@ -27,18 +29,31 @@
                         'default',true
                     ); 
                  ?>" accesskey="3" title="">Modifica Profilo</a></li>
+                 
+    <li class="menu"><a href="<?php echo $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'changepasswordform',
+                        'username'   => $this->authInfo('Username'),
+                        'filled'     => false,
+                        'completed'  => false
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="4" title=""> Modifica Password</a></li>
+                 
     <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'user',
                         'action'     => 'viewescapeplan'
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="4" title="">Vedi Percorso di Fuga</a></li> 
+                 ?>" accesskey="5" title="">Vedi Percorso di Fuga</a></li> 
+                 
      <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'user',
                         'action'     => 'logout'
                         ), 
                         'default',true
                     ); 
-               ?>" accesskey="5" title="">Logout</a></li> 
+               ?>" accesskey="6" title="">Logout</a></li> 
 </ul>
