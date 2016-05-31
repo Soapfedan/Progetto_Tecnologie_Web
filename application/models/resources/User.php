@@ -55,7 +55,7 @@ class Application_Resource_User extends Zend_Db_Table_Abstract
     
     public function updatePassword($form){
             
-        $where = $this->getAdapter()->quoteInto('Username = ?',$form['username']);
+        $where = $this->getAdapter()->quoteInto('Username = ?',$form['Username']);
         $this->update($form['password'],$where);
     }
     

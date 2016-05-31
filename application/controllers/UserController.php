@@ -131,6 +131,13 @@ class UserController extends Zend_Controller_Action
     public function changepasswordformAction(){
         $this->view->pswf = $this->_pswform;
     }
+    
+    public function changepasswordAction(){
+        $values = $this->_pswform->getValues;
+        $usr =$this->_authService->getIdentity()->Username;
+        $var = array('Username' => $usr, 'Password' => $values['Newpassword']);
+        $this->_userModel->updatePassword($var);
+    }
       
     private function getProfileForm($completed,$filled,$username,$action){
         $urlHelper = $this->_helper->getHelper('url');
@@ -156,7 +163,7 @@ class UserController extends Zend_Controller_Action
         $p->createForm($pass);
         $p->setAction($urlHelper->url(array(
             'controller' => 'user',
-            'action'     => ''
+            'action'     => 'changepassword'
             ), 
             'default',true    
         ));
