@@ -39,11 +39,17 @@ class AdminController extends Zend_Controller_Action
         $this->view->msg='Gestisci le faq';
     }
     
+    public function beforeinsertfaqAction(){
+        $this->view ->msg ='insertfaq'; 
+        $this->view->insertfaq = $this->_insertfaqform;       
+    }
+    
     public function insertfaqAction(){
-    	$this->view ->msg ='insertfaq'; 
-		$value=$this->_insertfaqform->getValues();
-		$value['ID'] = "";
-		$this->_adminModel->insertFaq($value);
+		$values = $this->_insertfaqform->getValues();
+            // Aggiungo un campo ID momentaneamente vuoto
+		$values['ID'] = '';
+        var_dump($values);
+		$this->_adminModel->insertFaq($values);
     }
     
      /* Action chiamata quando si preme su Modifica Faq o Elimina Faq */

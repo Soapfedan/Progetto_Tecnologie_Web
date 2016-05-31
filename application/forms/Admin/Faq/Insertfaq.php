@@ -7,7 +7,7 @@ class Application_Form_Admin_Faq_Insertfaq extends App_Form_Abstract
             
         $this->_adminModel = new Application_Model_Admin();
         $this->setMethod('post');
-        $this->setName('Insertfaqform');
+        $this->setName('insertfaqform');
         $this->setAction('');
             
             $this->addElement('textarea', 'Question', array(
@@ -34,8 +34,7 @@ class Application_Form_Admin_Faq_Insertfaq extends App_Form_Abstract
             
             $this->setAction($this->getView()->url(array(
                     'controller' => 'admin',
-                    'action'     => 'insertfaq',
-                    'edit'       => true
+                    'action'     => 'insertfaq'
                     ), 
                     'default',true
                 ));
