@@ -29,6 +29,15 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
         return $this->fetchAll($select);
     }
     
+     //estrae tutti gli immobili di quella società
+    
+    public function getallImms(){
+        $select = $this->select()
+                        ->from('piano_immobile','Immobile');
+                       
+        return $this->fetchAll($select);
+    }
+    
     //restituisce tutti i piani di quell'immobile
     
     public function getFloors($imm){

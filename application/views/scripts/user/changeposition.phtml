@@ -1,6 +1,22 @@
+<?php $this->headScript()
+    ->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+    ->appendFile($this->baseUrl('js/jqueryfun.js'))
+
+
+?>
+
 <br/> 
   <h3><?php echo $this->msg; ?></h3>
   <?php
   for($a=0; $a<6; $a++){
       echo "<br/>";
   }?>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <select id='immobili'>
+      <option>-- Seleziona --</option>
+      
+  </select>
