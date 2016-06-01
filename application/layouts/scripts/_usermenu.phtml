@@ -30,17 +30,6 @@
                     ); 
                  ?>" accesskey="3" title="">Modifica Profilo</a></li>
                  
-    <li class="menu"><a href="<?php echo $this->url(array(
-                        'controller' => 'user',
-                        'action'     => 'changepasswordform',
-                        'username'   => $this->authInfo('Username'),
-                        'filled'     => false,
-                        'completed'  => false
-                        ), 
-                        'default',true
-                    ); 
-                 ?>" accesskey="4" title=""> Modifica Password</a></li>
-                 
     <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'user',
                         'action'     => 'viewescapeplan'
