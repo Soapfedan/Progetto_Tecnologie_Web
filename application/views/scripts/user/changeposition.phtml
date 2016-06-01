@@ -1,36 +1,46 @@
-<?php $this->headScript()
-    ->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
-    ->appendFile($this->baseUrl('js/jqueryfun.js'))
-    ->captureStart() ?>
-    
-$(function(){
-    var actionUrl='<? echo $this->url(array('controller' => 'user', 'action' => 'getallimms',), 'default');  ?>';  
-    fetchAjax(actionUrl);
-    $("#immobili").on('blur', function(event) {
-    alert('Selezionato');
-    
-    });
-});
-    
-    <?php $this->headScript()->captureEnd() ?>
-
-
-
 
 <br/> 
   <h3><?php echo $this->msg; ?></h3>
-  <?php
-  for($a=0; $a<6; $a++){
-      echo "<br/>";
-  }?>
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <select id='immobili'>
-      <option>-- Seleziona --</option>
+
+<ul>
+    <?php 
+    foreach ($this->imms as $key => $value) :?>
+    <li class="show"><a href="<?= $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'changeposition',
+                        'immobile'      =>$value
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" title=""><?php echo 'Immobile'.$value?></a></li>
+                
+            
+        <?php endforeach ?>
+</ul>
+<ul>
+<?php 
       
-  </select>
-  
+ if($this->selimm!=null){
     
+        foreach ($this->floors as $key => $value) :?>
+            
+            <li class="show"><a href="<?= $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'changeposition',
+                        'immobile'   => $this->selimm,
+                        'floor'      =>$value
+                        ), 
+                        'default',true
+                    ); 
+            ?>" title=""><?php echo 'Floor'.$value;?></a></li>
+                    
+        <?php endforeach; 
+}?>
+        
+<?php if($this->selfloor!=null){
+    echo 'Immobile selezionato'.$this->selimm.'<br/>';
+    echo 'Piano selezionato'.$this->selfloor.'<br/>';
+    //var_dump($this->map);
+    echo $this->mapRenderer($this->map, array('height' => '500px',
+                                              'width'  => '500px'));
+}?>

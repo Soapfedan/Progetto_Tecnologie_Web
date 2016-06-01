@@ -44,7 +44,9 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     
     public function getFloors($imm){
         $select = $this->select()
-                        ->from('piano_immobile','Id_piano')
+                        ->distinct()
+                        ->from(array('p' => 'piano_immobile'),
+                              array('Id_piano'))
                         ->where('Immobile =?',$imm);
         return $this->fetchAll($select);
     }
@@ -54,9 +56,11 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     public function getMap($floor,$imm){
         
         $select = $this->select()
-                        ->from('piano_immobile','Mappa')
+                        ->from(array('p' => 'piano_immobile'),
+                              array('Mappa'))
                         ->where('Immobile =?',$imm)
                         ->where('Id_piano =?',$floor);
+                        
         return $this->fetchRow($select);
     }
     

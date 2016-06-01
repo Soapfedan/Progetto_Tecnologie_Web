@@ -42,36 +42,49 @@ class UserController extends Zend_Controller_Action
     }
     
     public function changepositionAction(){
-        $values=$this->_userModel->getallImms();
-        $imms;
         
-        foreach ($values as $key => $value) {
-            $imms[]=$value['Immobile'];
+        
+        $imm = ($this->_getParam('immobile')==null ? null: $this->_getParam('immobile'));
+        $floor = ($this->_getParam('floor')==null ? null: $this->_getParam('floor'));
+        $imms = array();
+        $floors = array();
+        $map = null;
+        if($imm==null){
+            
+            $values=$this->_userModel->getallImms();
+            
+            foreach ($values as $key => $value) {
+                $imms[]=$value['Immobile'];
+                
+            }
+            
+        }else{
+            if($floor==null){
+                
+                $values1 = $this->_userModel->getFloors($imm);
+                
+                foreach ($values1 as $key => $valfloor) {
+                  $floors[]=$valfloor['Id_piano'];
+                
+                }  
+            }else{
+                
+                $map = $this->_userModel->getMap($floor,$imm); 
+            }
             
         }
-        $this->view->assign(array('msg'=>'changeposition','imms'=>$imms));
+        $this->view->assign(array('msg'      =>  'changeposition',
+                                  'imms'     =>  $imms,
+                                  'floors'   =>  $floors,
+                                  'selimm'   =>  $imm,
+                                  'selfloor' =>  $floor,
+                                  'map'      =>  $map));
         //$identity = $this->_authService->getIdentity();
         
         // $floors = $this->_userModel->getFloors($imm);
         //return $this->_helper->redirector('welcome','user'); 
     }
-    
-    // Immobili tramite AJAX
-    public function getallimmsAction() 
-    {
-        $this->_helper->getHelper('layout')->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
-
-        $imms;
-        
-        foreach ($values as $key => $value) {
-            $imms[]=$value['Immobile'];
-            
-        }
-        
-        $this->getResponse()->setHeader('Content-type','application/json')->setBody($imms);         
-        
-    }
+   
     
     public function editprofileAction(){
         $this->view->msg = 'editProfile';

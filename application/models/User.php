@@ -47,6 +47,11 @@ class Application_Model_User extends App_Model_Abstract
     {
         return $this->getResource('PianoImmobile')->getFloors($imm);
     }
+    
+    public function  getMap($floor,$imm)
+    {
+        return $this->getResource('PianoImmobile')->getMap($floor,$imm);
+    }
      /*
      * ---------------------REGISTRO DELLA POSIZIONE----------------------
      */
