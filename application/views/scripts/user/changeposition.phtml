@@ -1,9 +1,21 @@
 <?php $this->headScript()
     ->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
     ->appendFile($this->baseUrl('js/jqueryfun.js'))
+    ->captureStart() ?>
+    
+$(function(){
+    var actionUrl='<? echo $this->url(array('controller' => 'user', 'action' => 'getallimms',), 'default');  ?>';  
+    fetchAjax(actionUrl);
+    $("#immobili").on('blur', function(event) {
+    alert('Selezionato');
+    
+    });
+});
+    
+    <?php $this->headScript()->captureEnd() ?>
 
 
-?>
+
 
 <br/> 
   <h3><?php echo $this->msg; ?></h3>
@@ -20,3 +32,5 @@
       <option>-- Seleziona --</option>
       
   </select>
+  
+    

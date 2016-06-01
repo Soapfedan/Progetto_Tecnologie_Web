@@ -33,7 +33,9 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     
     public function getallImms(){
         $select = $this->select()
-                        ->from('piano_immobile','Immobile');
+                       ->distinct()
+                       ->from(array('p' => 'piano_immobile'),
+                              array('Immobile'));
                        
         return $this->fetchAll($select);
     }

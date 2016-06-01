@@ -1,12 +1,21 @@
-$(function()
-{
-        var imms='<?php echo $this->imms ?>';
-     $('#immobili').find('option').remove();
-                $(xml).find('provincia').each(function(){
-                    $('#immobili').append('<option>' + $(this).text() + '</option>');
-                });
-    $("#immobili").on('blur', function(event) {
-    var formElementId = $(this).attr('id');
-    
-    });
-});
+function fetchajax(actionUrl) {
+		
+	function populate(data){
+
+    var select = $("#immobili");
+    $(select).find('option').not(':first').remove();
+    $(data).find('Immobile').each(function(){
+    										 $(select).append('<option>' + $(this).text() + '</option>');
+                							});
+    }      
+
+
+		
+	$.ajax({
+		type : 'POST',
+		url : actionUrl,
+		data : {'Immobile': $("#immobili").val(),'isAjax':true},
+		dataType : 'json',
+		success : populate(data)
+	});
+}

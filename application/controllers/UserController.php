@@ -42,11 +42,35 @@ class UserController extends Zend_Controller_Action
     }
     
     public function changepositionAction(){
-        $this->view->msg = 'changeposition';
+        $values=$this->_userModel->getallImms();
+        $imms;
+        
+        foreach ($values as $key => $value) {
+            $imms[]=$value['Immobile'];
+            
+        }
+        $this->view->assign(array('msg'=>'changeposition','imms'=>$imms));
         //$identity = $this->_authService->getIdentity();
-        $this->view->$imms = $this->_userModel->getallImms;
+        
         // $floors = $this->_userModel->getFloors($imm);
-        return $this->_helper->redirector('welcome','user'); 
+        //return $this->_helper->redirector('welcome','user'); 
+    }
+    
+    // Immobili tramite AJAX
+    public function getallimmsAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $imms;
+        
+        foreach ($values as $key => $value) {
+            $imms[]=$value['Immobile'];
+            
+        }
+        
+        $this->getResponse()->setHeader('Content-type','application/json')->setBody($imms);         
+        
     }
     
     public function editprofileAction(){
