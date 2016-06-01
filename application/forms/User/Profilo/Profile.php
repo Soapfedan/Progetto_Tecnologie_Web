@@ -39,21 +39,14 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
             'decorators' => $this->elementDecorators,
         )); 
         $this->addElement('password', 'Password1', array(
-            'label' => 'Vecchia password',
-            'filters' => array('StringTrim'),
-            'required' => false,
-            'validators' => array(array('StringLength',true, array(5,30))),
-            'decorators' => $this->elementDecorators,
-        ));
-        $this->addElement('password', 'Password2', array(
-            'label' => 'Vecchia password',
+            'label' => 'Nuova password',
             'filters' => array('StringTrim'),
             'required' => false,
             'validators' => array(array('StringLength',true, array(5,30))),
             'decorators' => $this->elementDecorators,
         ));
         $this->addElement('password', 'Password', array(
-            'label' => 'Nuova password',
+            'label' => 'Ripeti password',
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(5,30))),
