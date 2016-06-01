@@ -1,6 +1,3 @@
-/**
- * @author Federico-PC
- */
 $(function()
 {
         var imms='<?php echo $this->imms ?>';
