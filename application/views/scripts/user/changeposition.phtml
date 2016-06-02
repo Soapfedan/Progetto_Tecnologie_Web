@@ -40,7 +40,9 @@
 <?php if($this->selfloor!=null){
     echo 'Immobile selezionato'.$this->selimm.'<br/>';
     echo 'Piano selezionato'.$this->selfloor.'<br/>';
-    echo $this->mapRenderer($this->map, array('height' => '500px',
-                                              'width'  => '500px'));
-                                              
+    echo $this->mapRenderer($this->map/*, array('height' => '500px',
+                                              'width'  => '500px')*/);
+                                         
+    echo $this->printArea($this->schema); 
+                                            
 }?>

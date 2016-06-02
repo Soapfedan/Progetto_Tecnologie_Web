@@ -3,7 +3,7 @@
 class UserController extends Zend_Controller_Action
 {
 	protected $_userModel;
-	protected $_auth;
+	protected $_authService;
     protected $_username;
     protected $_completed;
     protected $_filled;
