@@ -12,7 +12,7 @@ class StaffController extends Zend_Controller_Action
         $this->_company = $this->_authService->getIdentity()->Societa_staff;
         $this->_staffmodel = new Application_Model_Staff;
         $this->_helper->layout->setLayout('arear');
-        $this->evacuationform = $this->getEvacuationForm($this->_company);
+        $this->_evacuationform = $this->getEvacuationForm($this->_company);
     }
     public function indexAction()
     {
@@ -39,7 +39,7 @@ class StaffController extends Zend_Controller_Action
     } 
     
     private function getEvacuationForm($company){
-        $f = Application_Form_Staff_Evacuation();
-        $f->create_form($company);
+        $f = new Application_Form_Staff_Evacuation();
+        $f->createForm($company);
     }
  }

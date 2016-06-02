@@ -8,7 +8,7 @@ class Application_Form_Staff_Evacuation extends App_Form_Abstract
      
     public function createForm($society){
             
-        $this->_adminModel = new Application_Model_Staff();
+        $this->_staffModel = new Application_Model_Staff();
         $this->setMethod('post');
         $this->setName('evacform');
         $this->setAction('');
@@ -16,7 +16,7 @@ class Application_Form_Staff_Evacuation extends App_Form_Abstract
         $values = $this->_staffModel->getImms($society);    
             
             
-            
+         /*   
         $values = $this->_adminModel->getAllBuildings();
         $valuearr = $values->toArray();
             // Crea un radioButton
@@ -35,7 +35,7 @@ class Application_Form_Staff_Evacuation extends App_Form_Abstract
         $this->addElement('submit','elimina', array(
             'label' => 'elimina',
             'decorators' => $this->buttonDecorators,
-        ));   
+        ));   */
     }
 
 
