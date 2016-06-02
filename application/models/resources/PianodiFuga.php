@@ -75,7 +75,7 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
         
          $select = $this->select()
                         ->from(array('p' => 'piano_di_fuga'),
-                                     array('Mappatura_zona'))
+                                     array('Zona','Mappatura_zona'))
                         ->where('Immobile =?',$imm)
                         ->where('Id_piano =?',$floor);
         return $this->fetchRow($select);

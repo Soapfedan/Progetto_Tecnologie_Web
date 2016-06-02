@@ -49,6 +49,7 @@ class UserController extends Zend_Controller_Action
         $imms = array();
         $floors = array();
         $map = null;
+        $schema = null;
         if($imm==null){
             
             $values=$this->_userModel->getallImms();
@@ -79,7 +80,8 @@ class UserController extends Zend_Controller_Action
                                   'floors'   =>  $floors,
                                   'selimm'   =>  $imm,
                                   'selfloor' =>  $floor,
-                                  'map'      =>  $map));
+                                  'map'      =>  $map,
+                                  'schema'   =>  $schema));
         
     }
    
