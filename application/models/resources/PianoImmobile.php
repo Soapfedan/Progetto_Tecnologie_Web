@@ -68,7 +68,8 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     public function getMapMapped($floor,$imm){
         
          $select = $this->select()
-                        ->from('piano_immobile',array('Mappa','Mappatura_zone'))
+                        ->from(array('p' => 'piano_immobile'),
+                                     array('Mappa','Mappatura_zone'))
                         ->where('Immobile =?',$imm)
                         ->where('Id_piano =?',$floor);
         return $this->fetchRow($select);
