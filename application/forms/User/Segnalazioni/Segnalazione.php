@@ -9,30 +9,31 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
     public function create($immobile, $piano){        
         $this->_userModel = new Application_Model_User();
         $this->setMethod('post');
-        $this->setName('formsegnalazione');
+        $this->setName('sendalertform');
         $this->setAction('');
 		
-			$values =$this->_userModel->getAllZone($immobile,$piano);       
-			$selettore = new Zend_Form_Element_Select('zone');
-			//$selettore->setMultiOptions($values);
-				
+			$values =$this->_userModel->getAllZone($immobile,$piano); 
+			$options = array();      
 			
-			
-			
-			
-            $this->addElement($selettore);
+			foreach ($values as $zone){
+				//$options[$zone['id']] = $zone['Zona'];
+				$options[1] = 1;
+			}
+			$select = new Zend_Form_Element_Select('zona');
+			$select->setMultiOptions($options);
+            $this->addElement($select);
         
             $this->addElement('submit','Modifica',array(
                     'label' => 'Inserisci',
                     'decorators' => $this->buttonDecorators,
                 ));
             
-           /* $this->setAction($this->getView()->url(array(
+           $this->setAction($this->getView()->url(array(
                     'controller' => 'user',
-                    'action'     => '' //da fare
+                    'action'     => 'sendalert'
                     ), 
                     'default',true
-                ));*/
+                ));
 		
        $this->setDecorators(array(
            'FormElements',
@@ -43,9 +44,7 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
 	   
        } 
 /*
- * 
- * 
- * $result = $model->fetchAll()->toArray();
+$result = $model->fetchAll()->toArray();
 $options = array();
 
 foreach ($result as $value) {
