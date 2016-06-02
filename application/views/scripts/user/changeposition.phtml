@@ -1,6 +1,15 @@
 
 <br/> 
   <h3><?php echo $this->msg; ?></h3>
+  
+  
+<h6><a href="<?php echo $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'deleteposition'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" title="">Cancella la tua posizione</a></h6>
 
 <ul>
     <?php 
@@ -43,6 +52,6 @@
     echo $this->mapRenderer($this->map/*, array('height' => '500px',
                                               'width'  => '500px')*/);
                                          
-    echo $this->printArea($this->schema); 
+    echo $this->printArea($this->schema,$this->selimm,$this->selfloor); 
                                             
 }?>

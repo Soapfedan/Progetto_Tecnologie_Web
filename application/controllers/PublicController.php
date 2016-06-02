@@ -99,7 +99,8 @@ class PublicController extends Zend_Controller_Action
         $controller='user';
         switch ($this->_authentication->getIdentity()->Categoria) {
             case 1:
-               $controller='user'; 
+               $controller='user';
+                return $this->_helper->redirector('changeposition', 'user'); 
                 break;
              case 2:
                 $controller='staff';
@@ -151,6 +152,9 @@ class PublicController extends Zend_Controller_Action
             $this->_publicModel->insertNewUser($results);
          return $this->_helper->redirector('index', 'public');
     }
+    
+  
+    
     
     private function getNewUserForm()
     {

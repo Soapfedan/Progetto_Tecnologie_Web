@@ -40,6 +40,7 @@ class UserController extends Zend_Controller_Action
     }
  	
     public function logoutAction(){
+        $this->deleteUserPosition();
         $this->_authService->clear();
         return $this->_helper->redirector('index','public');    
     }
@@ -143,11 +144,34 @@ class UserController extends Zend_Controller_Action
        $this->_helper->redirector('welcome','user'); 
    }
    
-   public function setpositionAction()
-   {
-      // $this->get
+   public function setpositionAction(){
+       $zone=($this->_getParam('zone')==null ? null: $this->_getParam('zone'));
+       $data = array('Utente'   => $this->_authService->getIdentity()->Username,
+                     'Id_piano'   => $this->_floor,
+                     'Immobile'   => $this->_imm,
+                     'Zona'       => $zone
+                     );
+       if($this->_userModel->getPosition($data['Utente'])==null){
+           //utente senza posizione
+           $this->_userModel->insertPosition($data);
+           $this->_helper->layout->setLayout('arear');
+       }else{
+           $this->_userModel->updatePosition($data);
+       }
+       $this->_helper->redirector('welcome','user');        
    }
    
+   public function deletepositionAction(){
+       $this->deleteUserPosition();
+       $this->_helper->redirector('welcome','user');
+   }
+   
+   
+   private function deleteUserPosition(){
+       if($this->_userModel->getPosition($this->_authService->getIdentity()->Username)!=null){
+            $this->_userModel->deletePosition($this->_authService->getIdentity()->Username);
+       }
+   }
       
    private function getProfileForm($completed,$filled,$username,$action){
        $urlHelper = $this->_helper->getHelper('url');

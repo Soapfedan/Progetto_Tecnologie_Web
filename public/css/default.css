@@ -301,6 +301,10 @@ ul.contact li a.icon-rss:before
 	padding: 0.5em;
 }
 
+#wrapper-content a{
+	color:#000000;
+}
+
 .reduced{
 	background-color:#CC0000;
 }
