@@ -40,7 +40,9 @@ class UserController extends Zend_Controller_Action
     }
  	
     public function logoutAction(){
-        $this->deleteUserPosition();
+        if($this->_authService->getIdentity()->Categoria==1){
+            $this->deleteUserPosition();
+        }
         $this->_authService->clear();
         return $this->_helper->redirector('index','public');    
     }
