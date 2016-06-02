@@ -31,10 +31,10 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
     
     
     //restituisce tutte le caratteristiche di quella zona
-      public function getZone($zone,$floor){
+      public function getZone($imm,$floor){
         
          $select = $this->select()
-                        ->where('Zona =?',$zone)
+                        ->where('Immobile =?',$imm)
                         ->where('Id_piano =?',$floor);
                         
        return $this->fetchRow($select);
@@ -81,5 +81,6 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
         return $this->fetchRow($select);
         
     }
+	
 }
 

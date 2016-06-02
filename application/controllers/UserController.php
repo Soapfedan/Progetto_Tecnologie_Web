@@ -152,5 +152,13 @@ class UserController extends Zend_Controller_Action
       $this->_insertprofileform = $this->getProfileForm(true, false, $username,'newuser');
       return $this->_insertprofileform;
    }
+   
+   //estrae tutte le zone in base alla posizione dell'utente
+   public function getZoneByPosition(){
+   	
+   	$position = $this->_userModel->getPosition($this->_authService->getIdentity()->Username);
+	return $this ->_userModel->getAllZone($position->Immobile,$position->Id_piano);
+   	
+   }
         
 }

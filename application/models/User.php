@@ -30,6 +30,10 @@ class Application_Model_User extends App_Model_Abstract
     {
         return $this->getResource('PianodiFuga')->getMapMapped($floor,$imm);
     }
+	
+	public function getAllZone($imm,$floor){
+		return $this->getResource('PianodiFuga')->getZone($imm,$floor);
+	}
     
     /*
      * ---------------------PIANO DELL'IMMOBILE-----------------------
