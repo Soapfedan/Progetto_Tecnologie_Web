@@ -87,10 +87,15 @@ class Application_Model_Admin extends App_Model_Abstract
        return $this->getResource('PianoImmobile')->insertFloor($floordata);
     }
     
+    // Restituisce tutti gli immobili
     public function getAllBuildings(){
         return $this->getResource('PianoImmobile')->getallImms();
     }
     
+    // Elimina un immobile
+    public function deleteBuilding($id){
+        return $this->getResource('PianoImmobile')->deleteBuilding($id);
+    }
     /*
      * ---------------------------REGISTRO DELLE POSIZIONI--------------------
      */

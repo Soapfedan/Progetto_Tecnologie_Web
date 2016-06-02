@@ -106,5 +106,11 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     public function insertFloor($floordata){
         $this->insert($floordata);
     }
+    
+    //elimina un immobile
+    public function deleteBuilding($immid){
+        $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $immid);
+        $this->delete($where);
+    }
 }
 

@@ -117,6 +117,15 @@ class AdminController extends Zend_Controller_Action
         $this->view->buildings = $this->_buildingsform; 
     }
     
+    public function editbuildingsAction(){
+            // Se si è premuto su 'elimina'
+        if($this->_getParam('elimina')){
+            $imm = $this->_getParam('imms');
+            $this->_adminModel->deleteBuilding($imm);
+            $this->_helper->redirector('imm','admin');
+        }
+    }
+    
     private function getLoginForm(){
         $urlHelper = $this->_helper->getHelper('url');
         $loginform = new Application_Form_Public_Auth_Login();
@@ -160,8 +169,15 @@ class AdminController extends Zend_Controller_Action
 	}  
     
     private function getShowBuildingsForm(){
+        $urlHelper = $this->_helper->getHelper('url');
         $f = new Application_Form_Admin_Buildings_Showbuildings();
         $f->createForm();
+        $f->setAction($urlHelper->url(array(
+            'controller' => 'admin',
+            'action'     => 'editbuildings'
+            ), 
+            'default',true
+        ));
         return $f;
     } 
  }
