@@ -28,12 +28,12 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
                     'decorators' => $this->buttonDecorators,
                 ));
             
-            $this->setAction($this->getView()->url(array(
+           /* $this->setAction($this->getView()->url(array(
                     'controller' => 'user',
                     'action'     => '' //da fare
                     ), 
                     'default',true
-                ));
+                ));*/
 		
        $this->setDecorators(array(
            'FormElements',

@@ -9,6 +9,8 @@ class UserController extends Zend_Controller_Action
     protected $_filled;
     protected $_editform;
     protected $_insertprofileform;
+	
+    protected $_sendalertform;
     
     public function init()
     {
@@ -22,7 +24,8 @@ class UserController extends Zend_Controller_Action
                                                          ($this->_filled==false ? false : true),
                                                          ($this->_username==null ? null : $this->_username),
                                                           'updateprofile');
-        $this->_insertprofileform = $this->getInsertUserForm($this->_username);                                                         
+        $this->_insertprofileform = $this->getInsertUserForm($this->_username);
+		$this->_sendalertform = $this->getSendAlertForm();                                                         
     }
 
     public function indexAction(){
@@ -154,11 +157,19 @@ class UserController extends Zend_Controller_Action
    }
    
    //estrae tutte le zone in base alla posizione dell'utente
-   public function getZoneByPosition(){
+   private function getZoneByPosition(){
    	
-   	$position = $this->_userModel->getPosition($this->_authService->getIdentity()->Username);
-	return $this ->_userModel->getAllZone($position->Immobile,$position->Id_piano);
+   		$position = $this->_userModel->getPosition($this->_authService->getIdentity()->Username);
+		return $position;
    	
    }
-        
+   
+   private function getSendAlertForm(){
+   		$form = new Application_Form_User_Segnalazioni_Segnalazione();
+		$pos = $this->getZoneByPosition();
+		var_dump($pos);
+		$form->create($pos['Immobile'],$pos['Id_zona']);
+		return $form;
+   	
+   }
 }
