@@ -24,7 +24,7 @@ class Application_Form_Admin_Buildings_Showbuildings extends App_Form_Abstract
             // Aggiunge il radioButton finale alla form
         $this->addElement($radio);
         
-        $subform->addElement('submit','Modifica', array(
+        $this->addElement('submit','Modifica', array(
             'label' => 'Modifica',
             'decorators' => $this->buttonDecorators,
         ));

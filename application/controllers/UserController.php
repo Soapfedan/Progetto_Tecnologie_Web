@@ -69,7 +69,8 @@ class UserController extends Zend_Controller_Action
                 }  
             }else{
                 
-                $map = $this->_userModel->getMap($floor,$imm); 
+                $map = $this->_userModel->getMap($floor,$imm);
+                $schema = $this->_userModel->getMapMapped($floor,$imm);
             }
             
         }
@@ -79,10 +80,7 @@ class UserController extends Zend_Controller_Action
                                   'selimm'   =>  $imm,
                                   'selfloor' =>  $floor,
                                   'map'      =>  $map));
-        //$identity = $this->_authService->getIdentity();
         
-        // $floors = $this->_userModel->getFloors($imm);
-        //return $this->_helper->redirector('welcome','user'); 
     }
    
     

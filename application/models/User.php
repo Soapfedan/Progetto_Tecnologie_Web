@@ -26,6 +26,11 @@ class Application_Model_User extends App_Model_Abstract
         return $this->getResource('PianodiFuga')->getEscapePlan($zone,$floor);
     }
     
+     public function  getMapMapped($floor,$imm)
+    {
+        return $this->getResource('PianodiFuga')->getMapMapped($floor,$imm);
+    }
+    
     /*
      * ---------------------PIANO DELL'IMMOBILE-----------------------
      */

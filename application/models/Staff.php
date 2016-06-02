@@ -42,7 +42,12 @@ class Application_Model_Staff extends App_Model_Abstract
      
      public function setAlternativePlan($zone,$floor,$plan=null) 
     {
-        return $this->getResource('Catastrofe')->setAlternativePlan($zone,$floor,$plan);
+        return $this->getResource('PianodiFuga')->setAlternativePlan($zone,$floor,$plan);
+    }
+    
+     public function  getMapMapped($floor,$imm)
+    {
+        return $this->getResource('PianodiFuga')->getMapMapped($floor,$imm);
     }
     
     /*
@@ -70,10 +75,7 @@ class Application_Model_Staff extends App_Model_Abstract
         return $this->getResource('PianoImmobile')->getMap($floor,$imm);
     }
     
-     public function  getMapMapped($floor,$imm)
-    {
-        return $this->getResource('PianoImmobile')->getMapMapped($floor,$imm);
-    }
+    
     
     
     public function setEvacuationState($floor,$imm,$state=0){

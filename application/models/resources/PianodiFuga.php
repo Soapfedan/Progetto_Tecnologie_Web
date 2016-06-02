@@ -69,5 +69,17 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
         $where = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
         $this->delete($where);
     }
+    
+    //Estrae la cartina del piano di quell'immobile con il relativo codice html della mappatura
+    public function getMapMapped($floor,$imm){
+        
+         $select = $this->select()
+                        ->from(array('p' => 'piano_di_fuga'),
+                                     array('Mappatura_zona'))
+                        ->where('Immobile =?',$imm)
+                        ->where('Id_piano =?',$floor);
+        return $this->fetchRow($select);
+        
+    }
 }
 
