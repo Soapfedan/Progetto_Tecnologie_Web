@@ -54,14 +54,14 @@ class Application_Model_Staff extends App_Model_Abstract
      * -------------------------PIANO DELL'IMMOBILE----------------------------------
      */ 
      
-      public function  getSociety($imm) 
+      public function  getCompany($imm) 
     {
-        return $this->getResource('PianoImmobile')->getSociety($imm);
+        return $this->getResource('PianoImmobile')->getCompany($imm);
     }
     
-     public function  getImms($society)
+     public function  getImms($company)
     {
-        return $this->getResource('PianoImmobile')->getImms($society);
+        return $this->getResource('PianoImmobile')->getImms($company);
     }
    
    

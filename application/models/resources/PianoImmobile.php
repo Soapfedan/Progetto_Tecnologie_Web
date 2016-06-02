@@ -11,7 +11,7 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     }
     
     //estrae la societa a cui appertiene quell'immobile
-    public function getSociety($imm){
+    public function getCompany($imm){
         
         $select = $this->select()
                         ->from('piano_immobile','Societa')
