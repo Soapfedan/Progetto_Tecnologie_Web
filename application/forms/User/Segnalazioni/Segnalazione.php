@@ -14,10 +14,9 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
 		
 			$values =$this->_userModel->getAllZone($immobile,$piano);       
 			$selettore = new Zend_Form_Element_Select('zone');
+			//$selettore->setMultiOptions($values);
+				
 			
-			foreach ($values as $zona) {
-				$selettore->addMultiOption($zona['Id_zona'], 'Zona '.$zona['Id_zona']);
-			}
 			
 			
 			
@@ -44,6 +43,21 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
 	   
        } 
 /*
+ * 
+ * 
+ * $result = $model->fetchAll()->toArray();
+$options = array();
+
+foreach ($result as $value) {
+    $options[$value['id']] = $value['whatEver'];
+}
+
+$field = new Zend_Form_Element_Select();
+$field->setMultiOptions($options);
+ * 
+ * 
+ * 
+ * 
         $this->_adminModel = new Application_Model_Admin();
         $this->setMethod('post');
         $this->setName('buildform');

@@ -167,8 +167,7 @@ class UserController extends Zend_Controller_Action
    private function getSendAlertForm(){
    		$form = new Application_Form_User_Segnalazioni_Segnalazione();
 		$pos = $this->getZoneByPosition();
-		var_dump($pos);
-		$form->create($pos['Immobile'],$pos['Id_zona']);
+		$form->create($pos['Immobile'],$pos['Id_piano']);
 		return $form;
    	
    }
