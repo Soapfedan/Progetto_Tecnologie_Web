@@ -10,7 +10,7 @@ class Zend_View_Helper_PrintArea extends Zend_View_Helper_HtmlElement
        foreach ($schema as $element) {
            $tag .= ' <area ' .$element->Mappatura_zona . 'href = "'. $this->view->url(array(
                         'controller' => 'user',
-                        'action'     => 'setpositon',
+                        'action'     => 'setposition',
                         'zone'       => $element->Zona
                         ), 
                         'default',true

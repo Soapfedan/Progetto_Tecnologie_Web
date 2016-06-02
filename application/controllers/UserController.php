@@ -11,6 +11,9 @@ class UserController extends Zend_Controller_Action
     protected $_insertprofileform;
 	
     protected $_sendalertform;
+    protected $_imm;
+    protected $_floor;
+    
     
     public function init()
     {
@@ -25,7 +28,9 @@ class UserController extends Zend_Controller_Action
                                                          ($this->_username==null ? null : $this->_username),
                                                           'updateprofile');
         $this->_insertprofileform = $this->getInsertUserForm($this->_username);
-		$this->_sendalertform = $this->getSendAlertForm();                                                         
+		$this->_sendalertform = $this->getSendAlertForm();
+        $this->_imm = ($this->_getParam('immobile')==null ? null: $this->_getParam('immobile'));
+        $this->_floor = ($this->_getParam('floor')==null ? null: $this->_getParam('floor'));                                                   
     }
 
     public function indexAction(){
@@ -46,9 +51,9 @@ class UserController extends Zend_Controller_Action
     
     public function changepositionAction(){
         
+        $imm=$this->_imm;
+        $floor=$this->_floor;
         
-        $imm = ($this->_getParam('immobile')==null ? null: $this->_getParam('immobile'));
-        $floor = ($this->_getParam('floor')==null ? null: $this->_getParam('floor'));
         $imms = array();
         $floors = array();
         $map = null;
@@ -137,6 +142,12 @@ class UserController extends Zend_Controller_Action
        $this->_userModel->insertNewUser($values);
        $this->_helper->redirector('welcome','user'); 
    }
+   
+   public function setpositionAction()
+   {
+      // $this->get
+   }
+   
       
    private function getProfileForm($completed,$filled,$username,$action){
        $urlHelper = $this->_helper->getHelper('url');
@@ -165,10 +176,10 @@ class UserController extends Zend_Controller_Action
    }
    
    private function getSendAlertForm(){
-   		$form = new Application_Form_User_Segnalazioni_Segnalazione();
+   		/*$form = new Application_Form_User_Segnalazioni_Segnalazione();
 		$pos = $this->getZoneByPosition();
 		$form->create($pos['Immobile'],$pos['Id_piano']);
-		return $form;
+		return $form;*/
    	
    }
 }
