@@ -11,6 +11,8 @@ class AdminController extends Zend_Controller_Action
     
     protected $_edituser;
     protected $_usersform;
+    
+    protected $_buildingsform;
        	
     public function init(){
         $this->_helper->layout->setLayout('arear');
@@ -23,15 +25,14 @@ class AdminController extends Zend_Controller_Action
         $this->_edituser = $this->_getParam('edituser');
         $this->_usersform = $this->getShowUsersForm($this->_edituser == false ? false : true);
 		
-		$this->_insertfaqform=$this->getInsertFaqForm();
+		$this->_insertfaqform = $this->getInsertFaqForm();
+        $this->_buildingsform = $this->getShowBuildingsForm();
     }
     
     public function indexAction(){
     }
-    
     public function welcomeAction(){
     }
-	
 	public function removeFaqAction(){
 	}
     
@@ -112,7 +113,8 @@ class AdminController extends Zend_Controller_Action
     }
     
     public function immAction(){
-        $this->view->msg='imm';  
+        $this->view->msg='imm'; 
+        $this->view->buildings = $this->_buildingsform; 
     }
     
     private function getLoginForm(){
@@ -153,8 +155,13 @@ class AdminController extends Zend_Controller_Action
     }
 	
 	private function getInsertFaqForm(){
-	$this->_form = new Application_Form_Admin_Faq_Insertfaq();
-	return $this->_form;
-		
-	}   
+	   $this->_form = new Application_Form_Admin_Faq_Insertfaq();
+	   return $this->_form;
+	}  
+    
+    private function getShowBuildingsForm(){
+        $f = new Application_Form_Admin_Buildings_Showbuildings();
+        $f->createForm();
+        return $f;
+    } 
  }

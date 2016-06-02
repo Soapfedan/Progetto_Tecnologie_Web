@@ -29,8 +29,10 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
         return $this->fetchAll($select);
     }
     
-     //estrae tutti gli immobili di quella società
-    
+     //estrae tutti gli immobili 
+    /* SELECT DISTINCT p.Immobile
+     * FROM piano_immobile AS p
+     */
     public function getallImms(){
         $select = $this->select()
                        ->distinct()
@@ -62,18 +64,6 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
                         ->where('Id_piano =?',$floor);
                         
         return $this->fetchRow($select);
-    }
-    
-    //Estrae la cartina del piano di quell'immobile con il relativo codice html della mappatura
-    public function getMapMapped($floor,$imm){
-        
-         $select = $this->select()
-                        ->from(array('p' => 'piano_immobile'),
-                                     array('Mappa','Mappatura_zone'))
-                        ->where('Immobile =?',$imm)
-                        ->where('Id_piano =?',$floor);
-        return $this->fetchRow($select);
-        
     }
     
     //Verifica se su un piano è stata dichiarata l'evacuazione

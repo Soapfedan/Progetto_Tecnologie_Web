@@ -86,7 +86,10 @@ class Application_Model_Admin extends App_Model_Abstract
        
        return $this->getResource('PianoImmobile')->insertFloor($floordata);
     }
-   
+    
+    public function getAllBuildings(){
+        return $this->getResource('PianoImmobile')->getallImms();
+    }
     
     /*
      * ---------------------------REGISTRO DELLE POSIZIONI--------------------
