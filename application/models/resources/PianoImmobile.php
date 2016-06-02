@@ -59,7 +59,7 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
         
         $select = $this->select()
                         ->from(array('p' => 'piano_immobile'),
-                              array('Mappa'))
+                               array('Mappa'))
                         ->where('Immobile =?',$imm)
                         ->where('Id_piano =?',$floor);
                         
@@ -70,7 +70,8 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     public function checkEvacuationState($floor,$imm){
         
         $select = $this->select()
-                        ->from('piano_immobile','Evacuazione')
+                        ->from(array('p' => 'piano_immobile'),
+                               array('Evacuazione'))                        
                         ->where('Immobile =?',$imm)
                         ->where('Id_piano =?',$floor);
         return $this->fetchRow($select);

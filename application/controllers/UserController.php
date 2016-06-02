@@ -37,6 +37,16 @@ class UserController extends Zend_Controller_Action
     }
     
     public function welcomeAction(){
+        $this->view->evac='';
+        if($this->_authService->getIdentity()->Categoria==1){
+            $pos=$this->_userModel->getPosition($this->_authService->getIdentity()->Username);
+            if($pos!=null){
+                $evacstate=$this->_userModel->checkEvacuationState($pos['Id_piano'],$pos['Immobile']);
+                if($evacstate['Evacuazione']==1){
+                    $this->view->evac='Attenzione devi evacuare il tuo piano !!!!';
+                }  
+            }    
+        }
     }
  	
     public function logoutAction(){
@@ -202,10 +212,12 @@ class UserController extends Zend_Controller_Action
    }
    
    private function getSendAlertForm(){
+        
    		$form = new Application_Form_User_Segnalazioni_Segnalazione();
 		$pos = $this->getZoneByPosition();
+        if($pos!=null){
 		$form->create($pos['Immobile'],$pos['Id_piano']);
 		return $form;
-   	
+        }
    }
 }
