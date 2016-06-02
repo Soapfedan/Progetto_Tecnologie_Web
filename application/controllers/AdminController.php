@@ -46,8 +46,18 @@ class AdminController extends Zend_Controller_Action
     }
     
     public function insertfaqAction(){
+        if (!$this->getRequest()->isPost()) {
+             $this->_helper->redirector('welcome','user');
+        }    
+        if (!$this->_insertfaqform->isValid($_POST)) {
+          
+        $this->_insertfaqform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+        return $this->render('faq');
+        }
 		$values = $this->_insertfaqform->getValues();
             // Aggiungo un campo ID momentaneamente vuoto
+                    var_dump($values);
+            
 		$values['ID'] = '';
         var_dump($values);
 		$this->_adminModel->insertFaq($values);
@@ -164,8 +174,8 @@ class AdminController extends Zend_Controller_Action
     }
 	
 	private function getInsertFaqForm(){
-	   $this->_form = new Application_Form_Admin_Faq_Insertfaq();
-	   return $this->_form;
+	   $form = new Application_Form_Admin_Faq_Insertfaq();
+	   return $form;
 	}  
     
     private function getShowBuildingsForm(){
