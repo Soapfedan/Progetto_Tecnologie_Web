@@ -44,7 +44,9 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
             
            $this->setAction($this->getView()->url(array(
                     'controller' => 'user',
-                    'action'     => 'sendalert'
+                    'action'     => 'sendalert',
+                    'immobile'   => $immobile,
+                    'floor'      => $piano
                     ), 
                     'default',true
                 ));

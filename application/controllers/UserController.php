@@ -13,6 +13,7 @@ class UserController extends Zend_Controller_Action
     protected $_sendalertform;
     protected $_imm;
     protected $_floor;
+
     
     
     public function init()
@@ -59,8 +60,28 @@ class UserController extends Zend_Controller_Action
     
    
     public function sendalertAction(){
-        $this->view->msg = $this->getSendAlertForm();
+        $this->view->msg = $this->_sendalertform;
     }
+    
+    public function insertalertAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('welcome','user');
+        }   
+        if (!$this->_sendalertform->isValid($_POST)) {
+            $this->_editform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('sendalert');
+        }
+        $values = $this->_sendalertform->getValues();
+        $floor = $this->_getParam('piano');
+        $immo = $this->_getParam('immobile');
+        $this->_userModel->insertDisaster(array(
+                                         
+                                         
+                                         ));      
+        return $this->_helper->redirector('welcome','user'); 
+    }
+    
     
     public function changepositionAction(){
         

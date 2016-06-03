@@ -39,7 +39,12 @@ class Application_Resource_Segnalazione extends Zend_Db_Table_Abstract
     //inserisce una nuova segnalazione
     public function insertAlert($data){
         
-        $data[0]=$this->lastSequenceId('ID');
+        // devo estrarre il numero di elementi della tabella e
+        // genero l'id aumentandolo di uno
+        $maxid = $this -> select()
+                       -> from('faq', array("id" => "MAX(ID)"));
+        $result = $this->fetchRow($maxid);
+        $data['Codice_Segnalazione']=$result;
         $this->insert($data);
     }
 
