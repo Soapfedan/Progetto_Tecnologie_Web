@@ -12,16 +12,30 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
         $this->setName('sendalertform');
         $this->setAction('');
 		
-			$values =$this->_userModel->getAllZone($immobile,$piano);
-			$options = array();      
+			$valuesZone =$this->_userModel->getAllZone($immobile,$piano);
+			//$valuesDisaster = $this->_userModel->extractDisaster();
+			$optionsZone = array();
+			$optionsDisaster = array();  
 			$i=1;
-			foreach ($values as $zone){
-				$options[$i] = $zone['Zona'];
+			foreach ($valuesZone as $zone){
+				$optionsZone[$i] = $zone['Zona'];
+				$i++;
+			}
+			$i=1;
+			foreach ($valuesDisaster as $disaster){
+				$optionsDisaster[$i] = $disaster['Descrizione'];
 				$i++;
 			}
 			$select = new Zend_Form_Element_Select('zona');
-			$select->setMultiOptions($options);
+			$select->setMultiOptions($optionsZone);
+			$select->setLabel('Zona da segnalare');
+			$selectDisaster = new Zend_Form_Element_Select('disastro');
+			$selectDisaster->setMultiOptions($optionsDisaster);
+			$selectDisaster->setLabel('Evento da segnalare');
+            
             $this->addElement($select);
+			$this->addElement($selectDisaster);
+			
         
             $this->addElement('submit','Modifica',array(
                     'label' => 'Inserisci',

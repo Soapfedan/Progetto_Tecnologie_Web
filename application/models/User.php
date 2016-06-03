@@ -16,6 +16,11 @@ class Application_Model_User extends App_Model_Abstract
     {
         return $this->getResource('Catastrofe')->insertDisaster($data);
     }
+	
+	public function extractDisaster()
+	{
+		return $this->getResource('Catastrofe')->extractDisaster();
+	}
     
     /*
      * --------------------PIANO DI FUGA-----------------------
