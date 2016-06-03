@@ -1,23 +1,12 @@
 
 <br/> 
-  <h3><?php echo $this->msg; ?></h3>
-  <h3><?php echo $this->welcomemsg; ?></h3>
-  
-  
-<h6><a href="<?php echo $this->url(array(
-                        'controller' => 'user',
-                        'action'     => 'deleteposition'
-                        ), 
-                        'default',true
-                    ); 
-                 ?>" title="">Cancella la tua posizione</a></h6>
 
 <ul>
     <?php 
     foreach ($this->imms as $key => $value) :?>
     <li class="show"><a href="<?= $this->url(array(
-                        'controller' => 'user',
-                        'action'     => 'changeposition',
+                        'controller' => 'public',
+                        'action'     => 'setinitialposition',
                         'immobile'      =>$value
                         ), 
                         'default',true
@@ -35,8 +24,8 @@
         foreach ($this->floors as $key => $value) :?>
             
             <li class="show"><a href="<?= $this->url(array(
-                        'controller' => 'user',
-                        'action'     => 'changeposition',
+                        'controller' => 'public',
+                        'action'     => 'setinitialposition',
                         'immobile'   => $this->selimm,
                         'floor'      =>$value
                         ), 
@@ -50,9 +39,13 @@
 <?php if($this->selfloor!=null){
     echo 'Immobile selezionato'.$this->selimm.'<br/>';
     echo 'Piano selezionato'.$this->selfloor.'<br/>';
-    echo $this->mapRenderer($this->map/*, array('height' => '500px',
-                                              'width'  => '500px')*/);
+    echo $this->mapRenderer($this->map);
                                          
-    echo $this->printArea($this->schema,$this->selimm,$this->selfloor,'user'); 
+    echo $this->printArea($this->schema,$this->selimm,$this->selfloor,'public'); 
                                             
 }?>
+<br />
+<br />
+<br />
+<br />
+<br /><br /><br />

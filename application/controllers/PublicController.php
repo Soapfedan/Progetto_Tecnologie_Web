@@ -11,6 +11,8 @@ class PublicController extends Zend_Controller_Action
     protected $_authentication;
     protected $_loginform;
     protected $_newuserform;
+    protected $_imm;
+    protected $_floor;
 	
     public function init()
     {
@@ -20,6 +22,8 @@ class PublicController extends Zend_Controller_Action
         $this->_authentication = new Application_Service_Authentication();
         $this->_publicModel = new Application_Model_Public();
         $this->_newuserform = $this->getNewUserForm();
+        $this->_imm = ($this->_getParam('immobile')==null ? null: $this->_getParam('immobile'));
+        $this->_floor = ($this->_getParam('floor')==null ? null: $this->_getParam('floor'));    
         
     }
 
@@ -100,7 +104,7 @@ class PublicController extends Zend_Controller_Action
         switch ($this->_authentication->getIdentity()->Categoria) {
             case 1:
                $controller='user';
-                return $this->_helper->redirector('changeposition', 'user'); 
+                return $this->_helper->redirector('setinitialposition'); 
                 break;
              case 2:
                 $controller='staff';
@@ -153,8 +157,63 @@ class PublicController extends Zend_Controller_Action
          return $this->_helper->redirector('index', 'public');
     }
     
-  
+    public function setinitialpositionAction(){
+        $this->_helper->layout->setLayout('login');   
+        $imm=$this->_imm;
+        $floor=$this->_floor;
+        $map=null;
+        $schema=null;
+        $imms = array();
+        $floors = array();
+
+        if($imm==null){
+            
+            $values=$this->_publicModel->getallImms();
+            
+            foreach ($values as $key => $value) {
+                $imms[]=$value['Immobile'];
+                
+            }
+            
+        }else{
+            if($floor==null){
+                
+                $values1 = $this->_publicModel->getFloors($imm);
+                
+                foreach ($values1 as $key => $valfloor) {
+                  $floors[]=$valfloor['Id_piano'];
+                
+                }  
+            }else{
+                
+                $map = $this->_publicModel->getMap($floor,$imm);
+                $schema = $this->_publicModel->getMapMapped($floor,$imm);
+            }
+            
+        }
+        $this->view->assign(array('imms'     =>  $imms,
+                                  'floors'   =>  $floors,
+                                  'selimm'   =>  $imm,
+                                  'selfloor' =>  $floor,
+                                  'map'      =>  $map,
+                                  'schema'   =>  $schema));
+        
     
+    }
+    
+    public function setpositionAction(){
+       $zone=($this->_getParam('zone')==null ? null: $this->_getParam('zone'));
+       $data = array('Utente'   => $this->_authentication->getIdentity()->Username,
+                     'Id_piano'   => $this->_floor,
+                     'Immobile'   => $this->_imm,
+                     'Zona'       => $zone
+                     );
+       
+       
+       $this->_publicModel->insertPosition($data);
+
+       $this->_helper->redirector('welcome','user');        
+   }
     
     private function getNewUserForm()
     {
