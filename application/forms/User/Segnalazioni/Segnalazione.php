@@ -13,7 +13,7 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
         $this->setAction('');
 		
 			$valuesZone =$this->_userModel->getAllZone($immobile,$piano);
-			//$valuesDisaster = $this->_userModel->extractDisaster();
+			$valuesDisaster = $this->_userModel->extractDisaster();
 			$optionsZone = array();
 			$optionsDisaster = array();  
 			$i=1;
