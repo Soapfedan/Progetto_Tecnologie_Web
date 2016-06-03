@@ -64,6 +64,18 @@ class UserController extends Zend_Controller_Action
     
     public function changepositionAction(){
         
+        $usr = $this->_authService->getIdentity()->Username;
+        $pos = $this->_userModel->getPosition($usr);
+        if($pos!=null){
+            $this->view->welcomemsg = 'Ciao utente ' . $usr . 'la tua posizione attuale: '.
+              '<br />'.' Immobile: '.$pos['Immobile'].','.
+              '<br />'.' Piano: '   .$pos['Id_piano'].','.
+              '<br />'.' Zona: '    .$pos['Zona'].','.
+              '<br />'; 
+        }else{
+            $this->view->welcomemsg = 'Utente '. $usr. ' inserisci, per fa la tua posizione';
+        }
+            
         $imm=$this->_imm;
         $floor=$this->_floor;
         
@@ -166,7 +178,7 @@ class UserController extends Zend_Controller_Action
        if($this->_userModel->getPosition($data['Utente'])==null){
            //utente senza posizione
            $this->_userModel->insertPosition($data);
-           $this->_helper->layout->setLayout('arear');
+           
        }else{
            $this->_userModel->updatePosition($data);
        }
