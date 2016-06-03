@@ -65,15 +65,18 @@ class UserController extends Zend_Controller_Action
     public function changepositionAction(){
         
         $usr = $this->_authService->getIdentity()->Username;
+        $nome = $this->_authService->getIdentity()->Nome;
+        $cognome = $this->_authService->getIdentity()->Cognome;
         $pos = $this->_userModel->getPosition($usr);
         if($pos!=null){
-            $this->view->welcomemsg = 'Ciao utente ' . $usr . 'la tua posizione attuale: '.
+            $this->view->welcomemsg = 'Ciao ' . $nome . ' '. $cognome . ' la tua posizione attuale: '.
+              '<div id="position"'.
               '<br />'.' Immobile: '.$pos['Immobile'].','.
               '<br />'.' Piano: '   .$pos['Id_piano'].','.
-              '<br />'.' Zona: '    .$pos['Zona'].','.
-              '<br />'; 
+              '<br />'.' Zona: '    .$pos['Zona'].
+              '<br />'.'</div>'; 
         }else{
-            $this->view->welcomemsg = 'Utente '. $usr. ' inserisci, per fa la tua posizione';
+            $this->view->welcomemsg = 'Ehi '. $nome . ' '. $cognome. ' inserisci, per favore, la tua posizione';
         }
             
         $imm=$this->_imm;
@@ -126,6 +129,13 @@ class UserController extends Zend_Controller_Action
      
     public function viewescapeplanAction(){
         $this->view->msg = 'viewEscapePlan';
+        $pos = $this->_userModel->getPosition($this->_authService->getIdentity()->Username);
+        if($pos==null){
+            $this->_helper->redirector('changeposition','user');
+        }else{
+            $this->view->assign(array('pos'=>$pos['Immobile']));
+            $this->view->escapeplan = $this->_userModel->getEscapePlan($pos['Zona'],$pos['Id_piano'],$pos['Immobile']);
+        }
     } 
       
     public function updateprofileAction(){

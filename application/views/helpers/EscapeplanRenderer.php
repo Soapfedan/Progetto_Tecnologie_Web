@@ -4,7 +4,7 @@ class Zend_View_Helper_EscapeplanRenderer extends Zend_View_Helper_HtmlElement
 	private $_attrs;
 
     
-    public function escapePlanRenderer($plan, $attrs = false)
+    public function escapeplanRenderer($plan, $attrs = false)
     {
         
         if (null !== $attrs) {
@@ -12,10 +12,10 @@ class Zend_View_Helper_EscapeplanRenderer extends Zend_View_Helper_HtmlElement
         } else {
             $_attrs = '';
         }
-        if($plan->Piano_di_fuga!=null){
-            $tag = '<img src="' . $this->view->baseUrl($plan->getEscapePlanPath($plan->Piano_di_fuga)) . '" ' . $_attrs . '>';
+        if($plan['Piano_di_fuga_alternativo']==null){
+            $tag = '<img src="' . $this->view->baseUrl($plan->getEscapePlanPath($plan['Piano_di_fuga'])) . '" ' . $_attrs . '>';
         }else{
-            $tag = '<img src="' . $this->view->baseUrl($plan->getEscapePlanPath($plan->Piano_di_fuga_alternativo)) . '" ' . $_attrs . '>';
+            $tag = '<img src="' . $this->view->baseUrl($plan->getEscapePlanPath($plan['Piano_di_fuga_alternativo'])) . '" ' . $_attrs . '>';
         }
         
         return $tag;
