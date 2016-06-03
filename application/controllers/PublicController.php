@@ -209,8 +209,13 @@ class PublicController extends Zend_Controller_Action
                      'Zona'       => $zone
                      );
        
-       
-       $this->_publicModel->insertPosition($data);
+        if($this->_publicModel->getPosition($data['Utente'])==null){
+           //utente senza posizione
+           $this->_publicModel->insertPosition($data);
+           
+       }else{
+           $this->_publicModel->updatePosition($data);
+       }
 
        $this->_helper->redirector('welcome','user');        
    }

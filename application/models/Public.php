@@ -48,7 +48,22 @@ class Application_Model_Public extends App_Model_Abstract
      }
      /*
      * --------------------POSIZIONE-------------------
-     */ 
+     */
+     
+        public function  getPosition($username)
+    {
+        return $this->getResource('RegistroPosizione')->getPosition($username);
+    }
+    
+    
+    //modifica la posizione dell'utente
+     public function updatePosition($data){
+        
+        return $this->getResource('RegistroPosizione')->updatePosition($data);
+               
+        
+    }
+      
      //inserisce la posizione iniziale di un utente
      public function insertPosition($data){
         

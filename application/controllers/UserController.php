@@ -154,6 +154,7 @@ class UserController extends Zend_Controller_Action
         if($pos==null){
             $this->_helper->redirector('changeposition','user');
         }else{
+            var_dump($pos);
             $this->view->assign(array('pos'=>$pos['Immobile']));
             $this->view->escapeplan = $this->_userModel->getEscapePlan($pos['Zona'],$pos['Id_piano'],$pos['Immobile']);
         }

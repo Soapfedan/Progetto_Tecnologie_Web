@@ -26,9 +26,9 @@ class Application_Model_User extends App_Model_Abstract
      * --------------------PIANO DI FUGA-----------------------
      */
     
-     public function getEscapePlan($zone,$floor)
+     public function getEscapePlan($zone,$floor,$imm)
     {
-        return $this->getResource('PianodiFuga')->getEscapePlan($zone,$floor);
+        return $this->getResource('PianodiFuga')->getEscapePlan($zone,$floor,$imm);
     }
     
      public function  getMapMapped($floor,$imm)
