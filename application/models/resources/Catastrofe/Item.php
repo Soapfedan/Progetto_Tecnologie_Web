@@ -1,6 +1,6 @@
 <?php
 
-class Application_Resource_Catastofe_Item extends Zend_Db_Table_Row_Abstract
+class Application_Resource_Catastrofe_Item extends Zend_Db_Table_Row_Abstract
 {   
 	public function init()
     {
