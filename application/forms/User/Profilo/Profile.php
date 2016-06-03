@@ -48,6 +48,7 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
         $this->addElement('password', 'Password', array(
             'label' => 'Ripeti password',
             'filters' => array('StringTrim'),
+            'onchange' => "check()",
             'required' => true,
             'validators' => array(array('StringLength',true, array(5,30))),
             'decorators' => $this->elementDecorators,
