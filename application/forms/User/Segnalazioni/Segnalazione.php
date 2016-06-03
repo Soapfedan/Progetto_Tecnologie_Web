@@ -12,12 +12,12 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
         $this->setName('sendalertform');
         $this->setAction('');
 		
-			$values =$this->_userModel->getAllZone($immobile,$piano); 
+			$values =$this->_userModel->getAllZone($immobile,$piano);
 			$options = array();      
-			
+			$i=1;
 			foreach ($values as $zone){
-				//$options[$zone['id']] = $zone['Zona'];
-				$options[1] = 1;
+				$options[$i] = $zone['Zona'];
+				$i++;
 			}
 			$select = new Zend_Form_Element_Select('zona');
 			$select->setMultiOptions($options);

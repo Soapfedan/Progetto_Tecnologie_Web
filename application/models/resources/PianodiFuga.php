@@ -37,7 +37,7 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
                         ->where('Immobile =?',$imm)
                         ->where('Id_piano =?',$floor);
                         
-       return $this->fetchRow($select);
+       return $this->fetchAll($select);
           
             
     }

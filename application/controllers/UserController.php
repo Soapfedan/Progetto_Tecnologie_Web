@@ -59,7 +59,7 @@ class UserController extends Zend_Controller_Action
     
    
     public function sendalertAction(){
-        $this->view->msg = 'sendalert';
+        $this->view->msg = $this->getSendAlertForm();
     }
     
     public function changepositionAction(){
