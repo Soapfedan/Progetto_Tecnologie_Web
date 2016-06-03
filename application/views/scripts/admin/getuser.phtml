@@ -34,29 +34,31 @@
 <br/> 
 
   
-  <!--
+
   <table id="tableusers">
       <thead>
         <tr>
-            <th>Username</th>     
-            <th>Nome</th>         <th>Cognome</th>
-            <th>Data Nascita</th> <th>Città</th>
-            <th>Provincia</th>    <th>Genere</th>
-            <th>Cod Fiscale</th>  <th>Email</th>
-            <th>Telefono</th>     <th>Categoria</th>  <th>Società</th>
+            <th>Username</th> <th>Nome</th>         
+            <th>Cognome</th><th>Categoria</th>  
         </tr>
       </thead>
-      <?php foreach ($this->users as $user) :?>
-        <tr>
-            <?php foreach ($user as $v) :?> 
-                <?php if($v != $user->Password) echo "<td> $v </td>" ?>
-            <?php endforeach ?>  
-        </tr>      
-      <?php endforeach ?>
+      <?php foreach ($this->users as $user){
+            switch($user['Categoria']){
+                case 1: $user['Categoria'] = 'Utente'; break;
+                case 2: $user['Categoria'] = 'Staff'; break;
+                case 3: $user['Categoria'] = 'Admin'; break;
+            }
+            echo "<tr>";
+            echo "<td>". $user['Username']  ."</td>";
+            echo "<td>". $user['Nome']      ."</td>";
+            echo "<td>". $user['Cognome']   ."</td>";
+            echo "<td>". $user['Categoria'] ."</td>";
+            echo "</tr>";      
+        } ?>
   </table> 
   
   <?php
   for($a=0; $a<6; $a++){
       echo "<br/>";
   }?>
-  --!>
+  

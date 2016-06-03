@@ -104,6 +104,8 @@ class AdminController extends Zend_Controller_Action
     
     public function getuserAction(){
         $this->view->msg='user'; 
+        $usr = $this->_adminModel->getAllUsers();
+        $this->view->users = $usr;
     }
     
     public function insertuserAction(){     
