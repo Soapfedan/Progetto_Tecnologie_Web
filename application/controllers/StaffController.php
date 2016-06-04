@@ -24,6 +24,9 @@ class StaffController extends Zend_Controller_Action
     public function panelAction(){
         
         $this->view->msg = 'panel';
+        $this->_staffmodel->getImms($this->_company);
+        
+        
     }
       
     public function assignescapeplanAction(){
@@ -39,7 +42,8 @@ class StaffController extends Zend_Controller_Action
     } 
     
     private function getEvacuationForm($company){
-        $f = new Application_Form_Staff_Evacuation();
+        $values = $this->_staffModel->getImms($company);    
+        $f = new Application_Form_Staff_Evacuation_Evacuation($imm);
         $f->createForm($company);
     }
  }

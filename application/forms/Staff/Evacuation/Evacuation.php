@@ -1,20 +1,19 @@
 <?php
-class Application_Form_Staff_Evacuation extends App_Form_Abstract
+class Application_Form_Staff_Evacuation_Evacuation extends App_Form_Abstract
 {
     protected $_staffModel;
         
     public function init(){
     }
      
-    public function createForm($society){
+    public function createForm($values){
             
         $this->_staffModel = new Application_Model_Staff();
         $this->setMethod('post');
         $this->setName('evacform');
         $this->setAction('');
             
-        $values = $this->_staffModel->getImms($society);    
-            
+           
             
          /*   
         $values = $this->_adminModel->getAllBuildings();

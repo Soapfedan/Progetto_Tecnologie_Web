@@ -271,7 +271,9 @@ class UserController extends Zend_Controller_Action
    		$form = new Application_Form_User_Segnalazioni_Segnalazione();
 		$pos = $this->getZoneByPosition();
         if($pos!=null){
-		$form->create($pos['Immobile'],$pos['Id_piano']);
+        $valuesZone =$this->_userModel->getAllZone($pos['Immobile'],$pos['Id_piano']);
+        $valuesDisaster = $this->_userModel->extractDisaster();
+		$form->create($pos['Immobile'],$pos['Id_piano'],$valuesZone,$valuesDisaster);
 		return $form;
         }
    }
