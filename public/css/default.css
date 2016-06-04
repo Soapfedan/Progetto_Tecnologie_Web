@@ -711,3 +711,8 @@ ul.style4 .first
 	height:50px;
 	background-color:transparent;
 }
+
+.wrong{
+	background-color: #f3e4e4;
+    border: solid 2px #ff0000;
+}

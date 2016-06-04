@@ -1,6 +1,10 @@
 function check(){
-
-	for(i = 0; i < 5; i++){
-		document.writeln('diomerda');
+	
+	docuemnt.writeln('aaa');
+	if($('#Password').val() != $('#Password1').val()){
+		$('#Password').addClass('wrong');
 	}
+	else
+		$('#Password').removeClass('wrong');
+	docuemnt.writeln('bbb');
 }
