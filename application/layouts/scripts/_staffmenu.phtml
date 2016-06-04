@@ -30,12 +30,24 @@
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="3" title="">Attiva l'Evacuazione</a></li> 
+                 ?>" accesskey="3" title="">Attiva l'Evacuazione</a></li>
+                 
+    <li class="menu"><a href="<?php echo $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'editprofile',
+                        'username'   => $this->authInfo('Username'),
+                        'filled'     => true,
+                        'completed'  => false
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="4" title="">Modifica Profilo</a></li>  
+                                
   <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'user',
                         'action'     => 'logout'
                         ), 
                         'default',true
                     ); 
-               ?>" accesskey="4" title="">Logout</a></li>                  
+               ?>" accesskey="5" title="">Logout</a></li>                  
 </ul>

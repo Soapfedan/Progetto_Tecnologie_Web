@@ -1,4 +1,4 @@
-window.onlad = (function(){
+$(function(){
 	
         var ps1 = '#Password1';
         var ps2 = '#Password';
