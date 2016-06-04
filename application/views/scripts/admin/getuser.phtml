@@ -57,9 +57,14 @@
             echo "<td>". $user['Cognome']   ."</td>";
             echo "<td>". $user['Categoria'] ."</td>";
             echo "<td>
-                    <a href=#>
-                        <img width=32 height=32 src=".$this->baseURL()."/images/editicon.png>
-                      </a>
+                    <a href=".
+                        $this->url(array(
+                            'controller' => 'user',
+                            'action'     => 'editprofile'
+                            ), 
+                            'default',true).">
+                    <img width=32 height=32 src=".$this->baseURL()."/images/editicon.png>
+                    </a>
                   </td>";
             echo "<td>
                     <a href=#>
