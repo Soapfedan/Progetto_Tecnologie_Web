@@ -61,6 +61,10 @@ class UserController extends Zend_Controller_Action
    
     public function sendalertAction(){
         $this->view->msg = $this->_sendalertform;
+        $pos = $this->_userModel->getPosition($this->_authService->getIdentity()->Username);
+        if($pos==null){
+            $this->_helper->redirector('changeposition','user');
+        }
     }
     
     public function insertalertAction()
@@ -73,12 +77,19 @@ class UserController extends Zend_Controller_Action
             return $this->render('sendalert');
         }
         $values = $this->_sendalertform->getValues();
-        $floor = $this->_getParam('piano');
+        $floor = $this->_getParam('floor');
         $immo = $this->_getParam('immobile');
-        $this->_userModel->insertDisaster(array(
-                                         
-                                         
-                                         ));      
+        
+        $this->_userModel->insertAlert(array('Data_Segnalazione' => date("Y-m-d"),
+                                                'Ora_Segnalazione'  => date("h:i:s"),
+                                                'Id_Piano'          => $floor,
+                                                'Codice_Zona'       => $values['Codice_Zona'],
+                                                'Utente'            => $this->_authService->getIdentity()->Username,
+                                                'Tipo_Catastrofe'   => $values['Tipo_Catastrofe'],
+                                                'Immobile'          => $immo
+
+                                         ));
+                                               
         return $this->_helper->redirector('welcome','user'); 
     }
     

@@ -26,10 +26,10 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
 				$optionsDisaster[$i] = $disaster['Descrizione'];
 				$i++;
 			}
-			$select = new Zend_Form_Element_Select('zona');
+			$select = new Zend_Form_Element_Select('Codice_Zona');
 			$select->setMultiOptions($optionsZone);
 			$select->setLabel('Zona da segnalare');
-			$selectDisaster = new Zend_Form_Element_Select('disastro');
+			$selectDisaster = new Zend_Form_Element_Select('Tipo_Catastrofe');
 			$selectDisaster->setMultiOptions($optionsDisaster);
 			$selectDisaster->setLabel('Evento da segnalare');
             
@@ -37,14 +37,14 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
 			$this->addElement($selectDisaster);
 			
         
-            $this->addElement('submit','Modifica',array(
+            $this->addElement('submit','Inserisci',array(
                     'label' => 'Inserisci',
                     'decorators' => $this->buttonDecorators,
                 ));
             
            $this->setAction($this->getView()->url(array(
                     'controller' => 'user',
-                    'action'     => 'sendalert',
+                    'action'     => 'insertalert',
                     'immobile'   => $immobile,
                     'floor'      => $piano
                     ), 

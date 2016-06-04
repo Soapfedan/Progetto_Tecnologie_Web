@@ -42,9 +42,9 @@ class Application_Resource_Segnalazione extends Zend_Db_Table_Abstract
         // devo estrarre il numero di elementi della tabella e
         // genero l'id aumentandolo di uno
         $maxid = $this -> select()
-                       -> from('segnalazione', array("id" => "MAX(ID)"));
+                       -> from('segnalazione', array("id" => "MAX(Codice_Segnalazione)"));
         $result = $this->fetchRow($maxid);
-        $data['Codice_Segnalazione']=$result;
+        $data['Codice_Segnalazione']=$result['id']+1;
         $this->insert($data);
     }
 
