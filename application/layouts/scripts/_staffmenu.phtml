@@ -16,21 +16,31 @@
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="1" title="">Assegna Percorsi</a></li>  
+                 ?>" accesskey="1" title="">Assegna Percorsi</a></li>
+                   
     <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'staff',
-                        'action'     => 'managealert'
+                        'action'     => 'insertalert'
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="2" title="">Gestisci Segnalazioni</a></li> 
+                 ?>" accesskey="2" title="">Inserisci Segnalazioni</a></li>
+                  
+    <li class="menu"><a href="<?= $this->url(array(
+                        'controller' => 'staff',
+                        'action'     => 'removealert'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="3" title="">Rimuovi Segnalazioni</a></li>
+                  
     <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'staff',
                         'action'     => 'evacuation'
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="3" title="">Attiva l'Evacuazione</a></li>
+                 ?>" accesskey="4" title="">Attiva l'Evacuazione</a></li>
                  
     <li class="menu"><a href="<?php echo $this->url(array(
                         'controller' => 'user',
@@ -41,7 +51,7 @@
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="4" title="">Modifica Profilo</a></li>  
+                 ?>" accesskey="5" title="">Modifica Profilo</a></li>  
                                 
   <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'user',

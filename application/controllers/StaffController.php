@@ -38,8 +38,12 @@ class StaffController extends Zend_Controller_Action
         $this->view->msg = 'assignEscapePlan';
     }
         
-    public function managealertAction(){
-        $this->view->msg = 'manageAlert';
+    public function insertalertAction(){
+        $this->view->msg = 'insertAlert';
+    }
+	
+	public function removealertAction(){
+        $this->view->msg = 'removeAlert';
     }
           
     public function evacuationAction(){

@@ -57,41 +57,4 @@ class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
        ));
 	   
        } 
-/*
-$result = $model->fetchAll()->toArray();
-$options = array();
-
-foreach ($result as $value) {
-    $options[$value['id']] = $value['whatEver'];
-}
-
-$field = new Zend_Form_Element_Select();
-$field->setMultiOptions($options);
- * 
- * 
- * 
- * 
-        $this->_adminModel = new Application_Model_Admin();
-        $this->setMethod('post');
-        $this->setName('buildform');
-        $this->setAction('');
-            
-        $values = $this->_adminModel->getAllBuildings();
-        $valuearr = $values->toArray();
-            // Crea un radioButton
-        $radio = new Zend_Form_Element_Radio('imms');
-            // Cicla sulla lista di immobile e aggiunge l'opzione relativa al radioButton
-        foreach($valuearr as $imm){
-            $radio->addMultiOption($imm['Immobile'], 'Immobile '.$imm['Immobile']);
-        }
-            // Aggiunge il radioButton finale alla form
-        $this->addElement($radio);
-        
-        $this->addElement('submit','Modifica', array(
-            'label' => 'Modifica',
-            'decorators' => $this->buttonDecorators,
-        ));
- */
-    
-
 }
