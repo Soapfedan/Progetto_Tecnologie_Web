@@ -53,5 +53,12 @@ class Application_Resource_Segnalazione extends Zend_Db_Table_Abstract
         $where = $this->getAdapter()->quoteInto('Codice_Segnalazione = ?', $cod);
         $this->delete($where);
     }
+    
+    public function getAlert($imm){
+    	$select = $this->select()
+					    ->from('segnalazione')
+						->where('Immobile =?',$imm);
+		$results = $this->fetchAll($select);
+    }
 }
 

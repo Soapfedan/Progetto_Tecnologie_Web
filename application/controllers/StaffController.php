@@ -40,10 +40,13 @@ class StaffController extends Zend_Controller_Action
         
     public function insertalertAction(){
         $this->view->msg = 'insertAlert';
+		
     }
 	
 	public function removealertAction(){
         $this->view->msg = 'removeAlert';
+		$alert = $this->_staffmodel->getAlert($this->_authService->getIdentity()->Societa_staff);
+		$this->view->alert = $alert;
     }
           
     public function evacuationAction(){

@@ -116,5 +116,9 @@ class Application_Model_Staff extends App_Model_Abstract
         
         return $this->getResource('Segnalazione')->deleteAlert($cod);
     }
-    
+
+    //restituisce gli allert per quel determinato immobile
+	public function getAlert($imm){
+		return $this->getResource('Segnalazione')->getAlert($imm);
+	}
 }
