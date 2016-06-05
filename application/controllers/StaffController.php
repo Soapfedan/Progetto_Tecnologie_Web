@@ -44,9 +44,16 @@ class StaffController extends Zend_Controller_Action
     }
 	
 	public function removealertAction(){
-        $this->view->msg = 'removeAlert';
-		$alert = $this->_staffmodel->getAlert($this->_authService->getIdentity()->Societa_staff);
-		$this->view->alert = $alert;
+		$cod_al = $this->_getParam('cod_al')==null ? null: $this->_getParam('cod_al');
+         if ($cod_al==null) {
+            $alert = $this->_staffmodel->getAlert($this->_authService->getIdentity()->Societa_staff);
+			$this->view->alert = $alert;
+         }
+         else{
+         	$this->_staffmodel->deleteAlert($cod_al);
+         	$alert = $this->_staffmodel->getAlert($this->_authService->getIdentity()->Societa_staff);
+			$this->view->alert = $alert;
+		 }
     }
           
     public function evacuationAction(){
@@ -119,8 +126,6 @@ class StaffController extends Zend_Controller_Action
             $imms = $this->_staffmodel->getImms('1');
             $dojoData= new Zend_Dojo_Data('Immobile',$imms->toArray(),'Immobile');
             $this->view->dojo= $dojoData->toJson();
-        }
-        
-        
-    }
+        }        
+    }	
  }

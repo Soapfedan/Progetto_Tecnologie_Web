@@ -56,9 +56,8 @@ class Application_Resource_Segnalazione extends Zend_Db_Table_Abstract
     
     public function getAlert($imm){
     	$select = $this->select()
-					    ->from('segnalazione')
 						->where('Immobile =?',$imm);
-		$results = $this->fetchAll($select);
+		return $this->fetchAll($select);
     }
 }
 
