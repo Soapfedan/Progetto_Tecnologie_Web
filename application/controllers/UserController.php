@@ -102,7 +102,6 @@ class UserController extends Zend_Controller_Action
         $pos = $this->_userModel->getPosition($usr);
         if($pos!=null){
             $this->view->welcomemsg = 'Ciao ' . $nome . ' '. $cognome . ' la tua posizione attuale: '.
-              '<div id="position"'.
               '<br />'.' Immobile: '.$pos['Immobile'].','.
               '<br />'.' Piano: '   .$pos['Id_piano'].','.
               '<br />'.' Zona: '    .$pos['Zona'].

@@ -1,19 +1,23 @@
 <?php
 class Application_Form_Staff_Evacuation_Evacuation extends App_Form_Abstract
 {
-    protected $_staffModel;
+   
         
     public function init(){
-    }
-     
-    public function createForm($values){
-            
-        $this->_staffModel = new Application_Model_Staff();
+           
+        
         $this->setMethod('post');
         $this->setName('evacform');
         $this->setAction('');
             
-           
+        $select = new Zend_Form_Element_Select('Immobili');
+        $select->addMultiOptions(array(
+                    'select'=>'[select]',
+                    'prova'=>'ciao'
+                    
+        ));
+        $this->addElement($select);
+        $select->setAttrib('onchange','AutoFill()');  
             
          /*   
         $values = $this->_adminModel->getAllBuildings();

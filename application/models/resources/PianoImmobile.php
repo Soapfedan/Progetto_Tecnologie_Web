@@ -24,6 +24,7 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     
     public function getImms($company){
         $select = $this->select()
+                        ->distinct()
                         ->from('piano_immobile','Immobile')
                         ->where('Societa =?',$company);
         return $this->fetchAll($select);
@@ -92,7 +93,9 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
                 
             $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
             $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
-            $this->update($state,$where);
+            
+            $evac = array('Evacuazione' => $state);
+            $this->update($evac,$where);
     }
     
     //elimina un piano

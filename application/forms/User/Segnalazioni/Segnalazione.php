@@ -1,13 +1,12 @@
 <?php
 class Application_Form_User_Segnalazioni_Segnalazione extends App_Form_Abstract
 {
-	protected $_userModel;
+	
         
     public function init(){
 	}
 	
     public function create($immobile, $piano,$valuesZone,$valuesDisaster){        
-        $this->_userModel = new Application_Model_User();
         $this->setMethod('post');
         $this->setName('sendalertform');
         $this->setAction('');
