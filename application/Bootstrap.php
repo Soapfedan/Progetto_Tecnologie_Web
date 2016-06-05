@@ -36,8 +36,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->headMeta()->appendHttpEquiv('Content-Language', 'it-IT');
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/default.css'));
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/fonts.css'));
-        $this->_view->headScript()->appendScript('https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
-        //$this->_view->headLink()->appendStylesheet($this->_view->baseUrl('http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900'));
         $this->_view->headTitle('Sito Tecnologie Web');
         
     }

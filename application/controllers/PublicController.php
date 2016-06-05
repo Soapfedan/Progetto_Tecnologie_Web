@@ -89,7 +89,7 @@ class PublicController extends Zend_Controller_Action
         $this->_helper->layout->setLayout('login');
         $request = $this->getRequest();
         if (!$request->isPost()) {
-            return $this->_helper->redirector('authenticate');
+            return $this->_helper->redirector('index');
         }
         $form = $this->_loginform;
         if (!$form->isValid($request->getPost())) {

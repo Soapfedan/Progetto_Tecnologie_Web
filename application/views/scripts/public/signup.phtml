@@ -1,8 +1,12 @@
+<?php $this->headScript()
+    ->appendFile($this->baseUrl('js/jquery-1.12.4.min.js'),$type = 'text/javascript')
+    ->appendFile($this->baseUrl('js/editprofilevalidation.js'),$type = 'text/javascript')?>
+
+<h1>Form di iscrizione</h1>
 <br/> 
   <h3><?php echo $this->msg; ?></h3>
-  <?php
-  for($a=0; $a<6; $a++){
-      echo "<br/>";
-  }
-      echo $this->signupForm;
+ 
+  <div id="signup">
+     <?php echo $this->signupForm;
   ?>
+  </div>

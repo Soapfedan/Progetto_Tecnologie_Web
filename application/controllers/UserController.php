@@ -188,7 +188,11 @@ class UserController extends Zend_Controller_Action
         unset($values['Password2']);  
             // Aggiorna le informazioni dell'utente 
         $this->_userModel->updateUserInformation($values);
-        $this->_helper->redirector('welcome','user'); 
+        if($this->_authService->getIdentity()->Categoria==1)
+            $this->_helper->redirector('welcome','user'); 
+        else if($this->_authService->getIdentity()->Categoria==2){
+             $this->_helper->redirector('welcome','staff'); 
+        }
    }
       
    public function insertuserAction(){

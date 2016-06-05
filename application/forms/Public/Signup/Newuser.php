@@ -19,15 +19,15 @@ class Application_Form_Public_Signup_Newuser extends App_Form_Abstract
             'decorators' => $this->elementDecorators,
         ));
         
-      $this->addElement('password', 'Password', array(
-            'label' => 'Password',
+      $this->addElement('password', 'Password1', array(
+            'label' => 'Inserisci la password',
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(5,30))),
             'decorators' => $this->elementDecorators,
         ));
        
-       $this->addElement('password', 'Ripetipassword', array(
+       $this->addElement('password', 'Password', array(
             'label' => 'Ripeti Password',
             'filters' => array('StringTrim'),
             'required' => true,

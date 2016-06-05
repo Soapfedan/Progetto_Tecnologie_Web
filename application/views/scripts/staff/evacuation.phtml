@@ -1,30 +1,6 @@
-<!--<?php $this->headScript()
+<?php $this->headScript()
     ->appendFile($this->baseUrl('js/jquery-1.12.4.min.js'),$type = 'text/javascript')
-    ->captureStart() ?>
-
-function AutoFill()
-    {
-        $.ajax({
-        type : 'POST',
-        url : "<?php $this->url(array('controller'=>'staff','action'=>'getdata'))?>",
-        data : {'Immobile': $("#immobili").val(),'isAjax':true},
-        dataType : 'json',
-        success : populate()
-    });
-       
-    }
-
-function populate(data){
-
-    var select = $("#immobili");
-    $(select).find('option').not(':first').remove();
-    $(data).find('Immobile').each(function(){
-                                             $(select).append('<option>' + $(this).text() + '</option>');
-                                            });
-    }   
-
-<?php $this->headScript()->captureEnd() ?> ?>
--->
+    ->appendFile($this->baseUrl('js/Staff/evacuation.js'),$type = 'text/javascript');?>
 
 <h3>Benvenuto utente <?php echo $this->authInfo('Username')?> seleziona il </h3><br />
 <h3>piano su cui vuoi attivare la procedura di evacuazione</h3>
@@ -69,7 +45,7 @@ function populate(data){
     
     <?php echo 'Immobile selezionato'.$this->selimm.'<br/>';
     echo 'Piano selezionato'.$this->selfloor.'<br/>';?>
-    <a href="<?= $this->url(array(
+    <a class="evac" href="<?= $this->url(array(
                         'controller' => 'staff',
                         'action'     => 'setevacuation',
                         'immobile'   => $this->selimm,
@@ -81,7 +57,7 @@ function populate(data){
                  ?>" title="Segnala l'allerta"><?php echo $this->imgRenderer('alert.png',array('width'=>'50','height'=>'50'));?></a>                                
     
     
-    <a href="<?= $this->url(array(
+    <a class="evac" href="<?= $this->url(array(
                         'controller' => 'staff',
                         'action'     => 'setevacuation',
                         'immobile'   => $this->selimm,

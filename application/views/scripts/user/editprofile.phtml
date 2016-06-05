@@ -1,9 +1,6 @@
-<script type="text/javascript" src="<?php $this->baseUrl('js/jquery-1.12.4.min.js') ?>"></script>
-<script type="text/javascript" src="<?php $this->baseUrl('js/validation.js') ?>"></script>
-
-<?php /*$this->headScript()
-    ->appendFile($this->baseUrl('js/ediprofilevalidation.js'))
-    ->appendScript($this->baseUrl('js/jquery-1.12.4.min.js'))*/?>
+<?php $this->headScript()
+    ->appendFile($this->baseUrl('js/jquery-1.12.4.min.js'),$type = 'text/javascript')
+    ->appendFile($this->baseUrl('js/editprofilevalidation.js'),$type = 'text/javascript')?>
 
 <br/> 
   <h3><?php echo $this->msg; ?></h3>

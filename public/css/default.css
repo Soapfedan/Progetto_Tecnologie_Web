@@ -263,20 +263,28 @@ ul.contact li a.icon-rss:before
 
 #usermenu{
     padding: 0.5em;
-    
     float: left;
     margin-left: -15em;
     width:30%;
     height:500px;
     background-color:transparent;
+    font-family: "Comic Sans MS";
+    
+    
 }
 
-#usermenu a{
-	color:#FFC31F;
+#usermenu .menu a{
+	color:#FFFFFF;
+	text-decoration: none;
+	text-align:center;
+	background: url(../images/menuback.png) no-repeat center;
+	padding:10px 30px;
+	
 }
 
 #wrapper-content{
 	color: black;
+	background-color: transparent;
 	
 }
 .container h3{
@@ -295,10 +303,10 @@ ul.contact li a.icon-rss:before
 #wrapper-arear
 {
 	margin-left: 15em;
-	background: #FFF;
 	height:500px;
-	background:#CC0000;
+	background:transparent;
 	padding: 0.5em;
+	font-family: "Comic Sans MS";
 }
 
 #wrapper-content a{
@@ -306,7 +314,9 @@ ul.contact li a.icon-rss:before
 }
 
 .reduced{
-	background-color:#CC0000;
+	
+	height: 700px;
+	background: url(../images/background.jpg) no-repeat center;
 }
 
 /*********************************************************************************/
@@ -652,6 +662,19 @@ ul.style4 .first
 	text-align: left;
 }
 
+#login-content{
+	background: url(../images/login-back.jpg) no-repeat center;
+}
+
+#login-content #staff{
+	padding: 0% 30%;
+	text-align:left;
+}
+
+#signupref{
+	color:#2D2D2D;
+}
+
 /*********************************************************************************/
 /* Faq                                                                         */
 /*********************************************************************************/
@@ -703,6 +726,21 @@ ul.style4 .first
 	
 }
 
+.widimg{
+	width:200px;
+	height:200px;
+}
+
+.has-success {
+    background:green;
+}
+.has-error {
+    background:red;
+}
+
+#signup{
+	padding: 0% 30%;
+}
 /*********************************************************************************/
 /* Div void                                                                        */
 /*********************************************************************************/
@@ -716,3 +754,5 @@ ul.style4 .first
 	background-color: #f3e4e4;
     border: solid 2px #ff0000;
 }
+
+

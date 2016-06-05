@@ -1,7 +1,7 @@
-<?php $this->headScript()
+<!--<?php $this->headScript()
     ->appendFile($this->baseUrl('js/jquryfun.js'))
     ->appendFile($this->baseUrl('js/jquery-1.12.4.min.js'))
-    ->captureStart() ?>
+    //->captureStart() ?>
 
 $(function()
 {
@@ -13,16 +13,18 @@ $(function()
     });
 });
 
-<?php $this->headScript()->captureEnd() ?>
-
+<?php//$this->headScript()->captureEnd() ?>
+-->
 
 <div id="staff" class="container">
+    <br /><br />
     <h3>Accedi al sito</h3>
+    <br />
     <p>Utilizza questa form per accedere al sito</p>
     <?php echo $this->loginForm ?>
 </div>
 <div>
-    <a href="<?= $this->url(array(
+    <a id="signupref" href="<?= $this->url(array(
                         'controller' => 'public',
                         'action'     => 'signup'
                         ), 
