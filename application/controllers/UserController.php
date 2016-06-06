@@ -175,11 +175,13 @@ class UserController extends Zend_Controller_Action
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('welcome','user');
         }   
-        if (!$this->_editform->isValid($_POST)) {
-            $this->_editform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+        $form= $this->_editform;
+        $this->view->profileForm= $form;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('editprofile');
         }
-        $values = $this->_editform->getValues();
+        $values = $form->getValues();
         $values['Username']=$this->_authService->getIdentity()->Username;
         $values['Categoria']=$this->_authService->getIdentity()->Categoria;
         $values['Societa_staff']=$this->_authService->getIdentity()->Societa_staff;
@@ -203,10 +205,12 @@ class UserController extends Zend_Controller_Action
        $identity = $this->_authService->getIdentity();
        if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('welcome','user');
-       }    
-       if (!$this->_insertprofileform->isValid($_POST)) {
+       }  
+       $form = $this->_insertprofileform;
+        $this->view->insertForm = $this->_insertprofileform; 
+       if (!$form->isValid($_POST)) {
           
-            $this->_insertprofileform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('insertuser');
        }
        $values = $this->_insertprofileform->getValues();

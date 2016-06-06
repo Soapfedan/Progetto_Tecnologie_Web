@@ -1,45 +1,48 @@
 <br/> 
-  <h3><?php echo $this->msg; var_dump($this->imms);?></h3>
+  <h3><?php echo $this->msg; ?></h3>
   <br />
   <br />
+  
+  <?php if($this->selimm==null) :?>
      <table>
       <thead>
         <tr>
             <th>Immobile</th>
             <th>Piano</th>         
             <th>Zona</th>
-            <th>Piano di fuga</th>
-            <th>Piano di fuga alternativo</th> 
+
             <th>Assegna</th> 
         </tr>
       </thead>
-      <?php foreach ($this->imms as $imm){
+      <?php foreach ($this->imms[0] as $imm){
             
             echo "<tr>";
             echo "<td>". $imm['Immobile']  ."</td>";
             echo "<td>". $imm['Id_piano']      ."</td>";
             echo "<td>". $imm['Zona']   ."</td>";
-            echo "<td>". $imm['Piano_di_fuga'] ."</td>";
-            echo "<td>". $imm['Piano_di_fuga_alternativo'] ."</td>";
-            echo "<td>". $imm['Utente'] ."</td>";
-            echo "<td>". $imm['Tipo_Catastrofe'] ."</td>";
             echo "<td>
                     <a  href=".
                         $this->url(array(
                             'controller' => 'staff',
-                            'action'     => 'assign',
+                            'action'     => 'assignescapeplan',
                             'immobile'   => $imm['Immobile'],
                             'floor'      => $imm['Id_piano'],
                             'zone'       => $imm['Zona']
                             ), 
                             'default',true).">
-                    <img width=32 height=32 src=".$this->baseURL()."/images/trashicon.png>
+                    <img width=32 height=32 src=".$this->baseURL()."/images/home.png>
                     </a>
                   </td>";
             echo "</tr>";      
         } ?>
   </table>
+        <?php else :?>
+            <p>Ok ora carica il piano alternativo per </p><br />
+            <p>Immobile : <?= $this->selimm ?></p>
+            <p>Piano : <?= $this->selfloor ?></p>
+            <p>Zona : <?= $this->selzone ?></p>
         <?php echo $this->fileform ?>
+        <?php endif ?>
         <br />
         <br />
         <a href="<?= $this->url(array(
