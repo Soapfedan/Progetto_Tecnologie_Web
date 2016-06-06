@@ -144,6 +144,18 @@ class AdminController extends Zend_Controller_Action
         }
     }
     
+    public function editfloorAction(){
+        if($this->_getParam('elimina')){
+            $fl = $this->_getParam('floors');
+            $bu = $this->_getParam('building');
+            $this->_adminModel->deleteFloor($fl, $bu);
+            $this->_helper->redirector('imm','admin');
+        }
+        if($this->getParam('modifica')){
+            
+        }
+    }
+    
     private function getLoginForm(){
         $urlHelper = $this->_helper->getHelper('url');
         $loginform = new Application_Form_Public_Auth_Login();
@@ -205,7 +217,8 @@ class AdminController extends Zend_Controller_Action
         $f->createForm($imm);
         $f->setAction($urlHelper->url(array(
             'controller' => 'admin',
-            'action'     => 'editbuilding'
+            'action'     => 'editfloor',
+            'building'   => $imm
             ), 
             'default',true
         ));
