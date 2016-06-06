@@ -144,7 +144,7 @@ class AdminController extends Zend_Controller_Action
     }
     
     public function editmapAction(){
-        $values = $this->_form->getValues();
+        $values = $this->_floorform->getValues();
         if($values){
             $this->_adminModel->setMap($values);
             $this->_helper->redirector('index');
