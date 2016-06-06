@@ -38,8 +38,10 @@ class Application_Model_Admin extends App_Model_Abstract
      * ----------------------PIANO DI FUGA-----------------------
      */
    
-   
-   
+   //resituisce tutti le zone di un piano di un immobile
+   public function getAllZones($imm, $floor){
+       return $this->getResource('PianodiFuga')->getZone($imm, $floor);
+   }
    
     //inserisce una nuova zona con un nuovo piano di fuga
     public function insertNewZonePlan($zonedata){

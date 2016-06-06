@@ -235,8 +235,9 @@ class AdminController extends Zend_Controller_Action
         $f->createForm($building, $floor);
         $f->setAction($urlHelper->url(array(
             'controller' => 'admin',
-            'action'     => 'editfloor',
-            'building'   => $building
+            'action'     => 'editzone',
+            'building'   => $building,
+            'floor'      => $floor
             ), 
             'default',true
         ));

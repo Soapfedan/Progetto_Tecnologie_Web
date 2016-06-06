@@ -13,7 +13,7 @@ class Application_Form_Admin_Buildings_Editfloor extends App_Form_Abstract
         $this->setName('floorform');
         $this->setAction('');
          
-        $this->addElement('file', 'image', array(
+        $this->addElement('file', 'map', array(
              'label' => 'Cambia la mappa del piano', 
              'destination' => '../public/images/map', 
              'validators' => array( array('Count', false, 1), 
@@ -21,17 +21,14 @@ class Application_Form_Admin_Buildings_Editfloor extends App_Form_Abstract
                                     array('Extension', false, 
                                     array('jpg', 'gif')))
         ));
-         
         
-         
-         /*
-        $values = $this->_adminModel->getFloors($imm);
+        $values = $this->_adminModel->getAllZones($imm, $fl);
         $valuearr = $values->toArray();
             // Crea un radioButton
-        $radio = new Zend_Form_Element_Radio('floors');
+        $radio = new Zend_Form_Element_Radio('zones');
             // Cicla sulla lista di piani e aggiunge l'opzione relativa al radioButton
-        foreach($valuearr as $floor){
-            $radio->addMultiOption($floor['Id_piano'], 'Piano '.$floor['Id_piano']);
+        foreach($valuearr as $zone){
+            $radio->addMultiOption($zone['Zona'], 'Zona '.$zone['Zona']);
         }
             // Aggiunge il radioButton finale alla form
         $this->addElement($radio);
@@ -43,7 +40,7 @@ class Application_Form_Admin_Buildings_Editfloor extends App_Form_Abstract
         $this->addElement('submit','elimina', array(
             'label' => 'elimina',
             'decorators' => $this->buttonDecorators,
-        ));   */
-    }
-
+        ));
+    } 
+    
 }
