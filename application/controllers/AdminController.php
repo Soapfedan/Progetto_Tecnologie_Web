@@ -13,6 +13,7 @@ class AdminController extends Zend_Controller_Action
     protected $_usersform;
     
     protected $_buildingsform;
+    protected $_editbuildingsform;
        	
     public function init(){
         $this->_helper->layout->setLayout('arear');
@@ -135,9 +136,11 @@ class AdminController extends Zend_Controller_Action
             $imm = $this->_getParam('imms');
             $this->_adminModel->deleteBuilding($imm);
             $this->_helper->redirector('imm','admin');
-        }
+        }   // Se si è premuto su 'modifica'
         if($this->_getParam('modifica')){
             $this->view->imm = $this->_getParam('imms');
+            $this->_editbuildingsform = $this->getEditBuildingForm($this->_getParam('imms'));
+            $this->view->ebuild = $this->_editbuildingsform;
         }
     }
     
@@ -195,4 +198,17 @@ class AdminController extends Zend_Controller_Action
         ));
         return $f;
     } 
+    
+    private function getEditBuildingForm($imm){
+        $urlHelper = $this->_helper->getHelper('url');
+        $f = new Application_Form_Admin_Buildings_Editbuilding();
+        $f->createForm($imm);
+        $f->setAction($urlHelper->url(array(
+            'controller' => 'admin',
+            'action'     => 'editbuilding'
+            ), 
+            'default',true
+        ));
+        return $f;
+    }
  }
