@@ -57,12 +57,10 @@ class AdminController extends Zend_Controller_Action
         return $this->render('faq');
         }
 		$values = $this->_insertfaqform->getValues();
-            // Aggiungo un campo ID momentaneamente vuoto
-                    var_dump($values);
             
 		$values['ID'] = '';
-        var_dump($values);
 		$this->_adminModel->insertFaq($values);
+		$this->render('faq');
     }
     
      /* Action chiamata quando si preme su Modifica Faq o Elimina Faq */
