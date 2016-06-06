@@ -12,8 +12,9 @@
         		<?php endforeach ?>
         	</table>
         	      
-	  <?php if($this->products instanceof Zend_Paginator) {
-	  		echo $this->paginationControl($this->products,'Sliding','public/_paginator.phtml');
+	  <?php var_dump($this->faqs);
+	   if($this->faqs instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->faqs,'Sliding','admin/_paginator.phtml');
 	  } 
 	  ?>
 
