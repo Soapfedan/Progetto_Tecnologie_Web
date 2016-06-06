@@ -42,7 +42,7 @@ class Application_Resource_User extends Zend_Db_Table_Abstract
     
     public function updateAllUserInformation($form,$olduser){
         $where = $this->getAdapter()->quoteInto('Username = ?',$olduser);
-        $this->update($data,$where);
+        $this->update($form,$where);
     }   
     
     public function updatePassword($form){

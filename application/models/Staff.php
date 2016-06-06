@@ -40,9 +40,9 @@ class Application_Model_Staff extends App_Model_Abstract
      */    
      
      
-     public function setAlternativePlan($zone,$floor,$plan=null) 
+     public function setAlternativePlan($data) 
     {
-        return $this->getResource('PianodiFuga')->setAlternativePlan($zone,$floor,$plan);
+        return $this->getResource('PianodiFuga')->setAlternativePlan($data);
     }
     
      public function  getMapMapped($floor,$imm)
@@ -50,6 +50,20 @@ class Application_Model_Staff extends App_Model_Abstract
         return $this->getResource('PianodiFuga')->getMapMapped($floor,$imm);
     }
     
+    public function getZone($zone,$floor)
+    {
+        return $this->getResource('PianodiFuga')->getZone($zone,$floor);
+    }
+    
+    public function getEscapePlanInfo($zone,$floor,$imm)
+    {
+        return $this->getResource('PianodiFuga')->getEscapePlanInfo($zone,$floor,$imm);
+    }
+    
+    public function getInfoImms($imms)
+    {
+        return $this->getResource('PianodiFuga')->getInfoImms($imms);
+    }
     /*
      * -------------------------PIANO DELL'IMMOBILE----------------------------------
      */ 

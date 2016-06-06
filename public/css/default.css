@@ -749,10 +749,17 @@ ul.style4 .first
 	height:50px;
 	background-color:transparent;
 }
-
+/*
+ *  Varie
+ */
 .wrong{
 	background-color: #f3e4e4;
     border: solid 2px #ff0000;
 }
 
+
+ ._error {
+                background-color: #f3e4e4;
+                border: solid 2px #ff0000;
+            }
 
