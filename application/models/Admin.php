@@ -38,10 +38,7 @@ class Application_Model_Admin extends App_Model_Abstract
      * ----------------------PIANO DI FUGA-----------------------
      */
    
-   public function getZone($zone,$floor)
-    {
-        return $this->getResource('PianodiFuga')->getZone($zone,$floor);
-    }
+   
    
    
     //inserisce una nuova zona con un nuovo piano di fuga

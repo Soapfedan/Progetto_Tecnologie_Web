@@ -26,6 +26,28 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
             
     }
     
+    public function getInfoImms($imms){
+        
+        $select = $this->select()
+                       ->where('Immobile IN(?)', $imms)
+                       ->order('Immobile')
+                       ->order('Id_piano')
+                       ->order('Zona');
+        $result = $this->fetchAll($select);
+        
+        return $result;
+    }
+    
+    public function getEscapePlanInfo($zone,$floor,$imm){
+         $select = $this->select()
+                        ->where('Zona =?',$zone)
+                        ->where('Id_piano =?',$floor)
+                        ->where('Immobile =?',$imm);
+        $result= $this->fetchRow($select);
+         
+         return $result; 
+    }
+    
     
     //restituisce tutte le caratteristiche di quella zona
       public function getZone($imm,$floor){
@@ -40,10 +62,13 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
     }
     
     //settta il piano alternativo e se non è passato niente al parametro $plan lo setta a null
-    public function setAlternativePlan($zone,$floor,$plan=null){
-        $data=array('Piano_di_fuga_alternativo'=>$plan);
-        $where[] = $this->getAdapter()->quoteInto('Zona = ?', $zone);
-        $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
+    public function setAlternativePlan($data){
+        
+        
+        $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $data['Immobile']);        
+        $where[] = $this->getAdapter()->quoteInto('Zona = ?', $data['Immobile']);
+        $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $data['Id_piano']);
+        
         $this->update($data,$where);
     }
     

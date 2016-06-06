@@ -7,6 +7,8 @@ class StaffController extends Zend_Controller_Action
     protected $_company;
     protected $_imm;
     protected $_floor;
+    protected $_zone;
+    protected $_fileform;
     	
     public function init()
     {
@@ -14,10 +16,11 @@ class StaffController extends Zend_Controller_Action
         $this->_company = $this->_authService->getIdentity()->Societa_staff;
         $this->_staffmodel = new Application_Model_Staff;
         $this->_helper->layout->setLayout('arear');
+        $this->_fileform = $this->getAssignPlanForm();
         $this->_evacuationform = $this->getEvacuationForm($this->_company);
         $this->_imm = ($this->_getParam('immobile')==null ? null: $this->_getParam('immobile'));
         $this->_floor = ($this->_getParam('floor')==null ? null: $this->_getParam('floor'));  
-  
+        $this->_zone = ($this->_getParam('zone')==null ? null: $this->_getParam('zone'));
     }
     public function indexAction()
     {
@@ -36,6 +39,31 @@ class StaffController extends Zend_Controller_Action
       
     public function assignescapeplanAction(){
         $this->view->msg = 'assignEscapePlan';
+        
+        
+        $imm=$this->_imm;
+        $floor=$this->_floor;
+        $zone=$this->_zone;
+        $imms = array();
+
+            $immo = $this->_staffmodel->getImms($this->_company);                    
+            $values = $this->_staffmodel->getInfoImms($immo);
+            
+            foreach ($values as $key => $value) {
+                $imms[]=$value;
+                
+            }
+            
+        
+        $this->_fileform = $this->getAssignPlanForm();
+        $this->view->fileform = $this->_fileform;
+        $this->view->assign(array('imms'     =>  $imms,
+                                  'floors'   =>  $floors,
+                                  'selimm'   =>  $imm,
+                                  'selfloor' =>  $floor,
+                                  ));
+        
+    
     }
         
     public function insertalertAction(){
@@ -61,8 +89,7 @@ class StaffController extends Zend_Controller_Action
         //$this->view->evform = $this->getEvacuationForm();
          $imm=$this->_imm;
         $floor=$this->_floor;
-        $map=null;
-        $schema=null;
+
         $imms = array();
         $floors = array();
 
@@ -107,13 +134,71 @@ class StaffController extends Zend_Controller_Action
    
     }
     
+    public function assignAction(){
+        
+        $zone = $this->_zone;
+        $floor = $this->_floor;
+        $imm = $this->_imm;
+        
+        $values = $this->_fileform->getValues();
+        $data = $this->_staffmodel->getEscapePlanInfo($zone,$floor,$imm);
+        $info = array('Zona'                        =>      $data['Zona'],
+                      'Immobile'                    =>      $data['Immobile'],
+                      'Id_piano'                    =>      $data['Id_piano'],
+                      'Piano_di_fuga'               =>      $data['Piano_di_fuga'],
+                      'Piano_di_fuga_alternativo'   =>      $values['Piano_di_fuga_alternativo'],
+                      'Mappatura_zona'              =>      $data['Mappatura_zona']
+                       );
+        $this->_staffmodel->setAlternativePlan($info);
+        $this->_helper->redirector('welcome','staff');
+        
+    }
+    
+    
+    
+    
+    public function deletealternativeplanAction(){
+        
+        $zone = $this->_zone;
+        $floor = $this->_floor;
+        $imm = $this->_imm;
+        
+        $values = $this->_fileform->getValues();
+        $data = $this->_staffmodel->getEscapePlanInfo($zone,$floor,$imm);
+        $info = array('Zona'                        =>      $data['Zona'],
+                      'Immobile'                    =>      $data['Immobile'],
+                      'Id_piano'                    =>      $data['Id_piano'],
+                      'Piano_di_fuga'               =>      $data['Piano_di_fuga'],
+                      'Piano_di_fuga_alternativo'   =>      null,
+                      'Mappatura_zona'              =>      $data['Mappatura_zona']
+                       );
+        $this->_staffmodel->setAlternativePlan($info);
+        $this->_helper->redirector('welcome','staff');
+        
+    }
+    
     private function getEvacuationForm(){
            
         $f = new Application_Form_Staff_Evacuation_Evacuation();
         return $f;
     }
     
-    
+    private function getAssignPlanForm(){
+           
+        
+        $urlHelper = $this->_helper->getHelper('url');
+       $form = new Application_Form_Staff_Escapeplan_Assignplan();
+       $form->setAction($urlHelper->url(array(
+                        'controller' => 'staff',
+                        'action'     => 'assign',
+                        'floor'      => $this->_floor,
+                        'immobile'   => $this->_imm,
+                        'zone'       => $this->_zone                      
+                        ), 
+                        'default',true
+       ));
+       return $form;
+    }
     
     
     

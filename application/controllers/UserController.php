@@ -81,7 +81,7 @@ class UserController extends Zend_Controller_Action
         $immo = $this->_getParam('immobile');
         
         $this->_userModel->insertAlert(array('Data_Segnalazione' => date("Y-m-d"),
-                                                'Ora_Segnalazione'  => date("h:i:s"),
+                                                'Ora_Segnalazione'  => date("H:i:s"),
                                                 'Id_Piano'          => $floor,
                                                 'Codice_Zona'       => $values['Codice_Zona'],
                                                 'Utente'            => $this->_authService->getIdentity()->Username,
