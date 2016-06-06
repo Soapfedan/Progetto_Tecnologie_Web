@@ -1,20 +1,4 @@
-<!--<?php $this->headScript()
-    ->appendFile($this->baseUrl('js/jquryfun.js'))
-    ->appendFile($this->baseUrl('js/jquery-1.12.4.min.js'))
-    //->captureStart() ?>
 
-$(function()
-{
-    var actionUrl='<? echo $this->url(array('controller' => 'public', 'action' => 'validatelogin',), 'default'); ?>';
-    var formName='<?php echo $this->loginForm->getName() ?>';
-    $(":input").on('blur', function(event) {
-    var formElementId = $(this).attr('id');
-    doValidation(formElementId, actionUrl, formName);
-    });
-});
-
-<?php//$this->headScript()->captureEnd() ?>
--->
 
 <div id="staff" class="container">
     <br /><br />

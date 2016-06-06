@@ -87,11 +87,13 @@ class PublicController extends Zend_Controller_Action
     {
         /* Setto anche il layout del login oltre al reindirizzamento */
         $this->_helper->layout->setLayout('login');
+        
         $request = $this->getRequest();
         if (!$request->isPost()) {
             return $this->_helper->redirector('index');
         }
         $form = $this->_loginform;
+        $this->view->loginForm = $form; 
         if (!$form->isValid($request->getPost())) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('login');
@@ -127,11 +129,13 @@ class PublicController extends Zend_Controller_Action
     
     public function insertnewuserAction()
     {
+        $this->_helper->layout->setLayout('login');
          $request = $this->getRequest();
         if (!$request->isPost()) {
             return $this->_helper->redirector('index');
         }
         $form = $this->_newuserform;
+        $this->view->signupForm = $form;
         if (!$form->isValid($request->getPost())) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('signup');

@@ -29,7 +29,7 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
     public function getInfoImms($imms){
         
         $select = $this->select()
-                       ->where('Immobile IN(?)', $imms)
+                       ->where('Immobile =?', $imms)
                        ->order('Immobile')
                        ->order('Id_piano')
                        ->order('Zona');

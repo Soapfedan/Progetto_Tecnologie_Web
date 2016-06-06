@@ -45,22 +45,28 @@ class StaffController extends Zend_Controller_Action
         $floor=$this->_floor;
         $zone=$this->_zone;
         $imms = array();
+        $infoimm = array();
 
-            $immo = $this->_staffmodel->getImms($this->_company);                    
-            $values = $this->_staffmodel->getInfoImms($immo);
+            $immo = $this->_staffmodel->getImms($this->_company); 
+            foreach ($immo as $i) {
+                $infoimm[]=$i['Immobile'];
+                
+            }
+                               
+           
             
-            foreach ($values as $key => $value) {
-                $imms[]=$value;
+            foreach ($infoimm as $signi) {
+                $imms[]=$this->_staffmodel->getInfoImms($signi);
                 
             }
             
         
         $this->_fileform = $this->getAssignPlanForm();
         $this->view->fileform = $this->_fileform;
-        $this->view->assign(array('imms'     =>  $imms,
-                                  'floors'   =>  $floors,
+        $this->view->assign(array('imms'     =>  $imms,                                  
                                   'selimm'   =>  $imm,
                                   'selfloor' =>  $floor,
+                                  'selzone'  =>  $zone
                                   ));
         
     
@@ -86,7 +92,7 @@ class StaffController extends Zend_Controller_Action
           
     public function evacuationAction(){
         $this->view->msg = 'evacuation';
-        //$this->view->evform = $this->getEvacuationForm();
+        $this->view->evform = $this->getEvacuationForm();
          $imm=$this->_imm;
         $floor=$this->_floor;
 

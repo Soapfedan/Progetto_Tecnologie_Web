@@ -1,15 +1,5 @@
-/*
-function AutoFill()
-    {
-        $.ajax({
-        type : 'POST',
-        url : "<?php $this->url(array('controller'=>'staff','action'=>'getdata'))?>",
-        data : {'Immobile': $("#immobili").val(),'isAjax':true},
-        dataType : 'json',
-        success : populate()
-    });
-       
-    }
+
+
 
 function populate(data){
 
@@ -20,7 +10,7 @@ function populate(data){
                                             });
     }   
 
-*/
+
  
         $(document).ready(function(){
         $(".evac img").hover(function() {

@@ -1,6 +1,21 @@
 <?php $this->headScript()
     ->appendFile($this->baseUrl('js/jquery-1.12.4.min.js'),$type = 'text/javascript')
-    ->appendFile($this->baseUrl('js/Staff/evacuation.js'),$type = 'text/javascript');?>
+    ->appendFile($this->baseUrl('js/Staff/evacuation.js'),$type = 'text/javascript')
+    ->captureStart() ?>
+    
+    function AutoFill()
+    {
+        $.ajax({
+        type : 'POST',
+        url : "<?php $this->url(array('controller'=>'staff','action'=>'getdata'))?>",
+        data : {'Immobile': $("#immobili").val(),'isAjax':true},
+        dataType : 'json',
+        success : populate()
+    });
+       
+    }
+    
+    <?php $this->headScript()->captureEnd() ?>
 
 <h3>Benvenuto utente <?php echo $this->authInfo('Username')?> seleziona il </h3><br />
 <h3>piano su cui vuoi attivare la procedura di evacuazione</h3>
@@ -72,7 +87,7 @@
 
 <br/> 
   <h3><?php echo $this->msg; ?></h3>
-  <!--<?php echo $this->evform; ?>-->
+  <?php echo $this->evform; ?>
   <?php
   for($a=0; $a<6; $a++){
       echo "<br/>";
