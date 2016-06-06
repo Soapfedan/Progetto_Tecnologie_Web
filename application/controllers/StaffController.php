@@ -32,8 +32,61 @@ class StaffController extends Zend_Controller_Action
     public function panelAction(){
         
         $this->view->msg = 'panel';
-        $this->_staffmodel->getImms($this->_company);
-        
+        $imms = array();
+        $infoimm = array();
+        $infimm = array();
+        $res = array();
+        $i=null;
+        $p=null;
+        $z=null;
+        $res2=array();
+
+            $immo = $this->_staffmodel->getImms($this->_company); 
+            foreach ($immo as $i) {
+                $infoimm[]=$i['Immobile'];
+                
+            }
+                               
+           
+            
+            foreach ($infoimm as $signi) {
+                $imms[]=$this->_staffmodel->getInfoImms($signi);
+                
+                
+            }
+            
+              foreach ($imms as $inf) {
+                foreach($inf as $piano){
+                    if(!($i==$piano['Immobile']&&$p==$piano['Id_piano'])){
+                        $infimm[]=$this->_staffmodel->getFloorNumPeople($piano['Immobile'],$piano['Id_piano']);
+                        $i=$piano['Immobile'];
+                        $p=$piano['Id_piano'];
+                    }
+                }
+            }
+            
+            foreach($infimm as $info=>$value){
+                $res[]=$value;
+            }
+            
+            
+            //seconda parte
+             foreach ($imms as $inf) {
+                foreach($inf as $piano){
+                    if(!($i==$piano['Immobile']&&$p==$piano['Id_piano']&&$z==$piano['Zona'])){
+                        $inf2[]=$this->_staffmodel->getZoneNumPeople($piano['Zona'],$piano['Id_piano'],$piano['Immobile']);
+                        $i=$piano['Immobile'];
+                        $p=$piano['Id_piano'];
+                        $z=$piano['Zona'];
+                    }
+                }
+            }
+            
+            foreach($inf2 as $info=>$value){
+                $res2[]=$value;
+            }
+        $this->view->assign(array('imms'     =>  $res,
+                                   'zones'   =>  $res2 ));
         
     }
       
@@ -217,6 +270,7 @@ class StaffController extends Zend_Controller_Action
             $imms = $this->_staffmodel->getImms('1');
             $dojoData= new Zend_Dojo_Data('Immobile',$imms->toArray(),'Immobile');
             $this->view->dojo= $dojoData->toJson();
+            // riga 2385 2387 di process vedi admin controller 
         }        
     }	
  }

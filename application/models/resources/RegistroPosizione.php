@@ -12,15 +12,22 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
     
     //Estrae il numero di persone per piano
     
-    public function getFloorNumPeople($floor,$imm){
+    public function getFloorNumPeople($imm,$floor){
         
         $select = $this->select()
-                       ->from("registro_posizione", array("Num"=>"COUNT(*)"))
-                       ->where('Id_piano =?',$floor)                       
-                       ->where('Immobile =?',$imm);
+                       ->from("registro_posizione", array("Num"=>"COUNT(Utente)",
+                                                    'Immobile'=>'Immobile',
+                                                    'Id_piano'=>'Id_piano'
+                                                    ))
+                       ->where('Immobile =?',$imm)
+                       ->where('Id_piano =?',$floor)
+                       ->group('Immobile')
+                       ->group('Id_piano')
+                       ->order('Immobile')
+                       ->order('Id_piano');
          $result=$this->fetchRow($select);
         
-         return $result["Num"];
+         return $result;
         
     }
     
@@ -29,11 +36,18 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
     public function getZoneNumPeople($zone,$floor,$imm){
             
         $select = $this->select()
-                       ->from("registro_posizione", array("Num"=>"COUNT(Zona)"))
+                       ->from("registro_posizione", array("Num"=>"COUNT(Zona)",
+                                                          'Immobile'=>'Immobile',
+                                                          'Id_piano'=>'Id_piano',
+                                                          'Zona'    =>'Zona'))
                        ->where('Id_piano =?',$floor)                       
                        ->where('Zona =?',$zone)
                        ->where('Immobile =?',$imm)
+                       ->group('Immobile')
+                       ->group('Id_piano')
                        ->group('Zona')
+                       ->order('Immobile')
+                       ->order('Id_piano')
                        ->order('Zona'); 
          return $this->fetchAll($select);
         

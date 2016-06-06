@@ -101,14 +101,14 @@ class Application_Model_Staff extends App_Model_Abstract
      * ---------------------REGISTRO DELLA POSIZIONE----------------------
      */
      
-      public function  getFloorNumPeople($floor)
+      public function  getFloorNumPeople($imm,$floor)
     {
-        return $this->getResource('RegistroPosizione')-> getFloorNumPeople($floor);
+        return $this->getResource('RegistroPosizione')-> getFloorNumPeople($imm,$floor);
     }
     
-     public function  getZoneNumPeople($zone,$floor)
+     public function  getZoneNumPeople($zone,$floor,$imm)
     {
-        return $this->getResource('RegistroPosizione')-> getZoneNumPeople($zone,$floor);
+        return $this->getResource('RegistroPosizione')-> getZoneNumPeople($zone,$floor,$imm);
     }
     
     /*
