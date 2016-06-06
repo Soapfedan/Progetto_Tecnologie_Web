@@ -103,6 +103,8 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
         return $this->fetchAll($select);
         
     }
+    
+    //
 	
 }
 

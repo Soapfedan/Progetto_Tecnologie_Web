@@ -212,7 +212,7 @@ class StaffController extends Zend_Controller_Action
     {
         $this->_helper->getHelper('layout')->disableLayout();
             $this->_helper->viewRenderer->setNoRender();
-
+    
         if ($this->getRequest()->isXmlHttpRequest()) {
             $imms = $this->_staffmodel->getImms('1');
             $dojoData= new Zend_Dojo_Data('Immobile',$imms->toArray(),'Immobile');

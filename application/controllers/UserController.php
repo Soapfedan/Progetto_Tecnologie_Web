@@ -60,7 +60,7 @@ class UserController extends Zend_Controller_Action
     
    
     public function sendalertAction(){
-        $this->view->msg = $this->_sendalertform;
+        $this->view->form = $this->_sendalertform;
         $pos = $this->_userModel->getPosition($this->_authService->getIdentity()->Username);
         if($pos==null){
             $this->_helper->redirector('changeposition','user');
@@ -71,9 +71,11 @@ class UserController extends Zend_Controller_Action
     {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('welcome','user');
-        }   
-        if (!$this->_sendalertform->isValid($_POST)) {
-            $this->_editform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+        }  
+        $form = $this->_sendalertform;
+         $this->view->form = $form;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('sendalert');
         }
         $values = $this->_sendalertform->getValues();

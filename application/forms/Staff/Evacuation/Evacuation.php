@@ -10,14 +10,22 @@ class Application_Form_Staff_Evacuation_Evacuation extends App_Form_Abstract
         $this->setName('evacform');
         $this->setAction('');
             
-        $select = new Zend_Form_Element_Select('Immobili');
+        $select = new Zend_Form_Element_Select('Societa');
         $select->addMultiOptions(array(
-                    'select'=>'[select]',
-                    'prova'=>'ciao'
+                    '0'=>'0',
+                    '1'=>'1'
                     
         ));
         $this->addElement($select);
-        $select->setAttrib('onchange','AutoFill()');  
+        
+        $select1 = new Zend_Form_Element_Select('Immobili');
+        $select1->addMultiOptions(array(
+                    'select'=>'[select]',
+                    
+                    
+        ));
+        $this->addElement($select1);
+        $select->setAttrib('onchange','autoFill()');  
             
          /*   
         $values = $this->_adminModel->getAllBuildings();
