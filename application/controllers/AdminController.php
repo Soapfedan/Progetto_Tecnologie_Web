@@ -136,6 +136,9 @@ class AdminController extends Zend_Controller_Action
             $this->_adminModel->deleteBuilding($imm);
             $this->_helper->redirector('imm','admin');
         }
+        if($this->_getParam('modifica')){
+            $this->view->imm = $this->_getParam('imms');
+        }
     }
     
     private function getLoginForm(){

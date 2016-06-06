@@ -3,7 +3,26 @@ $(document).ready(function(){
     $('input').blur(function() {
     var pass = $('#Password1').val();
     var repass = $('#Password').val();
-    if(($('#Password1').val().length == 0) || ($('#Password').val().length == 0)){
+    /*
+    if(($('#Password1').val().length == 0) && ($('#Password').val().length == 0)){
+    	$('#Password1').removeClass();
+	    $('#Password').removeClass();
+    }
+    
+    if(($('#Password1').val().length > 4) || ($('#Password').val().length > 4)){
+    	$('#Password1').addClass('has-error');
+        $('#Password').addClass('has-error');
+    	if (pass != repass) {
+	        $('#Password1').addClass('has-error');
+	        $('#Password').addClass('has-error');
+    	}
+	    else {
+	        $('#Password1').removeClass().addClass('has-success');
+	        $('#Password').removeClass().addClass('has-success');
+	    }
+    }
+});   */ 
+    if(($('#Password1').val().length < 5) && ($('#Password').val().length < 5)){
         $('#Password1').addClass('has-error');
     }
     else if (pass != repass) {
