@@ -14,6 +14,7 @@ class AdminController extends Zend_Controller_Action
     
     protected $_buildingsform;
     protected $_editbuildingsform;
+    protected $_floorform;
        	
     public function init(){
         $this->_helper->layout->setLayout('arear');
@@ -151,8 +152,11 @@ class AdminController extends Zend_Controller_Action
             $this->_adminModel->deleteFloor($fl, $bu);
             $this->_helper->redirector('imm','admin');
         }
-        if($this->getParam('modifica')){
-            
+        if($this->_getParam('modifica')){
+            $this->view->imm = $this->_getParam('building');
+            $this->view->fl = $this->_getParam('floors');
+            $this->_floorform = $this->getFloorForm($this->view->imm, $this->view->fl);
+            $this->view->ff = $this->_floorform;
         }
     }
     
@@ -219,6 +223,20 @@ class AdminController extends Zend_Controller_Action
             'controller' => 'admin',
             'action'     => 'editfloor',
             'building'   => $imm
+            ), 
+            'default',true
+        ));
+        return $f;
+    }
+    
+    private function getFloorForm($building, $floor){
+        $urlHelper = $this->_helper->getHelper('url');
+        $f = new Application_Form_Admin_Buildings_Editfloor();
+        $f->createForm($building, $floor);
+        $f->setAction($urlHelper->url(array(
+            'controller' => 'admin',
+            'action'     => 'editfloor',
+            'building'   => $building
             ), 
             'default',true
         ));
