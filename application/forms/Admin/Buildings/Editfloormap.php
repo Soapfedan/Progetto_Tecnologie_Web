@@ -1,5 +1,5 @@
 <?php
-class Application_Form_Admin_Buildings_Editfloor extends App_Form_Abstract
+class Application_Form_Admin_Buildings_Editfloormap extends App_Form_Abstract
 {
     protected $_adminModel;
         
@@ -21,6 +21,12 @@ class Application_Form_Admin_Buildings_Editfloor extends App_Form_Abstract
                                     array('Extension', false, 
                                     array('jpg', 'gif')))
         ));
+        
+        $this->addElement('submit','modifica', array(
+            'label' => 'modifica',
+            'decorators' => $this->buttonDecorators,
+        ));
+        
         
         $values = $this->_adminModel->getAllZones($imm, $fl);
         $valuearr = $values->toArray();

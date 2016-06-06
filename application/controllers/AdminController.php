@@ -145,6 +145,14 @@ class AdminController extends Zend_Controller_Action
         }
     }
     
+    public function editmapAction(){
+        $values = $this->_form->getValues();
+        if($values){
+            $this->_adminModel->setMap($values);
+            $this->_helper->redirector('index');
+        }
+    }
+    
     public function editfloorAction(){
         if($this->_getParam('elimina')){
             $fl = $this->_getParam('floors');
@@ -231,11 +239,11 @@ class AdminController extends Zend_Controller_Action
     
     private function getFloorForm($building, $floor){
         $urlHelper = $this->_helper->getHelper('url');
-        $f = new Application_Form_Admin_Buildings_Editfloor();
+        $f = new Application_Form_Admin_Buildings_Editfloormap();
         $f->createForm($building, $floor);
         $f->setAction($urlHelper->url(array(
             'controller' => 'admin',
-            'action'     => 'editzone',
+            'action'     => 'editmap',//'editzone',
             'building'   => $building,
             'floor'      => $floor
             ), 
