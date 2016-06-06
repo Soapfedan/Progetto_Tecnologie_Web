@@ -4,7 +4,7 @@
 <br />
 <br />
 <br />
-<br />
+<br /> <!--
   <ul><li class='show'><a href="<?= $this->url(array(
                         'controller' => 'user',
                         'action'     => 'insertuser'
@@ -30,7 +30,7 @@
                         'default',true
                     ); 
                  ?>" accesskey="2" title="">Cancella Utente</a></li> </ul>
-
+-->
 <br/> 
 
   
@@ -60,14 +60,22 @@
                     <a href=".
                         $this->url(array(
                             'controller' => 'user',
-                            'action'     => 'editprofile'
+                            'action'     => 'editprofile',
+                            'username'	 => $user['Username'],
+                            'filled'	 => 1
                             ), 
                             'default',true).">
                     <img width=32 height=32 src=".$this->baseURL()."/images/editicon.png>
                     </a>
                   </td>";
             echo "<td>
-                    <a href=#>
+                    <a href=".
+                        $this->url(array(
+                            'controller' => 'admin',
+                            'action'     => 'deleteuser',
+                            'usrid'		 => $user['Username']
+                            ), 
+                            'default',true).">
                         <img width=32 height=32 src=".$this->baseURL()."/images/trashicon.png>
                     </a>
                   </td>";

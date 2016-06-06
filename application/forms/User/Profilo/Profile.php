@@ -13,7 +13,6 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
         $this->setMethod('post');
         $this->setName('formprofile');
         $this->setAction('');
-        
         if($completed==true){ 
             $this->addElement('text', 'Username', array(
             'label' => 'Username',

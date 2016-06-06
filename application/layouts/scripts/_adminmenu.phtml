@@ -16,14 +16,21 @@
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="1" title="">Gestisci Utenti</a></li>  
+                 ?>" accesskey="1" title="">Modifica/Cancella Utenti</a></li>
+    <li class="menu"><a href="<?= $this->url(array(
+                        'controller' => 'user',
+                        'action'     => 'insertuser'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="2" title="">Inserisci Utenti</a></li>  
     <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'admin',
                         'action'     => 'faq'
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="2" title="">Gestisci FAQ</a></li> 
+                 ?>" accesskey="3" title="">Gestisci FAQ</a></li> 
      <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'user',
                         'action'     => 'logout'
