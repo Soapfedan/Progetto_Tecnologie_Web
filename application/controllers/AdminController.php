@@ -141,9 +141,11 @@ class AdminController extends Zend_Controller_Action
     public function editbuildingsAction(){
         if (!$this->getRequest()->isPost()) {
              $this->_helper->redirector('imm');
-        }    
-        if (!$this->_buildingsform->isValid($_POST)) {
-            $this->_buildingsform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+        }  
+        $form = $this->_buildingsform;
+        $this->view->buildings = $form;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('imm');
         }
             // Se si è premuto su 'elimina'
@@ -160,6 +162,15 @@ class AdminController extends Zend_Controller_Action
     }
     
     public function updatebuildingAction(){
+        if (!$this->getRequest()->isPost()) {
+             $this->_helper->redirector('imm');
+        }  
+        $form = $this->_editbuildingparamform;
+        $this->view->pbuild = $form;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('imm');
+        }
         $bu = $this->_getParam('building');
         $values = $this->_editbuildingparamform->getValues();
         $info = array('Id'        => $bu,
