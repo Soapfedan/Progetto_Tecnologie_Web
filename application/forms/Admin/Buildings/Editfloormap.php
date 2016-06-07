@@ -21,19 +21,6 @@ class Application_Form_Admin_Buildings_Editfloormap extends App_Form_Abstract
                                     array('Extension', false, 
                                     array('jpg', 'gif')))
         ));
-        /*
-        $this->addElement('text', 'id', array(
-            'label' => 'Nuovo ID',
-            'filters' => array('StringTrim'),
-            'required' => true,
-           // 'validators' => array(array('StringLength',true, array(1,2500))),
-            'decorators' => $this->elementDecorators
-        ));
-        
-        if($imm && $fl){
-            $values = $this->_adminModel->getFloorInfo($imm, $fl);
-            $this->populate(array($values['Mappa'], $values['Id_piano']));
-        }*/
         
         $this->addElement('submit','modifica', array(
             'label' => 'modifica',

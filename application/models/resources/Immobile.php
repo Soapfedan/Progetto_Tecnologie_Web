@@ -10,4 +10,11 @@ class Application_Resource_Immobile extends Zend_Db_Table_Abstract
     {
     }
     
+    public function getBuilding($imm){
+        $select = $this->select()
+                       ->where('Id = ?', $imm); 
+        $result = $this->fetchRow($select);
+        return $result;
+    }
+    
 }

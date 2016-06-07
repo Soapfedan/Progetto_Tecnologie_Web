@@ -61,7 +61,16 @@ class Application_Model_Admin extends App_Model_Abstract
     {
        return $this->getResource('PianodiFuga')->deletePlanbyFloor($floor);
     }
-   
+    /*
+     * --------------------- IMMOBILE-------------------
+     */
+     
+     // prende una tupla di un immobile
+     public function getBuilding($imm){
+         return $this->getResource('Immobile')->getBuilding($imm);
+     }
+     
+     
     /*
      * ---------------------PIANO DELL'IMMOBILE-------------------
      */

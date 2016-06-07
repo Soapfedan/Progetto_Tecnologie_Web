@@ -13,9 +13,11 @@ class AdminController extends Zend_Controller_Action
     protected $_usersform;
     
     protected $_buildingsform;
+    protected $_editbuildingparamform;
     protected $_editbuildingsform;
     protected $_floorform;
     protected $_editfloorform;
+    
        	
     public function init(){
         $this->_helper->layout->setLayout('arear');
@@ -30,6 +32,7 @@ class AdminController extends Zend_Controller_Action
 		
 		$this->_insertfaqform = $this->getInsertFaqForm();
         $this->_buildingsform = $this->getShowBuildingsForm();
+        $this->_editbuildingparamform = $this->getEditBuildingParamForm($this->_getParam('imms') == null ? null : $this->_getParam('imms'));
         $this->_editbuildingsform = $this->getEditBuildingForm($this->_getParam('imms') == null ? null : $this->_getParam('imms'));
         $this->_floorform = $this->getFloorForm($this->_getParam('building') == null ? null : $this->_getParam('building'), 
                                                 $this->_getParam('floors') == null ? null : $this->_getParam('floors'));
@@ -145,6 +148,7 @@ class AdminController extends Zend_Controller_Action
         if($this->_getParam('modifica')){
             $this->view->imm = $this->_getParam('imms');
             $this->view->ebuild = $this->_editbuildingsform;
+            $this->view->pbuild = $this->_editbuildingparamform;
         }
     }
         
@@ -233,6 +237,19 @@ class AdminController extends Zend_Controller_Action
         ));
         return $f;
     } 
+    
+    private function getEditBuildingParamForm($imm){
+        $urlHelper = $this->_helper->getHelper('url');
+        $f = new Application_Form_Admin_Buildings_Buildingparam();
+        $f->setAction($urlHelper->url(array(
+            'controller' => 'admin',
+            'action'     => 'editfloor',
+            'building'   => $imm
+            ), 
+            'default',true
+        ));
+        return $f;
+    }
     
     private function getEditBuildingForm($imm){
         $urlHelper = $this->_helper->getHelper('url');
