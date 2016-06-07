@@ -26,29 +26,7 @@ class Application_Form_Admin_Buildings_Editfloormap extends App_Form_Abstract
             'label' => 'hh',
             'decorators' => $this->buttonDecorators,
         ));
-        
-        
-        /*
-        $values = $this->_adminModel->getAllZones($imm, $fl);
-        $valuearr = $values->toArray();
-            // Crea un radioButton
-        $radio = new Zend_Form_Element_Radio('zones');
-            // Cicla sulla lista di piani e aggiunge l'opzione relativa al radioButton
-        foreach($valuearr as $zone){
-            $radio->addMultiOption($zone['Zona'], 'Zona '.$zone['Zona']);
-        }
-            // Aggiunge il radioButton finale alla form
-        $this->addElement($radio);
-                
-        $this->addElement('submit','modifica', array(
-            'label' => 'modifica',
-            'decorators' => $this->buttonDecorators,
-        ));
-        $this->addElement('submit','elimina', array(
-            'label' => 'elimina',
-            'decorators' => $this->buttonDecorators,
-        ));
-        */
+
     } 
     
 }
