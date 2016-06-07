@@ -62,8 +62,8 @@ class AdminController extends Zend_Controller_Action
         }    
         if (!$this->_insertfaqform->isValid($_POST)) {
           
-        $this->_insertfaqform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-        return $this->render('faq');
+            $this->_insertfaqform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('faq');
         }
 		$values = $this->_insertfaqform->getValues();
             
@@ -139,6 +139,13 @@ class AdminController extends Zend_Controller_Action
     }
     
     public function editbuildingsAction(){
+        if (!$this->getRequest()->isPost()) {
+             $this->_helper->redirector('imm');
+        }    
+        if (!$this->_buildingsform->isValid($_POST)) {
+            $this->_buildingsform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('imm');
+        }
             // Se si è premuto su 'elimina'
         if($this->_getParam('elimina')){
             $imm = $this->_getParam('imms');
