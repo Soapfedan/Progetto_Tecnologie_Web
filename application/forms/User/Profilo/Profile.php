@@ -37,7 +37,7 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
             'validators' => array(array('StringLength',true, array(5,30))),
             'decorators' => $this->elementDecorators,
         )); 
-        $this->addElement('password', 'Password1', array(
+        $this->addElement('password', 'Password', array(
             'label' => 'Nuova password',
             'filters' => array('StringTrim'),
             'required' => false,
@@ -110,7 +110,7 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
             $this->addElement('text', 'Societa_staff', array(
                 'label' => 'Società Staff',
                 'filters' => array('Digits'),
-                'required' => true,
+                'required' => false,
                 'validators' => array(array('StringLength',true, array(1))),
                 'decorators' => $this->elementDecorators,
             ));

@@ -161,7 +161,8 @@ class StaffController extends Zend_Controller_Action
         $this->view->assign(array('imms'     =>  $imms,                                  
                                   'selimm'   =>  $imm,
                                   'selfloor' =>  $floor,
-                                  'selzone'  =>  $zone
+                                  'selzone'  =>  $zone,
+                                  'infoimm' =>$infoimm
                                   ));
         
     
