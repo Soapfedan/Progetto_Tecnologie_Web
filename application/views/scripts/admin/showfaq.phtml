@@ -2,22 +2,45 @@
 
     <div class="tablefaq">
         <div ><h1 id="faq"> F.A.Q.</h1></div> <br />
-        <div>
-            <table>
-            	<?php  foreach (((object)$this->faqs) as $faq) :?>
-            	<tr>
-            		<td><?php echo $faq ?></td>
-            	</tr>   
-        
-        		<?php endforeach ?>
-        	</table>
-        	      
-	  <?php var_dump($this->faqs);
-	   if($this->faqs instanceof Zend_Paginator) {
-	  		echo $this->paginationControl($this->faqs,'Sliding','admin/_paginator.phtml');
-	  } 
-	  ?>
+        	<div>
+        		<table>
+        			<tr>
+            		<th>Id Faq</th>        
+            		<th>Domanda</th>
+            		<th>Risposta</th>
+        			</tr>
+      			</thead>
+      				<?php foreach ($this->faqs as $faq){
+            		echo "<tr>";
+           			echo "<td>". $faq['ID']  		."</td>";
+            		echo "<td>". $faq['Question']   ."</td>";
+            		echo "<td>". $faq['Answer']     ."</td>";
+            		echo "<td>
+                    <a href=".
+                        $this->url(array(
+                            'controller' => 'admin',
+                            'action'     => 'editprofile',
+                            'idfaq'	 => $faq['ID'],
+                            ), 
+                            'default',true).">
+                    <img width=32 height=32 src=".$this->baseURL()."/images/editicon.png>
+                    </a>
+                    </td>";
+            		echo "<td>
+                    <a href=".
+                        $this->url(array(
+                            'controller' => 'admin',
+                            'action'     => 'showfaq',
+                            'idfaq'	 => $faq['ID'],
+                            ), 
+                            'default',true).">
+                        <img width=32 height=32 src=".$this->baseURL()."/images/trashicon.png>
+                    </a>
+                  </td>";
+            echo "</tr>";      
+        } ?>
 
+        	</table>
       </div>
     </div>
 </div>

@@ -7,7 +7,7 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
     }
      
     public function createForm($edit){
-            
+        /*    
         $this->_adminModel = new Application_Model_Admin();
         $this->setMethod('post');
         $this->setName('faqform');
@@ -15,12 +15,6 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
             // Estrae tutte le righe della tabella faq.
         $values = $this->_adminModel->extractFaq();
             // Formatta tutto in un array.
-        $valuarr = $values->toArray();
-        $i = 0;
-        foreach ($valuarr as $faq) {
-          $i = $i + 1;
-                // Crea una subform per ogni riga della tabella delle faq.
-            $subform = new Zend_Form_SubForm($i);
             
             $subform->addElement('text', 'ID', array(
                 'label' => 'ID',     
@@ -85,8 +79,7 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
                     'class' => 'zend_form')),
                 array('Description', array('placement' => 'prepend', 'class' => 'formerror')),                                   
                 'Form',
-            ));
-		} // end foreach
+            )); */
 		
        $this->setDecorators(array(
            'FormElements',

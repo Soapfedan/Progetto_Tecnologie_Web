@@ -15,6 +15,8 @@ class AdminController extends Zend_Controller_Action
     protected $_buildingsform;
     protected $_editbuildingsform;
     protected $_floorform;
+	
+	protected $_paged;
        	
     public function init(){
         $this->_helper->layout->setLayout('arear');
@@ -29,6 +31,7 @@ class AdminController extends Zend_Controller_Action
 		
 		$this->_insertfaqform = $this->getInsertFaqForm();
         $this->_buildingsform = $this->getShowBuildingsForm();
+		
     }
     
     public function indexAction(){
@@ -43,7 +46,7 @@ class AdminController extends Zend_Controller_Action
     }
     
     public function beforeinsertfaqAction(){
-        $this->view ->msg ='insertfaq'; 
+        $this->view->msg ='insertfaq'; 
         $this->view->insertfaq = $this->_insertfaqform;       
     }
     
@@ -65,9 +68,17 @@ class AdminController extends Zend_Controller_Action
     
      /* Action chiamata quando si preme su Modifica Faq o Elimina Faq */
      public function showfaqAction(){
-        $this->view->msg='Modifica/Cancella le faq'; 
-        // Definisce le variabili per il viewer
-        $this->view->assign(array('faqs' => $this->_faqform)); 
+		$id=$this->_getParam('idfaq');
+		if($id==null)
+		{
+			$values = $this->_adminModel->extractFaq();
+			$this->view->faqs = $values;
+		}
+		else{
+            $this->_adminModel->deleteFaq($id);
+			$values = $this->_adminModel->extractFaq();
+			$this->view->faqs = $values;
+		}
      }
     
     /* Action chiamata quando si preme il bottone relativo alla form di Modifica Faq */
@@ -95,11 +106,8 @@ class AdminController extends Zend_Controller_Action
     
     /* Action chiamata quando si preme il bottone relativo alla form di Elimina Faq */
     public function deletefaqAction(){
-        if($this->_edit==false){
             $id=$this->_getParam('idfaq');
             $this->_adminModel->deleteFaq($id);
-            $this->_helper->redirector('faq','admin');
-        }   
     }
     
     public function getuserAction(){
