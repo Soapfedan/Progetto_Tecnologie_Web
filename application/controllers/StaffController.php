@@ -31,7 +31,7 @@ class StaffController extends Zend_Controller_Action
      
     public function panelAction(){
         
-        $this->view->msg = 'panel';
+        $this->view->msg = 'Pannello di controllo';
         $imms = array();
         $infoimm = array();
         $infimm = array();
@@ -40,6 +40,7 @@ class StaffController extends Zend_Controller_Action
         $p=null;
         $z=null;
         $res2=array();
+        $res3=array();
 
             $immo = $this->_staffmodel->getImms($this->_company); 
             foreach ($immo as $i) {
@@ -85,8 +86,19 @@ class StaffController extends Zend_Controller_Action
             foreach($inf2 as $info=>$value){
                 $res2[]=$value;
             }
+            
+            //terza parte
+            
+             foreach ($infoimm as $signi) {
+                $res3[]=$this->_staffmodel->getAlert($signi);
+                
+                
+            }
+            
+            
         $this->view->assign(array('imms'     =>  $res,
-                                   'zones'   =>  $res2 ));
+                                   'zones'   =>  $res2, 
+                                   'alerts'  =>  $res3));
         
     }
       

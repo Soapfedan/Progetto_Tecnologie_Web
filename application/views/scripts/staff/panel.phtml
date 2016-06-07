@@ -42,7 +42,49 @@
         } 
         ?>
   </table>
-  <?php
-  for($a=0; $a<6; $a++){
-      echo "<br/>";
-  }?>
+  
+  <table>
+      <thead>
+        <tr>
+            <th>Immobile</th>
+            <th>Piano</th>
+            <th>Zona</th>         
+            <th>Data</th>
+            <th>Ora</th>
+            <th>Utente</th>
+            <th>Tipo</th>
+
+        </tr>
+      </thead>
+      <?php $cat='';
+       foreach ($this->alerts as $info){
+              foreach($info as $ex){
+                  switch ($ex['Tipo_Catastrofe']) {
+                      
+                      case 1:
+                          $cat='Allagamento';
+                          break;
+                     case 2:
+                          $cat='Crollo';
+                          break;
+                     case 3:
+                          $cat='Incendio';
+                          break;
+                     case 4:
+                          $cat='Fumo';
+                          break; 
+                      
+                  }  
+                echo "<tr>";
+                echo "<td>". $ex['Immobile']  ."</td>";
+                echo "<td>". $ex['Id_Piano']  ."</td>";
+                echo "<td>". $ex['Codice_Zona']      ."</td>";
+                echo "<td>". $ex['Data_Segnalazione']       ."</td>";
+                echo "<td>". $ex['Ora_Segnalazione']       ."</td>";
+                echo "<td>". $ex['Utente']       ."</td>";
+                echo "<td>". $cat       ."</td>";
+                echo "</tr>"; 
+              }     
+        } 
+        ?>
+  </table>

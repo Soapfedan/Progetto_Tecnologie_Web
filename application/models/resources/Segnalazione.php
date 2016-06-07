@@ -23,7 +23,7 @@ class Application_Resource_Segnalazione extends Zend_Db_Table_Abstract
     
     //estrae il numero di segnalazioni per zona
     
-    public function getZonesAlertsNumb($floor,$immo){
+    public function getZonesAlertsNumb($zone,$floor,$immo){
         $select = $this->select()
                         ->from('segnalazione',array("Num"=>"COUNT(Tipo_Catastrofe)","Catastrofe"=>"Tipo_Catastrofe"))
                         ->where('Id_piano =?',$floor)
@@ -56,7 +56,13 @@ class Application_Resource_Segnalazione extends Zend_Db_Table_Abstract
     
     public function getAlert($imm){
     	$select = $this->select()
-						->where('Immobile =?',$imm);
+						->where('Immobile =?',$imm)
+                        ->order('Immobile')
+                        ->order('Id_Piano')
+                        ->order('Codice_Zona')
+                        ->order('Data_Segnalazione')
+                        ->order('Ora_Segnalazione')
+                        ->order('Tipo_Catastrofe');
 		return $this->fetchAll($select);
     }
 }

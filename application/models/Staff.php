@@ -120,10 +120,12 @@ class Application_Model_Staff extends App_Model_Abstract
         return $this->getResource('Segnalazione')-> getZonesInformation($floor,$immo,$zone);
     }
     
-      public function  getPosition($username)
+      public function  getZonesAlertsNumb($zone,$floor,$immo)
     {
-        return $this->getResource('Segnalazione')-> getZonesAlertsNumb($floor,$immo);
+        return $this->getResource('Segnalazione')-> getZonesAlertsNumb($zone,$floor,$immo);
     }
+    
+    
     
         
      public function deleteAlert($cod){
