@@ -162,7 +162,7 @@ class StaffController extends Zend_Controller_Action
                                   'selimm'   =>  $imm,
                                   'selfloor' =>  $floor,
                                   'selzone'  =>  $zone,
-                                  'infoimm' =>$infoimm
+                                 
                                   ));
         
     

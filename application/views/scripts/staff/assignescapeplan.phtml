@@ -1,5 +1,5 @@
 <br/> 
-  <h3><?php echo $this->msg; echo var_dump($this->imms);?></h3>
+  <h3><?php echo $this->msg; ?></h3>
   <br />
   <br />
   
@@ -14,7 +14,8 @@
             <th>Assegna</th> 
         </tr>
       </thead>
-      <?php foreach ($this->imms[0] as $imm){
+      <?php foreach($this->imms as $i){
+       foreach ($i as $imm){
             
             echo "<tr>";
             echo "<td>". $imm['Immobile']  ."</td>";
@@ -34,6 +35,7 @@
                     </a>
                   </td>";
             echo "</tr>";      
+        }
         } ?>
   </table>
         <?php else :?>
@@ -42,7 +44,7 @@
             <p>Piano : <?= $this->selfloor ?></p>
             <p>Zona : <?= $this->selzone ?></p>
         <?php echo $this->fileform ?>
-        <?php endif ?>
+       
         <br />
         <br />
         <a href="<?= $this->url(array(
@@ -54,5 +56,5 @@
                         ), 
                         'default',true
                     ); 
-            ?>" title="">Elimina il piano di zona alternativo</a>
-                                            
+            ?>" title="">Clicca qui se vuoi eliminare il piano alternativo della zona selezionata</a>
+           <?php endif ?>                                  

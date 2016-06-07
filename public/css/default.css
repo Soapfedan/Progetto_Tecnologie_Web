@@ -278,7 +278,7 @@ ul.contact li a.icon-rss:before
 	text-decoration: none;
 	text-align:center;
 	background: url(../images/menuback.png) no-repeat center;
-	padding:10px 30px;
+	padding:0px 30px;
 	
 }
 
@@ -722,9 +722,10 @@ ul.style4 .first
 	color:#000000;
 	background: url(../images/buttonbackground.png) no-repeat center;
 	padding:0px 50px;
-	
-	
+
 }
+
+
 
 .widimg{
 	width:200px;
