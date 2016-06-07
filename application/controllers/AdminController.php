@@ -155,8 +155,12 @@ class AdminController extends Zend_Controller_Action
     public function updatebuildingAction(){
         $bu = $this->_getParam('building');
         $values = $this->_editbuildingparamform->getValues();
-        $values['Id'] = $bu;
-        $this->_adminModel->updateBuilding($values, $bu);
+        $info = array('Id'        => $bu,
+                      'Nome'      => $values['Nome'],
+                      'Citta'     => $values['Citta'],
+                      'Provincia' => $values['Provincia'],
+                      'Via'       => $values['Via']);
+        $this->_adminModel->updateBuilding($info, $bu);
         $this->_helper->redirector('imm');
     }
         
