@@ -67,12 +67,17 @@ class Application_Model_Admin extends App_Model_Abstract
      */
    
    //va a cambiare la mappa di un piano e la sua mappatura
-    public function setMap($map,$mapschema,$floor,$imm){
+    public function setMap($map,$floor,$imm){
         
-        return $this->getResource('PianoImmobile')->setMap($map,$mapschema,$floor,$imm);
+        return $this->getResource('PianoImmobile')->setMap($map,$floor,$imm);
            
     }
-     
+    
+    //aggiorna un piano
+    public function updateFloor($data, $imm, $floor){
+        return $this->getResource('PianoImmobile')->updateFloor($data, $imm, $floor);
+    }
+    
     //elimina un piano
     public function deleteFloor($floor,$imm){
        
@@ -89,6 +94,11 @@ class Application_Model_Admin extends App_Model_Abstract
     // Restituisce tutti i piani di un immobile
     public function getFloors($imm){
         return $this->getResource('PianoImmobile')->getFloors($imm);
+    }
+    
+    // restituisce una tupla della tabella relativa ad dato piano di un dato immobile
+    public function getFloorInfo($imm, $floor){
+        return $this->getResource('PianoImmobile')->getFloorInfo($imm, $floor);
     }
     
     // Restituisce tutti gli immobili

@@ -29,6 +29,9 @@ class AdminController extends Zend_Controller_Action
 		
 		$this->_insertfaqform = $this->getInsertFaqForm();
         $this->_buildingsform = $this->getShowBuildingsForm();
+        $this->_editbuildingsform = $this->getEditBuildingForm($this->_getParam('imms') == null ? null : $this->_getParam('imms'));
+        $this->_floorform = $this->getFloorForm($this->_getParam('building') == null ? null : $this->_getParam('building'), 
+                                                $this->_getParam('floors') == null ? null : $this->_getParam('floors'));
     }
     
     public function indexAction(){
@@ -138,21 +141,13 @@ class AdminController extends Zend_Controller_Action
         }   // Se si è premuto su 'modifica'
         if($this->_getParam('modifica')){
             $this->view->imm = $this->_getParam('imms');
-            $this->_editbuildingsform = $this->getEditBuildingForm($this->_getParam('imms'));
             $this->view->ebuild = $this->_editbuildingsform;
         }
     }
-    
-    public function editmapAction(){
-        $values = $this->_floorform->getValues();
-        if($values){
-            $this->_adminModel->setMap($values);
-            $this->_helper->redirector('index');
-        }
-    }
-    
+        
     public function editfloorAction(){
         if($this->_getParam('elimina')){
+                // floors è il nome del radio button
             $fl = $this->_getParam('floors');
             $bu = $this->_getParam('building');
             $this->_adminModel->deleteFloor($fl, $bu);
@@ -161,8 +156,22 @@ class AdminController extends Zend_Controller_Action
         if($this->_getParam('modifica')){
             $this->view->imm = $this->_getParam('building');
             $this->view->fl = $this->_getParam('floors');
-            $this->_floorform = $this->getFloorForm($this->view->imm, $this->view->fl);
             $this->view->ff = $this->_floorform;
+        }
+    }
+    
+    public function editmapAction(){
+        $values = $this->_floorform->getValues();
+        if($values){
+            $data = $this->_adminModel->getFloorInfo($this->_getParam('building'), $this->_getParam('floor'));
+            $info = array('Id_piano'    => $data['Id_piano'],
+                          'Mappa'       => $values['map'],
+                          'Immobile'    => $data['Immobile'],
+                          'Societa'     => $data['Societa'],
+                          'Evacuazione' => $data['Evacuazione']
+                          );
+            $this->_adminModel->updateFloor($info, $this->_getParam('building'), $this->_getParam('floor'));           
+            $this->_helper->redirector('imm');
         }
     }
     
@@ -243,7 +252,7 @@ class AdminController extends Zend_Controller_Action
             'controller' => 'admin',
             'action'     => 'editmap',//'editzone',
             'building'   => $building,
-            'floor'      => $floor
+            'floor'      => $floor,
             ), 
             'default',true
         ));

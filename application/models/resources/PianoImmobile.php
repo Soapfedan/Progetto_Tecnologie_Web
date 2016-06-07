@@ -54,6 +54,16 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
         return $this->fetchAll($select);
     }
     
+    // restituisce una tupla della tabella relativa ad dato piano di un dato immobile
+    
+    public function getFloorInfo($imm, $floor){
+        $select = $this->select()
+                       ->where('Immobile = ?', $imm)
+                       ->where('Id_piano = ?', $floor);
+        $result = $this->fetchRow($select);
+        return $result;
+    }
+    
     //Restituisce la mappa di quel piano
     
     public function getMap($floor,$imm){
@@ -80,12 +90,20 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     }
     
     //va a cambiare la mappa di un piano e la sua mappatura
-    public function setMap($map,$mapschema,$floor,$imm){
+    public function setMap($map,$floor,$imm){
         
-            $data=array('Mappa'=>$map,'Mappatura_zone'=>$mapschema);
+            $data=array('Mappa'=>$map);
             $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
             $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
             $this->update($data,$where);
+    }
+    
+    //aggiorna un piano
+    public function updateFloor($data, $imm, $floor){
+        $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);        
+        $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
+        
+        $this->update($data,$where);
     }
     
     //setta lo stato di evacuazione di un piano

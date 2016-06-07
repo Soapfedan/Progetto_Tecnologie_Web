@@ -12,7 +12,8 @@ class Application_Form_Admin_Buildings_Editbuilding extends App_Form_Abstract
         $this->setMethod('post');
         $this->setName('editbuildform');
         $this->setAction('');
-   
+        
+        if($imm){
         $values = $this->_adminModel->getFloors($imm);
         $valuearr = $values->toArray();
             // Crea un radioButton
@@ -31,7 +32,7 @@ class Application_Form_Admin_Buildings_Editbuilding extends App_Form_Abstract
         $this->addElement('submit','elimina', array(
             'label' => 'elimina',
             'decorators' => $this->buttonDecorators,
-        ));   
+        )); }  
     }
 
 }

@@ -23,11 +23,12 @@ class Application_Form_Admin_Buildings_Editfloormap extends App_Form_Abstract
         ));
         
         $this->addElement('submit','modifica', array(
-            'label' => 'modifica',
+            'label' => 'hh',
             'decorators' => $this->buttonDecorators,
         ));
         
         
+        /*
         $values = $this->_adminModel->getAllZones($imm, $fl);
         $valuearr = $values->toArray();
             // Crea un radioButton
@@ -47,6 +48,7 @@ class Application_Form_Admin_Buildings_Editfloormap extends App_Form_Abstract
             'label' => 'elimina',
             'decorators' => $this->buttonDecorators,
         ));
+        */
     } 
     
 }
