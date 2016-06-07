@@ -169,7 +169,7 @@ class AdminController extends Zend_Controller_Action
         if($values){
             $data = $this->_adminModel->getFloorInfo($this->_getParam('building'), $this->_getParam('floor'));
             $info = array('Id_piano'    => $data['Id_piano'],
-                          'Mappa'       => $values['map'],
+                          'Mappa'       => $values['map'] == null ? $data['Mappa'] : $values['map'],
                           'Immobile'    => $data['Immobile'],
                           'Societa'     => $data['Societa'],
                           'Evacuazione' => $data['Evacuazione']
