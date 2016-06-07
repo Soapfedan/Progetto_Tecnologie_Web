@@ -147,9 +147,17 @@ class AdminController extends Zend_Controller_Action
         }   // Se si è premuto su 'modifica'
         if($this->_getParam('modifica')){
             $this->view->imm = $this->_getParam('imms');
-            $this->view->ebuild = $this->_editbuildingsform;
             $this->view->pbuild = $this->_editbuildingparamform;
+            $this->view->ebuild = $this->_editbuildingsform;
         }
+    }
+    
+    public function updatebuildingAction(){
+        $bu = $this->_getParam('building');
+        $values = $this->_editbuildingparamform->getValues();
+        $values['Id'] = $bu;
+        $this->_adminModel->updateBuilding($values, $bu);
+        $this->_helper->redirector('imm');
     }
         
     public function editfloorAction(){
@@ -241,9 +249,10 @@ class AdminController extends Zend_Controller_Action
     private function getEditBuildingParamForm($imm){
         $urlHelper = $this->_helper->getHelper('url');
         $f = new Application_Form_Admin_Buildings_Buildingparam();
+        $f->createForm($imm);
         $f->setAction($urlHelper->url(array(
             'controller' => 'admin',
-            'action'     => 'editfloor',
+            'action'     => 'updatebuilding',
             'building'   => $imm
             ), 
             'default',true

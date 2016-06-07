@@ -17,4 +17,10 @@ class Application_Resource_Immobile extends Zend_Db_Table_Abstract
         return $result;
     }
     
+    public function updateBuilding($data, $imm){
+        $where[] = $this->getAdapter()->quoteInto('Id = ?', $imm);        
+        
+        $this->update($data,$where);
+    }
+    
 }
