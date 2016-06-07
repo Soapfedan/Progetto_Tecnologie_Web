@@ -23,7 +23,11 @@ class Application_Form_Admin_Buildings_Showbuildings extends App_Form_Abstract
         }
             // Aggiunge il radioButton finale alla form
         $this->addElement($radio);
-                
+        
+        $this->addElement('submit','inserisci', array(
+            'label' => 'aggiungi',
+            'decorators' => $this->buttonDecorators,
+        ));        
         $this->addElement('submit','modifica', array(
             'label' => 'modifica',
             'decorators' => $this->buttonDecorators,
