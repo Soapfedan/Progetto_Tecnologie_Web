@@ -3,7 +3,7 @@
 class StaffController extends Zend_Controller_Action
 {
     protected $_staffmodel;
-    protected $_evacuationform;
+    protected $_alertform;
     protected $_company;
     protected $_imm;
     protected $_floor;
@@ -17,7 +17,7 @@ class StaffController extends Zend_Controller_Action
         $this->_staffmodel = new Application_Model_Staff;
         $this->_helper->layout->setLayout('arear');
         $this->_fileform = $this->getAssignPlanForm();
-        $this->_evacuationform = $this->getEvacuationForm($this->_company);
+        $this->_alertform = $this->getEvacuationAlertForm();
         $this->_imm = ($this->_getParam('immobile')==null ? null: $this->_getParam('immobile'));
         $this->_floor = ($this->_getParam('floor')==null ? null: $this->_getParam('floor'));  
         $this->_zone = ($this->_getParam('zone')==null ? null: $this->_getParam('zone'));
@@ -29,18 +29,19 @@ class StaffController extends Zend_Controller_Action
      public function welcomeAction(){
      }
      
-    public function panelAction(){
+   public function panelAction(){
         
         $this->view->msg = 'Pannello di controllo';
         $imms = array();
         $infoimm = array();
         $infimm = array();
         $res = array();
-        $i=null;
-        $p=null;
-        $z=null;
-        $res2=array();
-        $res3=array();
+        $i = null;
+        $p = null;
+        $z = null;
+        $res2 = array();
+        $res3 = array();
+        $res4 = array();
 
             $immo = $this->_staffmodel->getImms($this->_company); 
             foreach ($immo as $i) {
@@ -90,15 +91,44 @@ class StaffController extends Zend_Controller_Action
             //terza parte
             
              foreach ($infoimm as $signi) {
-                $res3[]=$this->_staffmodel->getAlert($signi);
+                //$res3[]=$this->_staffmodel->getAlert($signi);
                 
                 
             }
             
+            foreach ($imms as $inf) {
+                foreach($inf as $piano){
+                    if(!($i==$piano['Immobile']&&$p==$piano['Id_piano']&&$z==$piano['Zona'])){
+                        $inf3[]=$this->_staffmodel->getZonesInformation($piano['Id_piano'],$piano['Immobile'],$piano['Zona']);
+                        $i=$piano['Immobile'];
+                        $p=$piano['Id_piano'];
+                        $z=$piano['Zona'];
+                    }
+                }
+            }
             
+            foreach($inf3 as $info=>$value){
+                $res3[]=$value;
+            }
+            //quarta parte
+             foreach ($imms as $inf) {
+                foreach($inf as $piano){
+                    if(!($i==$piano['Immobile']&&$p==$piano['Id_piano']&&$z==$piano['Zona'])){
+                        $inf4[]=$this->_staffmodel->getZonesAlertsNumb($piano['Zona'],$piano['Id_piano'],$piano['Immobile']);
+                        $i=$piano['Immobile'];
+                        $p=$piano['Id_piano'];
+                        $z=$piano['Zona'];
+                    }
+                }
+            }
+            
+            foreach($inf4 as $info=>$value){
+                $res4[]=$value;
+            }
         $this->view->assign(array('imms'     =>  $res,
                                    'zones'   =>  $res2, 
-                                   'alerts'  =>  $res3));
+                                   'alerts'  =>  $res3,
+                                   'alertnum'=>  $res4));
         
     }
       
@@ -139,7 +169,7 @@ class StaffController extends Zend_Controller_Action
         
     public function insertalertAction(){
         $this->view->msg = 'insertAlert';
-		
+		$this->view->alertform = $this->_alertform;
     }
 	
 	public function removealertAction(){
@@ -157,7 +187,7 @@ class StaffController extends Zend_Controller_Action
           
     public function evacuationAction(){
         $this->view->msg = 'evacuation';
-        $this->view->evform = $this->getEvacuationForm();
+        
          $imm=$this->_imm;
         $floor=$this->_floor;
 
@@ -248,9 +278,23 @@ class StaffController extends Zend_Controller_Action
         
     }
     
-    private function getEvacuationForm(){
+    private function getEvacuationAlertForm(){
            
-        $f = new Application_Form_Staff_Evacuation_Evacuation();
+        $f = new Application_Form_Staff_Evacuation_Insertalert();
+        $values=$this->_staffmodel->getImms($this->_company);
+            
+            foreach ($values as $key => $value) {
+                $imms[]=$value['Immobile'];
+                
+            }
+        $f->create($imms);
+        $f->setAction($this->_helper->getHelper('url')->url(array(
+                    'controller' => 'staff',
+                    'action'     => 'insertalert',
+                    
+                    ), 
+                    'default',true
+                ));
         return $f;
     }
     
