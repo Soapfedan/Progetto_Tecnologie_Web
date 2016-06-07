@@ -1,5 +1,6 @@
 <br/> 
   <h3><?php echo $this->msg; ?></h3>
+  <h4>Ecco il numero di persone presenti nei suoi immobili</h4>
     <table>
       <thead>
         <tr>
@@ -18,7 +19,7 @@
         } 
        ?>
   </table>
-  
+  <h4>Ecco il numero di persone presenti nei suoi immobili, diversitificati per zona</h4>
   <table>
       <thead>
         <tr>
@@ -42,7 +43,7 @@
         } 
         ?>
   </table>
-  
+  <h4>Ecco tutte le segnalazioni che, gli utenti, hanno fatto su i suoi immobili</h4>
   <table>
       <thead>
         <tr>
@@ -88,3 +89,28 @@
         } 
         ?>
   </table>
+ <h4>Ecco il numero di segnalazioni fatte per zona</h4> 
+ <table>
+      <thead>
+        <tr>
+            <th>Immobile</th>
+            <th>Piano</th>
+            <th>Zona</th>         
+            <th>Numero di segnalazioni</th>
+
+        </tr>
+      </thead>
+      <?php foreach ($this->alertnum as $info){
+              foreach($info as $ex){  
+                echo "<tr>";
+                echo "<td>". $ex['Immobile']  ."</td>";
+                echo "<td>". $ex['Id_Piano']  ."</td>";
+                echo "<td>". $ex['Codice_Zona']      ."</td>";
+                echo "<td>". $ex['Num']       ."</td>";
+                
+                echo "</tr>"; 
+              }     
+        } 
+        ?>
+  </table>
+  

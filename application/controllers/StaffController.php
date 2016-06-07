@@ -31,7 +31,7 @@ class StaffController extends Zend_Controller_Action
      
    public function panelAction(){
         
-        $this->view->msg = 'Pannello di controllo';
+        $this->view->msg = 'Benvenuto ecco i dati su i suoi immobili';
         $imms = array();
         $infoimm = array();
         $infimm = array();
@@ -133,7 +133,7 @@ class StaffController extends Zend_Controller_Action
     }
       
     public function assignescapeplanAction(){
-        $this->view->msg = 'assignEscapePlan';
+        $this->view->msg = 'Assegna il percorso di fuga';
         
         
         $imm=$this->_imm;
