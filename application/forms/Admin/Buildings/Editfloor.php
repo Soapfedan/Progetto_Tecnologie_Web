@@ -1,26 +1,26 @@
 <?php
-class Application_Form_Admin_Buildings_Editbuilding extends App_Form_Abstract
+class Application_Form_Admin_Buildings_Editfloor extends App_Form_Abstract
 {
     protected $_adminModel;
         
     public function init(){
     }
      
-    public function createForm($imm){
-            
-        $this->_adminModel = new Application_Model_Admin();
-        $this->setMethod('post');
-        $this->setName('editbuildform');
-        $this->setAction('');
+    public function createForm($imm, $fl){
         
-        if($imm){
-            $values = $this->_adminModel->getFloors($imm);
+        if($fl){    
+            $this->_adminModel = new Application_Model_Admin();
+            $this->setMethod('post');
+            $this->setName('editfloorform');
+            $this->setAction('');
+            
+            $values = $this->_adminModel->getAllZones($imm, $fl);
             $valuearr = $values->toArray();
                 // Crea un radioButton
-            $radio = new Zend_Form_Element_Radio('floors');
+            $radio = new Zend_Form_Element_Radio('zones');
                 // Cicla sulla lista di piani e aggiunge l'opzione relativa al radioButton
-            foreach($valuearr as $floor){
-                $radio->addMultiOption($floor['Id_piano'], 'Piano '.$floor['Id_piano']);
+            foreach($valuearr as $zone){
+                $radio->addMultiOption($zone['Zona'], 'Zona '.$zone['Zona']);
             }
                 // Aggiunge il radioButton finale alla form
             $this->addElement($radio);
@@ -33,7 +33,7 @@ class Application_Form_Admin_Buildings_Editbuilding extends App_Form_Abstract
                 'label' => 'elimina',
                 'decorators' => $this->buttonDecorators,
             )); 
-        }  
+        }
     }
 
 }

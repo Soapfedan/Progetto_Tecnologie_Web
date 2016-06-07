@@ -15,6 +15,7 @@ class AdminController extends Zend_Controller_Action
     protected $_buildingsform;
     protected $_editbuildingsform;
     protected $_floorform;
+    protected $_editfloorform;
        	
     public function init(){
         $this->_helper->layout->setLayout('arear');
@@ -32,6 +33,8 @@ class AdminController extends Zend_Controller_Action
         $this->_editbuildingsform = $this->getEditBuildingForm($this->_getParam('imms') == null ? null : $this->_getParam('imms'));
         $this->_floorform = $this->getFloorForm($this->_getParam('building') == null ? null : $this->_getParam('building'), 
                                                 $this->_getParam('floors') == null ? null : $this->_getParam('floors'));
+        $this->_editfloorform = $this->getEditFloorForm($this->_getParam('building') == null ? null : $this->_getParam('building'), 
+                                                        $this->_getParam('floors') == null ? null : $this->_getParam('floors'));
     }
     
     public function indexAction(){
@@ -157,6 +160,7 @@ class AdminController extends Zend_Controller_Action
             $this->view->imm = $this->_getParam('building');
             $this->view->fl = $this->_getParam('floors');
             $this->view->ff = $this->_floorform;
+            $this->view->eff = $this->_editfloorform;
         }
     }
     
@@ -251,6 +255,21 @@ class AdminController extends Zend_Controller_Action
         $f->setAction($urlHelper->url(array(
             'controller' => 'admin',
             'action'     => 'editmap',//'editzone',
+            'building'   => $building,
+            'floor'      => $floor,
+            ), 
+            'default',true
+        ));
+        return $f;
+    }
+    
+    private function getEditFloorForm($building, $floor){
+        $urlHelper = $this->_helper->getHelper('url');
+        $f = new Application_Form_Admin_Buildings_Editfloor();
+        $f->createForm($building, $floor);
+        $f->setAction($urlHelper->url(array(
+            'controller' => 'admin',
+            'action'     => 'editzone',
             'building'   => $building,
             'floor'      => $floor,
             ), 
