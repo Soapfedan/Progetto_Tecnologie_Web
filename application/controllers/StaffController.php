@@ -168,7 +168,7 @@ class StaffController extends Zend_Controller_Action
     }
         
     public function insertalertAction(){
-        $this->view->msg = 'insertAlert';
+        $this->view->msg = 'Inserisci una segnalazione';
 		$this->view->alertform = $this->_alertform;
     }
 	
@@ -256,6 +256,32 @@ class StaffController extends Zend_Controller_Action
     }
     
     
+    public function createalertAction(){
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('welcome','user');
+        }  
+        $form = $this->_alertform;
+         $this->view->alertform = $form;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('insertalert');
+        }
+        $values = $this->_alertform->getValues();
+       
+        
+        $this->_staffmodel->insertAlert(array('Data_Segnalazione' => date("Y-m-d"),
+                                                'Ora_Segnalazione'  => date("H:i:s"),
+                                                'Id_Piano'          => $values['Id_Piano'],
+                                                'Codice_Zona'       => $values['Codice_Zona'],
+                                                'Utente'            => $this->_authService->getIdentity()->Username,
+                                                'Tipo_Catastrofe'   => $values['Tipo_Catastrofe'],
+                                                'Immobile'          => $values['Immobile']
+
+                                         ));
+                                               
+        return $this->_helper->redirector('welcome','staff'); 
+    }
+    
     
     
     public function deletealternativeplanAction(){
@@ -282,15 +308,20 @@ class StaffController extends Zend_Controller_Action
            
         $f = new Application_Form_Staff_Evacuation_Insertalert();
         $values=$this->_staffmodel->getImms($this->_company);
-            
+        $dis = $this->_staffmodel->extractDisaster();    
             foreach ($values as $key => $value) {
                 $imms[]=$value['Immobile'];
                 
             }
-        $f->create($imms);
+            foreach ($dis as $key => $value) {
+                $disaster[]=$value['Descrizione'];
+                
+            }
+            
+        $f->create($imms,$disaster);
         $f->setAction($this->_helper->getHelper('url')->url(array(
                     'controller' => 'staff',
-                    'action'     => 'insertalert',
+                    'action'     => 'createalert',
                     
                     ), 
                     'default',true
@@ -315,18 +346,63 @@ class StaffController extends Zend_Controller_Action
        return $form;
     }
     
-    
-    
-    public function getdataAction()
+    public function getfloorAction() 
     {
+        $res = array();
+        $floors = array();
+        $i = null;
+        $p = null;
+        
+        $values = $this->_staffmodel->getInfoImms($this->_imm);
+        
+             foreach ($values as $piano) {
+                    if(!($i==$piano['Immobile']&&$p==$piano['Id_piano'])){
+                        $floors[]=$piano['Id_piano'];
+                        $i=$piano['Immobile'];
+                        $p=$piano['Id_piano'];
+                        
+                    
+                }
+            }
+            
+           
         $this->_helper->getHelper('layout')->disableLayout();
             $this->_helper->viewRenderer->setNoRender();
+        
+            require_once '/../../library/Zend/Json.php';
+            $response= Zend_Json::encode($floors);
+            $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);
+       
+    }
     
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            $imms = $this->_staffmodel->getImms('1');
-            $dojoData= new Zend_Dojo_Data('Immobile',$imms->toArray(),'Immobile');
-            $this->view->dojo= $dojoData->toJson();
-            // riga 2385 2387 di process vedi admin controller 
-        }        
-    }	
+    
+     public function getzoneAction() 
+    {
+        $res = array();
+        $zones = array();
+        $i = null;
+        $p = null;
+        $z = null;
+        
+        $values = $this->_staffmodel->getInfoImms($this->_imm);
+        
+             foreach ($values as $piano) {
+                    if(!($i==$piano['Immobile']&&$p==$piano['Id_piano']&&$z==$piano['Zona']&&$piano['Id_piano']==$this->_floor)){
+                        $zones[]=$piano['Zona'];
+                        $i=$piano['Immobile'];
+                        $p=$piano['Id_piano'];
+                        $z=$piano['Zona'];
+                    
+                }
+            }
+            
+           
+        $this->_helper->getHelper('layout')->disableLayout();
+            $this->_helper->viewRenderer->setNoRender();
+        
+            require_once '/../../library/Zend/Json.php';
+            $response= Zend_Json::encode($zones);
+            $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);
+       
+    }
  }

@@ -125,7 +125,10 @@ class Application_Model_Staff extends App_Model_Abstract
         return $this->getResource('Segnalazione')-> getZonesAlertsNumb($zone,$floor,$immo);
     }
     
-    
+     public function insertAlert($data){
+        
+          return $this->getResource('Segnalazione')->insertAlert($data);
+        }
     
         
      public function deleteAlert($cod){

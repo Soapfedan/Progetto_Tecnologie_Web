@@ -1,7 +1,51 @@
+<?php $this->headScript()
+    ->appendFile($this->baseUrl('js/jquery-1.12.4.min.js'),$type = 'text/javascript')
+   
+    ->captureStart() ?>
+    $(document).ready(function(){
+            
+              $('#Immobile').change(function(event){
+                    $.ajax({
+                        type: 'GET',
+                        url: '<?php echo $this->url(array('controller' => 'staff', 'action' => 'getfloor'), 'default');  ?>',
+                        data: "immobile=" + $('#Immobile option:selected').text(),
+                        dataType: 'json',
+                        success: setFloors
+                    });
+                });
+                $('#Id_Piano').change(function(event){
+                    $.ajax({
+                        type: 'GET',
+                        url: '<?php echo $this->url(array('controller' => 'staff', 'action' => 'getzone'), 'default');  ?>',
+                        data: {floor: $('#Id_Piano option:selected').text(),immobile: $('#Immobile option:selected').text()},
+                        dataType: 'json',
+                        success: setZones
+                    });
+                });
+            });
+            
+            function setFloors(data){
+                $('#Id_Piano').find('option').remove();
+                $('#Codice_Zona').find('option').remove();
+                $('#Id_Piano').append('<option>'+''+'</option>');
+                $.each(data, function(key, val){
+                    $('#Id_Piano').append('<option value="'+val+'">' + val + '</option>');
+                });
+            }
+    
+            function setZones(data){
+                $('#Codice_Zona').find('option').remove();
+                $('#Codice_Zona').append('<option>'+''+'</option>');
+                $.each(data, function(key, val){
+                    $('#Codice_Zona').append('<option value="'+val+'">' + val + '</option>');
+                });
+            }
+    
+   
+    <?php $this->headScript()->captureEnd() ?>
+
+
+
 <br/> 
   <h3><?php echo $this->msg; ?></h3>
-  <?php
-  for($a=0; $a<6; $a++){
-      echo "<br/>";
-  }
-  echo $this->alertform;?>
+  <?php  echo $this->alertform;?>
