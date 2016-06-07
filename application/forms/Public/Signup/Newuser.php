@@ -19,7 +19,7 @@ class Application_Form_Public_Signup_Newuser extends App_Form_Abstract
             'decorators' => $this->elementDecorators,
         ));
         
-      $this->addElement('password', 'Password1', array(
+      $this->addElement('password', 'Password', array(
             'label' => 'Inserisci la password',
             'filters' => array('StringTrim'),
             'required' => true,
@@ -109,14 +109,7 @@ class Application_Form_Public_Signup_Newuser extends App_Form_Abstract
         
        
         
-       $this->addElement('text', 'Societa_staff', array(
-            'label' => 'Società Staff (opzionale)',
-            'filters' => array('Digits'),
-            'required' => false,
-            'validators' => array(array('StringLength',true, array(1))),
-            'decorators' => $this->elementDecorators,
-        ));
-        
+    
 
         $this->addElement('submit', 'add', array(
             'label' => 'Invia dati',

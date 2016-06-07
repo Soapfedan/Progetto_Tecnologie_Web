@@ -154,7 +154,7 @@ class PublicController extends Zend_Controller_Action
                          'Email'            => $values['Email'],
                          'Telefono'         => $values['Telefono'],
                          'Categoria'        => 1,   
-                         'Societa_staff'    => $values['Societa_staff'],
+                         'Societa_staff'    => 0,
              );
             
             $this->_publicModel->insertNewUser($results);

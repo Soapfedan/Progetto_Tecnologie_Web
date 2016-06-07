@@ -25,15 +25,20 @@ class Application_Resource_Segnalazione extends Zend_Db_Table_Abstract
     
     public function getZonesAlertsNumb($zone,$floor,$immo){
         $select = $this->select()
-                        ->from('segnalazione',array("Num"=>"COUNT(Tipo_Catastrofe)","Catastrofe"=>"Tipo_Catastrofe"))
-                        ->where('Id_piano =?',$floor)
+                        ->from('segnalazione',array("Num"=>"COUNT(Tipo_Catastrofe)",
+                                                          'Immobile'=>'Immobile',
+                                                          'Id_Piano'=>'Id_Piano',
+                                                          'Codice_Zona'    =>'Codice_Zona'))
+                        ->where('Id_Piano =?',$floor)
                         ->where('Immobile =?',$immo)
                         ->where('Codice_Zona =?',$zone)
-                        ->group('Tipo_Catastrofe');
+                        ->group('Immobile')
+                        ->group('Id_Piano')
+                        ->group('Codice_Zona');
         
         $result=$this->fetchAll($select);
         
-         return array($result["Catastrofe"],$result["Num"]);
+         return $result;
     }
     
     //inserisce una nuova segnalazione

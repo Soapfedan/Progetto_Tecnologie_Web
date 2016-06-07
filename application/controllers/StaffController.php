@@ -36,11 +36,12 @@ class StaffController extends Zend_Controller_Action
         $infoimm = array();
         $infimm = array();
         $res = array();
-        $i=null;
-        $p=null;
-        $z=null;
-        $res2=array();
-        $res3=array();
+        $i = null;
+        $p = null;
+        $z = null;
+        $res2 = array();
+        $res3 = array();
+        $res4 = array();
 
             $immo = $this->_staffmodel->getImms($this->_company); 
             foreach ($immo as $i) {
@@ -90,15 +91,44 @@ class StaffController extends Zend_Controller_Action
             //terza parte
             
              foreach ($infoimm as $signi) {
-                $res3[]=$this->_staffmodel->getAlert($signi);
+                //$res3[]=$this->_staffmodel->getAlert($signi);
                 
                 
             }
             
+            foreach ($imms as $inf) {
+                foreach($inf as $piano){
+                    if(!($i==$piano['Immobile']&&$p==$piano['Id_piano']&&$z==$piano['Zona'])){
+                        $inf3[]=$this->_staffmodel->getZonesInformation($piano['Id_piano'],$piano['Immobile'],$piano['Zona']);
+                        $i=$piano['Immobile'];
+                        $p=$piano['Id_piano'];
+                        $z=$piano['Zona'];
+                    }
+                }
+            }
             
+            foreach($inf3 as $info=>$value){
+                $res3[]=$value;
+            }
+            //quarta parte
+             foreach ($imms as $inf) {
+                foreach($inf as $piano){
+                    if(!($i==$piano['Immobile']&&$p==$piano['Id_piano']&&$z==$piano['Zona'])){
+                        $inf4[]=$this->_staffmodel->getZonesAlertsNumb($piano['Zona'],$piano['Id_piano'],$piano['Immobile']);
+                        $i=$piano['Immobile'];
+                        $p=$piano['Id_piano'];
+                        $z=$piano['Zona'];
+                    }
+                }
+            }
+            
+            foreach($inf4 as $info=>$value){
+                $res4[]=$value;
+            }
         $this->view->assign(array('imms'     =>  $res,
                                    'zones'   =>  $res2, 
-                                   'alerts'  =>  $res3));
+                                   'alerts'  =>  $res3,
+                                   'alertnum'=>  $res4));
         
     }
       
