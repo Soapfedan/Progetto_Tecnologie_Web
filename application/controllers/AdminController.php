@@ -164,12 +164,6 @@ class AdminController extends Zend_Controller_Action
         if (!$this->getRequest()->isPost()) {
              $this->_helper->redirector('imm');
         }  
-        $form = $this->_buildingsform;
-        $this->view->buildings = $form;
-        if (!$form->isValid($_POST)) {
-            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('imm');
-        }
             // Se si è premuto su 'elimina'
         if($this->_getParam('elimina')){
             $imm = $this->_getParam('imms');
@@ -188,13 +182,6 @@ class AdminController extends Zend_Controller_Action
         if (!$this->getRequest()->isPost()) {
              $this->_helper->redirector('imm');
         }  
-        $form = $this->_editbuildingparamform;
-        $this->view->pbuild = $form;
-        if (!$form->isValid($_POST)) {
-            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('editbuildings');
-        }
-        
         $values = $this->_editbuildingparamform->getValues();
         $info = array('Id'        => $this->_building,
                       'Nome'      => $values['Nome'],
@@ -212,12 +199,6 @@ class AdminController extends Zend_Controller_Action
         if (!$this->getRequest()->isPost()) {
              $this->_helper->redirector('imm');
         }  
-        $form = $this->_editbuildingsform;
-        $this->view->ebuild = $form;
-        if (!$form->isValid($_POST) || !$this->_getParam('floors')) {
-            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->view->partial('admin/editbuildings.phtml', array('imm' => $this->_getParam('building')));
-        }
         if($this->_getParam('elimina')){
                 // floors è il nome del radio button
             $fl = $this->_getParam('floors');
