@@ -54,7 +54,7 @@ class Application_Form_Admin_Buildings_Editzone extends App_Form_Abstract
             $shape = explode('=', $splitter[0]);
             $coords = explode('=', $splitter[1]);
             
-            $this->populate(array('shape'      => $shape[1],
+            $this->populate(array('Shape'      => $shape[1],
                                   'Coordinate' => $coords[1]));
         }
     } 
