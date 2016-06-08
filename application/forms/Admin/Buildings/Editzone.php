@@ -6,14 +6,13 @@ class Application_Form_Admin_Buildings_Editfloormap extends App_Form_Abstract
     public function init(){
     }
      
-    public function createForm($imm, $fl){
+    public function createForm($imm, $fl, $z){
             
         $this->_adminModel = new Application_Model_Admin();
         $this->setMethod('post');
-        $this->setName('floorform');
+        $this->setName('zoneform');
         $this->setAction('');
         
-        $validator = new Zend_Validate_Digits();
          
         $this->addElement('file', 'escape_plan', array(
              'label' => 'Cambia il piano di fuga di default', 
