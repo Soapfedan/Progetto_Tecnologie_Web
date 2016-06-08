@@ -23,7 +23,7 @@ class Application_Form_Admin_Buildings_Editzone extends App_Form_Abstract
                                         array('jpg', 'gif')))
             ));
             
-            $this->addElement('text', 'shape', array(
+            $this->addElement('text', 'Shape', array(
                 'label' => 'Forma della mappatura',
                 'filters' => array('StringTrim'),
                 'required' => true,
