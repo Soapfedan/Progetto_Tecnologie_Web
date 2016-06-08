@@ -41,6 +41,15 @@ class Application_Form_Admin_Buildings_Editfloormap extends App_Form_Abstract
             'label' => 'modifica',
             'decorators' => $this->buttonDecorators,
         ));
+        
+        $values = $this->_adminModel->getEscapePlanInfo($z,$fl,$imm);
+        
+        $splitter = explode(' ', $values['Mappatura_zona']);
+        $shape = explode('=', $splitter[0]);
+        $coords = explode('=', $splitter[1]);
+        
+        $this->populate(array('shape'      => $shape,
+                              'Coordinate' => $coords));
 
     } 
     
