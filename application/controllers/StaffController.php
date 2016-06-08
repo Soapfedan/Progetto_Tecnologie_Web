@@ -384,16 +384,11 @@ class StaffController extends Zend_Controller_Action
         $p = null;
         $z = null;
         
-        $values = $this->_staffmodel->getInfoImms($this->_imm);
+        $values = $this->_staffmodel->getZone($this->_imm,$this->_floor);
         
              foreach ($values as $piano) {
-                    if(!($i==$piano['Immobile']&&$p==$piano['Id_piano']&&$z==$piano['Zona']&&$piano['Id_piano']==$this->_floor)){
-                        $zones[]=$piano['Zona'];
-                        $i=$piano['Immobile'];
-                        $p=$piano['Id_piano'];
-                        $z=$piano['Zona'];
-                    
-                }
+    
+                $zones[]=$piano['Zona'];
             }
             
            

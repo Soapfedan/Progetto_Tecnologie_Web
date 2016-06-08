@@ -50,9 +50,9 @@ class Application_Model_Staff extends App_Model_Abstract
         return $this->getResource('PianodiFuga')->getMapMapped($floor,$imm);
     }
     
-    public function getZone($zone,$floor)
+    public function getZone($imm,$floor)
     {
-        return $this->getResource('PianodiFuga')->getZone($zone,$floor);
+        return $this->getResource('PianodiFuga')->getZone($imm,$floor);
     }
     
     public function getEscapePlanInfo($zone,$floor,$imm)
