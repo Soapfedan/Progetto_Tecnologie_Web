@@ -23,14 +23,21 @@
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="2" title="">Inserisci Utenti</a></li>  
-    <li class="menu"><a href="<?= $this->url(array(
+                 ?>" accesskey="2" title="">Inserisci Utenti</a></li>
+     <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'admin',
-                        'action'     => 'faq'
+                        'action'     => 'beforeinsertfaq'
                         ), 
                         'default',true
                     ); 
-                 ?>" accesskey="3" title="">&nbsp;&nbsp;Gestisci FAQ&nbsp;&nbsp;</a></li> 
+                 ?>" accesskey="3" title="">&nbsp;&nbsp;Inserisci FAQ&nbsp;&nbsp;</a></li> 
+    <li class="menu"><a href="<?= $this->url(array(
+                        'controller' => 'admin',
+                        'action'     => 'showfaq'
+                        ), 
+                        'default',true
+                    ); 
+                 ?>" accesskey="4" title="">&nbsp;&nbsp;Gestisci FAQ&nbsp;&nbsp;</a></li> 
      <li class="menu"><a href="<?= $this->url(array(
                         'controller' => 'user',
                         'action'     => 'logout'

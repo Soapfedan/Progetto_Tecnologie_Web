@@ -4,7 +4,7 @@ class AdminController extends Zend_Controller_Action
 {
     protected $_adminModel;
     
-    protected $_edit;
+    protected $_idfaq;
     protected $_faqform;
     protected $_subform;
 	protected $_insertfaqform;
@@ -23,8 +23,8 @@ class AdminController extends Zend_Controller_Action
         $this->_helper->layout->setLayout('arear');
         $this->_adminModel = new Application_Model_Admin();
         
-        $this->_edit = $this->_getParam('edit');
-        $this->_faqform = $this->getShowFaqForm($this->_edit == false ? false : true);
+        $this->_idfaq = $this->_getParam('idfaq');
+        $this->_faqform = $this->getShowFaqForm($this->_idfaq);
         $this->_subform = $this->_getParam('subform');
         
         $this->_edituser = $this->_getParam('edituser');
@@ -63,20 +63,30 @@ class AdminController extends Zend_Controller_Action
         if (!$this->_insertfaqform->isValid($_POST)) {
           
             $this->_insertfaqform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('faq');
+            return $this->_helper->redirector('beforeinsertfaq','admin');
         }
 		$values = $this->_insertfaqform->getValues();
             
 		$values['ID'] = '';
 		$this->_adminModel->insertFaq($values);
-		$this->render('faq');
+		$this->_helper->redirector('showfaq','admin');
+
     }
     
      /* Action chiamata quando si preme su Modifica Faq o Elimina Faq */
      public function showfaqAction(){
-        $this->view->msg='Modifica/Cancella le faq'; 
         // Definisce le variabili per il viewer
-        $this->view->assign(array('faqs' => $this->_faqform)); 
+        $id=$this->_getParam('idfaq');
+        if($id==null)
+		{
+        	$values = $this->_adminModel->extractFaq();
+        	$this->view->faqs=$values;
+
+		}else{
+        	$this->_adminModel->deleteFaq($id);
+        	$values = $this->_adminModel->extractFaq();
+        	$this->view->faqs=$values;
+		}
      }
     
     /* Action chiamata quando si preme il bottone relativo alla form di Modifica Faq */
@@ -225,11 +235,15 @@ class AdminController extends Zend_Controller_Action
         return $loginform;
     }
     
-    private function getShowFaqForm($edit){
-        $this->_faqform = new Application_Form_Admin_Faq_Showfaq();
-        $this->_faqform->createForm($edit);
-        
-        return $this->_faqform;
+    private function getShowFaqForm($idfaq){
+    	if($idfaq==null){}
+		else
+		{
+			$faq= $this->_adminModel->extractfaqbyid($idfaq);
+        	$this->_faqform = new Application_Form_Admin_Faq_Showfaq();
+        	$this->_faqform->createForm($faq);
+        	return $this->_faqform;
+		}
     }
   
     public function getCurrentSubForm(){        

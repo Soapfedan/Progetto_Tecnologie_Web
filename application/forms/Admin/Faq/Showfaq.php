@@ -6,8 +6,44 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
     public function init(){
     }
      
-    public function createForm($edit){
-            
+    public function createForm($faq){
+    	$this->setMethod('post');
+        $this->setName('faqform');
+        $this->setAction('');
+		
+		$this->addElement('hidden', 'ID');
+		
+        $this->addElement('textarea', 'Question', array(
+                'label' => 'Question',
+                'cols' => '60', 'rows' => '2',
+                'filters' => array('StringTrim'),
+                'required' => true,
+                'validators' => array(array('StringLength',true, array(1,2500))),
+                'decorators' => $this->elementDecorators,
+            ));
+        $this->addElement('textarea', 'Answer', array(
+                'label' => 'Answer',
+                'cols' => '60', 'rows' => '2',
+                'filters' => array('StringTrim'),
+                'required' => true,
+                'validators' => array(array('StringLength',true, array(1,2500))),
+                'decorators' => $this->elementDecorators,
+            ));
+		$this->populate($faq);
+		$this->addElement('submit','Modifica',array(
+                'label' => 'Modifica',
+                'decorators' => $this->buttonDecorators,
+                ));
+        $this->setAction($this->getView()->url(array(
+                    'controller' => 'admin',
+                    'action'     => 'editfaq',
+                    'idfaq'      => $faq['ID'],
+                    'question'   => $question,
+                    'answer' 	 => $answer
+                    ), 
+                    'default',true
+                ));
+       /*     
         $this->_adminModel = new Application_Model_Admin();
         $this->setMethod('post');
         $this->setName('faqform');
@@ -87,7 +123,7 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
                 'Form',
             ));
 		} // end foreach
-		
+		*/
        $this->setDecorators(array(
            'FormElements',
            array('HtmlTag', array('tag' => 'table')),
