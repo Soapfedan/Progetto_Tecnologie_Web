@@ -216,7 +216,7 @@ class AdminController extends Zend_Controller_Action
         $this->view->ebuild = $form;
         if (!$form->isValid($_POST) || !$this->_getParam('floors')) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('editbuildings');
+            return $this->view->partial('admin/editbuildings.phtml', array('imm' => $this->_getParam('building')));
         }
         if($this->_getParam('elimina')){
                 // floors è il nome del radio button

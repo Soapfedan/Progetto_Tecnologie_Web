@@ -21,6 +21,7 @@ class Application_Form_Admin_Buildings_Showbuildings extends App_Form_Abstract
         foreach($valuearr as $imm){
             $radio->addMultiOption($imm['Immobile'], 'Immobile '.$imm['Immobile']);
         }
+        $radio->setValue($valuearr[0]);
         $radio->setRequired();
             // Aggiunge il radioButton finale alla form
         $this->addElement($radio);

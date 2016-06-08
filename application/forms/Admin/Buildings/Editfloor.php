@@ -22,6 +22,8 @@ class Application_Form_Admin_Buildings_Editfloor extends App_Form_Abstract
             foreach($valuearr as $zone){
                 $radio->addMultiOption($zone['Zona'], 'Zona '.$zone['Zona']);
             }
+            $radio->setValue($valuearr[0]);
+            $radio->setRequired();
                 // Aggiunge il radioButton finale alla form
             $this->addElement($radio);
             
