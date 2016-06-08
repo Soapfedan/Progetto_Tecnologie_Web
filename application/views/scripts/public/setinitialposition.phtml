@@ -1,8 +1,9 @@
 
 <br/> 
-<h3>Benvenuto utente <?php echo $this->authInfo('Username')?> sei pregato di inserire la tua posizione</h3>
+<h3>&nbsp;&nbsp;Benvenuto utente <?php echo $this->authInfo('Username')?> sei pregato di inserire la tua posizione</h3>
 <br />
 <br />
+<h4>Seleziona l'immobile e di seguito il piano</h4>
 <ul>
     <?php 
     foreach ($this->imms as $key => $value) :?>
@@ -39,8 +40,8 @@
 }?>
         
 <?php if($this->selfloor!=null){
-    echo 'Immobile selezionato'.$this->selimm.'<br/>';
-    echo 'Piano selezionato'.$this->selfloor.'<br/>';
+    echo '<h4>Immobile selezionato'.$this->selimm.'<br/>';
+    echo 'Piano selezionato'.$this->selfloor.'</h4>';
     echo $this->mapRenderer($this->map);
                                          
     echo $this->printArea($this->schema,$this->selimm,$this->selfloor,'public'); 

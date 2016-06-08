@@ -13,6 +13,7 @@ class UserController extends Zend_Controller_Action
     protected $_sendalertform;
     protected $_imm;
     protected $_floor;
+    protected $_zone;
 
     
     
@@ -31,7 +32,8 @@ class UserController extends Zend_Controller_Action
         $this->_insertprofileform = $this->getInsertUserForm($this->_username);
 		$this->_sendalertform = $this->getSendAlertForm();
         $this->_imm = ($this->_getParam('immobile')==null ? null: $this->_getParam('immobile'));
-        $this->_floor = ($this->_getParam('floor')==null ? null: $this->_getParam('floor'));                                                   
+        $this->_floor = ($this->_getParam('floor')==null ? null: $this->_getParam('floor'));
+        $this->_zone=($this->_getParam('zone')==null ? null: $this->_getParam('zone'));                                                   
     }
 
     public function indexAction(){
@@ -60,10 +62,14 @@ class UserController extends Zend_Controller_Action
     
    
     public function sendalertAction(){
+        $this->view->msg = 'Qui puoi inviare una segnalazioni relative al piano in cui ti trovi';
         $this->view->form = $this->_sendalertform;
         $pos = $this->_userModel->getPosition($this->_authService->getIdentity()->Username);
         if($pos==null){
             $this->_helper->redirector('changeposition','user');
+        }else{
+            $this->view->imm = $pos['Immobile'];
+            $this->view->floor = $pos['Id_piano'];
         }
     }
     
@@ -103,7 +109,7 @@ class UserController extends Zend_Controller_Action
         $cognome = $this->_authService->getIdentity()->Cognome;
         $pos = $this->_userModel->getPosition($usr);
         if($pos!=null){
-            $this->view->welcomemsg = 'Ciao ' . $nome . ' '. $cognome . ' la tua posizione attuale: '.
+            $this->view->welcomemsg = 'Ehi ' . $nome . ' ' . $cognome . ' ecco la tua posizione attuale: '.
               '<br />'.' Immobile: '.$pos['Immobile'].','.
               '<br />'.' Piano: '   .$pos['Id_piano'].','.
               '<br />'.' Zona: '    .$pos['Zona'].
@@ -144,7 +150,7 @@ class UserController extends Zend_Controller_Action
             }
             
         }
-        $this->view->assign(array('msg'      =>  'changeposition',
+        $this->view->assign(array('msg'      =>  'Qui puoi cambiare la tua posizione',
                                   'imms'     =>  $imms,
                                   'floors'   =>  $floors,
                                   'selimm'   =>  $imm,
@@ -166,7 +172,7 @@ class UserController extends Zend_Controller_Action
         if($pos==null){
             $this->_helper->redirector('changeposition','user');
         }else{
-            var_dump($pos);
+            
             $this->view->assign(array('pos'=>$pos['Immobile']));
             $this->view->escapeplan = $this->_userModel->getEscapePlan($pos['Zona'],$pos['Id_piano'],$pos['Immobile']);
         }
@@ -221,11 +227,11 @@ class UserController extends Zend_Controller_Action
    }
    
    public function setpositionAction(){
-       $zone=($this->_getParam('zone')==null ? null: $this->_getParam('zone'));
+       
        $data = array('Utente'   => $this->_authService->getIdentity()->Username,
                      'Id_piano'   => $this->_floor,
                      'Immobile'   => $this->_imm,
-                     'Zona'       => $zone
+                     'Zona'       => $this->_zone
                      );
        if($this->_userModel->getPosition($data['Utente'])==null){
            //utente senza posizione

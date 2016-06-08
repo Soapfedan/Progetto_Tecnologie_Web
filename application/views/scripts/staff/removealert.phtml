@@ -1,39 +1,45 @@
 <br/> 
-  <h3><?php echo $this->msg; ?></h3>
+  <h3><?php echo $this->msg; //echo var_dump($this->alert);?></h3>
+    <br />
+    <br />
     <table id="tableusers">
       <thead>
         <tr>
-            <th>Codice Segnalazione</th>
-            <th>Data Segnalazione</th>         
-            <th>Ora Segnalazione</th>
+            <th>Immobile</th>
             <th>Id Piano</th>
             <th>Zona</th> 
+            <th>Data Segnalazione</th>         
+            <th>Ora Segnalazione</th>
+            
             <th>Utente</th>
             <th>Tipo catastrofe</th> 
             <th>Cancella</th> 
         </tr>
       </thead>
-      <?php foreach ($this->alert as $alert){
-            echo "<tr>";
-            echo "<td>". $alert['Codice_Segnalazione']  ."</td>";
-            echo "<td>". $alert['Data_Segnalazione']      ."</td>";
-            echo "<td>". $alert['Ora_Segnalazione']   ."</td>";
-            echo "<td>". $alert['Id_Piano'] ."</td>";
-			echo "<td>". $alert['Codice_Zona'] ."</td>";
-			echo "<td>". $alert['Utente'] ."</td>";
-			echo "<td>". $alert['Tipo_Catastrofe'] ."</td>";
-            echo "<td>
-                    <a href=".
-                        $this->url(array(
-                            'controller' => 'staff',
-                            'action'     => 'removealert',
-                            'cod_al'		 => $alert['Codice_Segnalazione']
-                            ), 
-                            'default',true).">
-                    <img width=32 height=32 src=".$this->baseURL()."/images/trashicon.png>
-                    </a>
-                  </td>";
-            echo "</tr>";      
+      <?php foreach ($this->alert as $a){
+                foreach($a as $alert){
+                    echo "<tr>";
+                    echo "<td>". $alert['Immobile']  ."</td>";
+                    echo "<td>". $alert['Id_Piano'] ."</td>";
+                    echo "<td>". $alert['Codice_Zona'] ."</td>";
+                    echo "<td>". $alert['Data_Segnalazione']      ."</td>";
+                    echo "<td>". $alert['Ora_Segnalazione']   ."</td>";
+                    
+        			echo "<td>". $alert['Utente'] ."</td>";
+        			echo "<td>". $alert['Tipo_Catastrofe'] ."</td>";
+                    echo "<td>
+                            <a href=".
+                                $this->url(array(
+                                    'controller' => 'staff',
+                                    'action'     => 'removealert',
+                                    'cod_al'		 => $alert['Codice_Segnalazione']
+                                    ), 
+                                    'default',true).">
+                            <img width=32 height=32 src=".$this->baseURL()."/images/trashicon.png>
+                            </a>
+                          </td>";
+                    echo "</tr>"; 
+               }     
         } ?>
   </table>
   

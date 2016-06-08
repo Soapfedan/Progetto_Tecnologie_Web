@@ -52,5 +52,11 @@ class Application_Resource_Faq extends Zend_Db_Table_Abstract
         $this->delete($where);
     }
    
+   public function extractFaqById($id)
+    {
+        $select = $this->select()
+                        ->where('ID = ?', $id);
+        return $this->fetchAll($select);
+    }
 }
 
