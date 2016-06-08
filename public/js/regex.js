@@ -60,7 +60,7 @@ $(document).ready(function(){
                             }
                             break;
                         case 'Shape':
-                        	var pattern = /^\"(poly|circle)\"$/
+                        	var pattern = /^\"(poly|circle|rect)\"$/
                             if (!pattern.test(element.val())) {
                                 element.addClass('has-error');
                             }
