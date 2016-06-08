@@ -18,7 +18,7 @@ class AdminController extends Zend_Controller_Action
     protected $_editbuildingsform;
     protected $_floorform;
     protected $_editfloorform;
-    
+    protected $_zoneform;
        	
     public function init(){
         $this->_helper->layout->setLayout('arear');
@@ -41,6 +41,9 @@ class AdminController extends Zend_Controller_Action
                                                 $this->_getParam('floors') == null ? null : $this->_getParam('floors'));
         $this->_editfloorform = $this->getEditFloorForm($this->_getParam('building') == null ? null : $this->_getParam('building'), 
                                                         $this->_getParam('floors') == null ? null : $this->_getParam('floors'));
+        $this->_zoneform = $this->getEditZoneForm($this->_getParam('building') == null ? null : $this->_getParam('building'), 
+                                                  $this->_getParam('floor') == null ? null : $this->_getParam('floor'),
+                                                  $this->_getParam('zones') == null ? null : $this->_getParam('zones'));
     }
     
     public function indexAction(){
@@ -146,11 +149,17 @@ class AdminController extends Zend_Controller_Action
         }   
     }
     
+    // Visualizza gli immobili presenti nel db e permette di modificarli, eliminarli o inserirne altri.
     public function immAction(){
         $this->view->msg='imm'; 
         $this->view->buildings = $this->_buildingsform; 
     }
     
+    /* Dopo aver selezionato un immobile, se si è premuto su 'elimina', cancella l'immobile
+     * e reindirizza alla action precedente; se si è premuto su 'modifica' apre una vista
+     * con i campi da modificare dell'immobile e un'altra form che permette di modificare,
+     * eliminare o inserire un nuovo piano nell'immobile.
+     */
     public function editbuildingsAction(){
         if (!$this->getRequest()->isPost()) {
              $this->_helper->redirector('imm');
@@ -174,6 +183,7 @@ class AdminController extends Zend_Controller_Action
         }
     }
     
+    // Action chiamata quando si modificano i parametri di un immobile (Nome, via ecc...)
     public function updatebuildingAction(){
         if (!$this->getRequest()->isPost()) {
              $this->_helper->redirector('imm');
@@ -194,7 +204,10 @@ class AdminController extends Zend_Controller_Action
         $this->_adminModel->updateBuilding($info);
         $this->_helper->redirector('imm');
     }
-        
+     /* Dopo aver selezionato un piano di un immobile, la action gestisce la cancellazione del piano
+      * oppure se si è premuto su modifica porta ad una vista dove si può cambiare la mappa del piano e 
+      * gestire le zone del piano
+      */   
     public function editfloorAction(){
         if($this->_getParam('elimina')){
                 // floors è il nome del radio button
@@ -211,6 +224,7 @@ class AdminController extends Zend_Controller_Action
         }
     }
     
+    // Action che si attiva quando si modifica la mappa di un piano.
     public function editmapAction(){
         $values = $this->_floorform->getValues();
         if($values){
@@ -224,6 +238,14 @@ class AdminController extends Zend_Controller_Action
             $this->_adminModel->updateFloor($info, $this->_getParam('building'), $this->_getParam('floor'));           
             $this->_helper->redirector('imm');
         }
+    }
+
+    // Mostra una form per modificare i campi di una zona, dopo aver cliccato su 'modifica' dalla modifica del piano.
+    public function editzoneAction(){
+        $this->view->i = $this->_getParam('building');
+        $this->view->fl = $this->_getParam('floor');
+        $this->view->z = $this->_getParam('zones');
+        $this->view->f = $this->_zoneform;
     }
     
     private function getLoginForm(){
@@ -319,7 +341,7 @@ class AdminController extends Zend_Controller_Action
         $f->createForm($building, $floor);
         $f->setAction($urlHelper->url(array(
             'controller' => 'admin',
-            'action'     => 'editmap',//'editzone',
+            'action'     => 'editmap',
             'building'   => $building,
             'floor'      => $floor,
             ), 
@@ -337,6 +359,21 @@ class AdminController extends Zend_Controller_Action
             'action'     => 'editzone',
             'building'   => $building,
             'floor'      => $floor,
+            ), 
+            'default',true
+        ));
+        return $f;
+    }
+    
+    private function getEditZoneForm($bu, $fl, $z){
+        $urlHelper = $this->_helper->getHelper('url');
+        $f = new Application_Form_Admin_Buildings_Editzone();
+        $f->createForm($bu, $fl, $z);
+        $f->setAction($urlHelper->url(array(
+            'controller' => 'admin',
+            'action'     => 'hh',
+            'building'   => $bu,
+            'floor'      => $fl,
             ), 
             'default',true
         ));
