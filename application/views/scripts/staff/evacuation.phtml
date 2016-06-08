@@ -17,13 +17,16 @@
     
     <?php $this->headScript()->captureEnd() ?>
 
-<h3>Benvenuto utente <?php echo $this->authInfo('Username')?> seleziona il </h3><br />
-<h3>piano su cui vuoi attivare la procedura di evacuazione</h3>
+<h4>Benvenuto utente <?php echo $this->authInfo('Username')?> !!!!</h4><br />
+<h2><?php echo $this->msg; ?></h2>
 <br />
 <br />
+<h4>Seleziona l'immobile e di seguito il piano</h4>
 <ul>
+    
     <?php 
     foreach ($this->imms as $key => $value) :?>
+    
     <li class="show"><a href="<?= $this->url(array(
                         'controller' => 'staff',
                         'action'     => 'evacuation',
@@ -37,10 +40,11 @@
         <?php endforeach ?>
 </ul>
 <ul>
+   
 <?php 
       
  if($this->selimm!=null){
-    
+     
         foreach ($this->floors as $key => $value) :?>
             
             <li class="show"><a href="<?= $this->url(array(
@@ -58,8 +62,8 @@
         
 <?php if($this->selfloor!=null):?>
     
-    <?php echo 'Immobile selezionato'.$this->selimm.'<br/>';
-    echo 'Piano selezionato'.$this->selfloor.'<br/>';?>
+   <h5> <?php echo 'Immobile selezionato'.$this->selimm.'<br/>';
+    echo 'Piano selezionato'.$this->selfloor.'<br/>';?></h5>
     <a class="evac" href="<?= $this->url(array(
                         'controller' => 'staff',
                         'action'     => 'setevacuation',
@@ -86,7 +90,7 @@
     <?php endif ?>                                        
 
 <br/> 
-  <h3><?php echo $this->msg; ?></h3>
+  
   <?php
   for($a=0; $a<6; $a++){
       echo "<br/>";

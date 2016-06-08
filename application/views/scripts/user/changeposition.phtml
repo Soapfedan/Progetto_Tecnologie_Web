@@ -4,14 +4,14 @@
   <h3><?php echo $this->welcomemsg; ?></h3>
   
   
-<h6><a href="<?php echo $this->url(array(
+<h5><a id="changeposition" href="<?php echo $this->url(array(
                         'controller' => 'user',
                         'action'     => 'deleteposition'
                         ), 
                         'default',true
                     ); 
-                 ?>" title="">Cancella la tua posizione</a></h6>
-
+                 ?>" title="">Clicca qui se vuoi resettare la tua posizione attuale</a></h5>
+<h4>Seleziona l'immobile e di seguito il piano</h4>
 <ul>
     <?php 
     foreach ($this->imms as $key => $value) :?>

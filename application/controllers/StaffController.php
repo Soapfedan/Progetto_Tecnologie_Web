@@ -173,20 +173,32 @@ class StaffController extends Zend_Controller_Action
     }
 	
 	public function removealertAction(){
+	    $this->view->msg = 'Qui puoi rimuovere tutte le segnalazioni appartenenti alla tua societa';
 		$cod_al = $this->_getParam('cod_al')==null ? null: $this->_getParam('cod_al');
+        $alert = array();
+        $infoimm = array();
+        
+        $imms = $this->_staffmodel->getImms($this->_authService->getIdentity()->Societa_staff);
+        foreach ($imms as $i) {
+                $infoimm[]=$i['Immobile'];
+                
+            }
+        foreach ($infoimm as $key => $value) {
+            $alert[]=$this->_staffmodel->getAlert($value);
+        }
          if ($cod_al==null) {
-            $alert = $this->_staffmodel->getAlert($this->_authService->getIdentity()->Societa_staff);
+            //$alert = $this->_staffmodel->getAlert();
 			$this->view->alert = $alert;
          }
          else{
          	$this->_staffmodel->deleteAlert($cod_al);
-         	$alert = $this->_staffmodel->getAlert($this->_authService->getIdentity()->Societa_staff);
+         	//$alert = $this->_staffmodel->getAlert($this->_authService->getIdentity()->Societa_staff);
 			$this->view->alert = $alert;
 		 }
     }
           
     public function evacuationAction(){
-        $this->view->msg = 'evacuation';
+        $this->view->msg = 'Attiva la procedura di evacuazione';
         
          $imm=$this->_imm;
         $floor=$this->_floor;
@@ -345,7 +357,7 @@ class StaffController extends Zend_Controller_Action
        ));
        return $form;
     }
-    
+    //metodo che restituisce 
     public function getfloorAction() 
     {
         $res = array();
@@ -369,7 +381,7 @@ class StaffController extends Zend_Controller_Action
         $this->_helper->getHelper('layout')->disableLayout();
             $this->_helper->viewRenderer->setNoRender();
         
-            require_once '/../../library/Zend/Json.php';
+            require_once 'Zend/Json.php';
             $response= Zend_Json::encode($floors);
             $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);
        
@@ -395,7 +407,7 @@ class StaffController extends Zend_Controller_Action
         $this->_helper->getHelper('layout')->disableLayout();
             $this->_helper->viewRenderer->setNoRender();
         
-            require_once '/../../library/Zend/Json.php';
+            require_once 'Zend/Json.php';
             $response= Zend_Json::encode($zones);
             $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);
        

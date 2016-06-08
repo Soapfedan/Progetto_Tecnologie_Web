@@ -32,7 +32,11 @@ class Application_Model_Admin extends App_Model_Abstract
     {
         return $this->getResource('Faq')->deleteFaq($faq);
     }
-    
+       
+      public function extractFaqById($id)
+    {
+        return $this->getResource('Faq')->extractFaqById($id);
+    }
    
     /*
      * ----------------------PIANO DI FUGA-----------------------
