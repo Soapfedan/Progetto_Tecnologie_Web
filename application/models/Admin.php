@@ -43,6 +43,10 @@ class Application_Model_Admin extends App_Model_Abstract
        return $this->getResource('PianodiFuga')->getZone($imm, $floor);
    }
    
+   //restituisce una singola zona
+   public function getSingleZone($imm,$floor,$zone){
+       return $this->getResource('PianodiFuga')->getSingleZone($imm,$floor,$zone);
+   }
     //inserisce una nuova zona con un nuovo piano di fuga
     public function insertNewZonePlan($zonedata){
          

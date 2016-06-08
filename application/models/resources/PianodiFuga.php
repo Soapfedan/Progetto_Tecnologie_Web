@@ -57,8 +57,17 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
                         ->where('Id_piano =?',$floor);
                         
        return $this->fetchAll($select);
-          
-            
+    }
+      
+      //restituisce una zona di un piano di un immobile
+      public function getSingleZone($imm,$floor,$zone){
+        
+         $select = $this->select()
+                        ->where('Immobile =?',$imm)
+                        ->where('Id_piano =?',$floor)
+                        ->where('Zona =?', $zone);
+                        
+       return $this->fetchAll($select);
     }
     
     //settta il piano alternativo e se non è passato niente al parametro $plan lo setta a null
