@@ -25,9 +25,8 @@ class AdminController extends Zend_Controller_Action
         $this->_adminModel = new Application_Model_Admin();
         
         $this->_idfaq = $this->_getParam('idfaq');
-        $this->_faqform = $this->getShowFaqForm($this->_idfaq);
-        $this->_subform = $this->_getParam('subform');
-        
+        $this->_faqform = $this->getShowFaqForm($this->_idfaq == null ? null : $this->_getParam('idfaq'));
+		        
         $this->_edituser = $this->_getParam('edituser');
         $this->_usersform = $this->getShowUsersForm($this->_edituser == false ? false : true);
 		
@@ -64,7 +63,7 @@ class AdminController extends Zend_Controller_Action
     
     public function insertfaqAction(){
         if (!$this->getRequest()->isPost()) {
-             $this->_helper->redirector('welcome','user');
+             $this->_helper->redirector('welcome','admin');
         }    
         if (!$this->_insertfaqform->isValid($_POST)) {
           
@@ -94,28 +93,21 @@ class AdminController extends Zend_Controller_Action
         	$this->view->faqs=$values;
 		}
      }
+	 
+	 public function beforeeditfaqAction(){
+	 	$this->view->beforeeditfaq = $this->_faqform;	 
+	 }
     
     /* Action chiamata quando si preme il bottone relativo alla form di Modifica Faq */
     public function editfaqAction(){
-        if($this->_edit==true){
-            if (!$this->getRequest()->isPost()) {
-                $this->_helper->redirector('faq','admin');
-            }    
-                                              
-            if (!$this->getCurrentSubForm()->isValid($_POST)) {
-                $this->getCurrentSubForm()->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-                return $this->render('showfaq');
-            }
-            
-            $values = $this->getCurrentSubForm()->getValues();
-            
-            $result = array('ID'        => $values[$this->_subform]['ID'],
-                            'Question'  => $values[$this->_subform]['Question'],
-                            'Answer'    => $values[$this->_subform]['Answer']
+        $values = $this->_faqform->getValues();
+        $result =array('ID'        => $values['ID'],
+                       'Question'  => $values['Question'],
+                       'Answer'    => $values['Answer']
                              );
-            $this->_adminModel->modifyfaq($result);
-            $this->render('welcome'); 
-        }    
+        $this->_adminModel->modifyfaq($result);
+        $this->_helper->redirector('welcome','admin');
+		     
     }
     
     /* Action chiamata quando si preme il bottone relativo alla form di Elimina Faq */
@@ -283,9 +275,13 @@ class AdminController extends Zend_Controller_Action
     	if($idfaq==null){}
 		else
 		{
-			$faq= $this->_adminModel->extractfaqbyid($idfaq);
+			$faq = $this->_adminModel->extractFaqById($idfaq);
+			$result = array('ID'        => $faq['ID'],
+                       		'Question'  => $faq['Question'],
+                       		'Answer'    => $faq['Answer']
+              );
         	$this->_faqform = new Application_Form_Admin_Faq_Showfaq();
-        	$this->_faqform->createForm($faq);
+        	$this->_faqform->createForm($result);
         	return $this->_faqform;
 		}
     }

@@ -56,7 +56,7 @@ class Application_Resource_Faq extends Zend_Db_Table_Abstract
     {
         $select = $this->select()
                         ->where('ID = ?', $id);
-        return $this->fetchAll($select);
+        return $this->fetchRow($select);
     }
 }
 
