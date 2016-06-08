@@ -71,8 +71,8 @@ class Application_Model_Admin extends App_Model_Abstract
      }
      
      // aggiorna un immobile
-     public function updateBuilding($data, $imm){
-         return $this->getResource('Immobile')->updateBuilding($data, $imm);
+     public function updateBuilding($data){
+         return $this->getResource('Immobile')->updateBuilding($data);
      }
     /*
      * ---------------------PIANO DELL'IMMOBILE-------------------
