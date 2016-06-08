@@ -12,6 +12,7 @@ class AdminController extends Zend_Controller_Action
     protected $_edituser;
     protected $_usersform;
     
+    protected $_building;    
     protected $_buildingsform;
     protected $_editbuildingparamform;
     protected $_editbuildingsform;
@@ -31,6 +32,8 @@ class AdminController extends Zend_Controller_Action
         $this->_usersform = $this->getShowUsersForm($this->_edituser == false ? false : true);
 		
 		$this->_insertfaqform = $this->getInsertFaqForm();
+        
+        $this->_building = $this->_getParam('building') == null ? null : $this->_getParam('building');
         $this->_buildingsform = $this->getShowBuildingsForm();
         $this->_editbuildingparamform = $this->getEditBuildingParamForm($this->_getParam('imms') == null ? null : $this->_getParam('imms'));
         $this->_editbuildingsform = $this->getEditBuildingForm($this->_getParam('imms') == null ? null : $this->_getParam('imms'));
@@ -179,16 +182,16 @@ class AdminController extends Zend_Controller_Action
         $this->view->pbuild = $form;
         if (!$form->isValid($_POST)) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('imm');
+            return $this->render('editbuilding');
         }
-        $bu = $this->_getParam('building');
+        
         $values = $this->_editbuildingparamform->getValues();
-        $info = array('Id'        => $bu,
+        $info = array('Id'        => $this->_building,
                       'Nome'      => $values['Nome'],
                       'Citta'     => $values['Citta'],
                       'Provincia' => $values['Provincia'],
                       'Via'       => $values['Via']);
-        $this->_adminModel->updateBuilding($info, $bu);
+        $this->_adminModel->updateBuilding($info);
         $this->_helper->redirector('imm');
     }
         
