@@ -192,7 +192,7 @@ class AdminController extends Zend_Controller_Action
         $this->view->pbuild = $form;
         if (!$form->isValid($_POST)) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('editbuilding');
+            return $this->render('editbuildings');
         }
         
         $values = $this->_editbuildingparamform->getValues();
@@ -209,6 +209,15 @@ class AdminController extends Zend_Controller_Action
       * gestire le zone del piano
       */   
     public function editfloorAction(){
+        if (!$this->getRequest()->isPost()) {
+             $this->_helper->redirector('imm');
+        }  
+        $form = $this->_editbuildingsform;
+        $this->view->ebuild = $form;
+        if (!$form->isValid($_POST) || !$this->_getParam('floors')) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('editbuildings');
+        }
         if($this->_getParam('elimina')){
                 // floors è il nome del radio button
             $fl = $this->_getParam('floors');

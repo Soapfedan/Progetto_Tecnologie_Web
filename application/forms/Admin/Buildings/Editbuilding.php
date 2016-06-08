@@ -22,6 +22,7 @@ class Application_Form_Admin_Buildings_Editbuilding extends App_Form_Abstract
             foreach($valuearr as $floor){
                 $radio->addMultiOption($floor['Id_piano'], 'Piano '.$floor['Id_piano']);
             }
+            $radio->setRequired();
                 // Aggiunge il radioButton finale alla form
             $this->addElement($radio);
             
