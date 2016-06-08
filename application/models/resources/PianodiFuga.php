@@ -86,6 +86,15 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
          $this->insert($zonedata);
     }
    
+   //modifica una zona
+    public function updateZone($data){
+        $where []= $this->getAdapter()->quoteInto('Immobile = ?', $data['Immobile']);        
+        $where []= $this->getAdapter()->quoteInto('Id_piano = ?', $data['Id_piano']);
+        $where []= $this->getAdapter()->quoteInto('Zona = ?', $data['Zona']);
+        
+        $this->update($data,$where);
+    }
+   
    //elimina un percorso di fuga per zona
     public function deletePlanbyZone($zone)
     {

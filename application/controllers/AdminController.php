@@ -216,9 +216,13 @@ class AdminController extends Zend_Controller_Action
     
     // Action che si attiva quando si modifica la mappa di un piano.
     public function editmapAction(){
+        if (!$this->getRequest()->isPost()) {
+             $this->_helper->redirector('imm');
+        }
         $values = $this->_floorform->getValues();
         if($values){
-            $data = $this->_adminModel->getFloorInfo($this->_getParam('building'), $this->_getParam('floor'));
+            $data = $this->_adminModel->getFloorInfo($this->_getParam('building'), 
+                                                     $this->_getParam('floor'));
             $info = array('Id_piano'    => $data['Id_piano'],
                           'Mappa'       => $values['map'] == null ? $data['Mappa'] : $values['map'],
                           'Immobile'    => $data['Immobile'],
@@ -232,10 +236,35 @@ class AdminController extends Zend_Controller_Action
 
     // Mostra una form per modificare i campi di una zona, dopo aver cliccato su 'modifica' dalla modifica del piano.
     public function editzoneAction(){
+        if (!$this->getRequest()->isPost()) {
+             $this->_helper->redirector('imm');
+        }
         $this->view->i = $this->_getParam('building');
         $this->view->fl = $this->_getParam('floor');
         $this->view->z = $this->_getParam('zones');
         $this->view->f = $this->_zoneform;
+    }
+    
+    // Esegue l'aggiornamento della zona dopo aver premuto su 'modifica' nella form della zona
+    public function updatezoneAction(){
+        if (!$this->getRequest()->isPost()) {
+             $this->_helper->redirector('imm');
+        }
+        $values = $this->_zoneform->getValues();
+        if($values){
+            $data = $this->_adminModel->getSingleZone($this->_getParam('building'), 
+                                                      $this->_getParam('floor'),
+                                                      $this->_getParam('zone'));
+            $info = array('Immobile'                  => $data['Immobile'],
+                          'Id_piano'                  => $data['Id_piano'],
+                          'Zona'                      => $data['Zona'],
+                          'Piano_di_fuga'             => $values['escape_plan'],
+                          'Piano_di_fuga_alternativo' => $data['Piano_di_fuga_alternativo'],
+                          'Mappatura_zona'            => 'shape='.$values['Shape'].' '.'coords='.$values['Coordinate']
+                    );
+            $this->_adminModel->updateZone($info);
+            $this->_helper->redirector('imm');
+        }
     }
     
     private function getLoginForm(){
@@ -361,9 +390,10 @@ class AdminController extends Zend_Controller_Action
         $f->createForm($bu, $fl, $z);
         $f->setAction($urlHelper->url(array(
             'controller' => 'admin',
-            'action'     => 'hh',
+            'action'     => 'updatezone',
             'building'   => $bu,
             'floor'      => $fl,
+            'zone'       => $z
             ), 
             'default',true
         ));

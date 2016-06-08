@@ -62,6 +62,11 @@ class Application_Model_Admin extends App_Model_Abstract
          
          return $this->getResource('PianodiFuga')->insertNewZonePlan($zonedata);
     }
+
+    //aggiorna una zona
+    public function updateZone($data){
+        return $this->getResource('PianodiFuga')->updateZone($data);
+    }
    
    //elimina un percorso di fuga per zona
     public function deletePlanbyZone($zone)
