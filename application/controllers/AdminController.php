@@ -195,9 +195,13 @@ class AdminController extends Zend_Controller_Action
                           'Provincia' => $values['Provincia'],
                           'Via'       => $values['Via'],
                           'Societa'   => $values['Societa']);
+            $this->_adminModel->insertBuilding($info);
+            $this->_helper->redirector('imm');
         }
-        $this->_adminModel->insertBuilding($info);
-        $this->_helper->redirector('imm');
+        else{
+            $this->_insertbuildingform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->_helper->redirector('editbuildings','admin');
+        }
     }
     
     // Action chiamata quando si modificano i parametri di un immobile (Nome, via ecc...)
@@ -215,6 +219,10 @@ class AdminController extends Zend_Controller_Action
                           'Societa'   => $values['Societa']);
             $this->_adminModel->updateBuilding($info);
             $this->_helper->redirector('imm');
+        }
+        else{
+            $this->_editbuildingparamform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->_helper->redirector('editbuildings','admin');
         }
     }
     
@@ -259,9 +267,13 @@ class AdminController extends Zend_Controller_Action
             $info = array('Mappa'    => $values['map'],
                           'Immobile' => $this->_getParam('building'),
                           'Societa'  => $b['Societa']);
+            $this->_adminModel->insertFloor($info);
+            $this->_helper->redirector('imm');
         }
-        $this->_adminModel->insertFloor($info);
-        $this->_helper->redirector('imm');
+        else{
+            $this->_insertfloorform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->_helper->redirector('editfloor','admin');
+        }
     }
     
     // Action che si attiva quando si modifica la mappa di un piano.
@@ -325,9 +337,13 @@ class AdminController extends Zend_Controller_Action
                           'Piano_di_fuga'             => $values['escape_plan'],
                           'Piano_di_fuga_alternativo' => null,
                           'Mappatura_zona'            => 'shape='.$values['Shape'].' '.'coords='.$values['Coordinate']);
+            $this->_adminModel->insertNewZonePlan($info);
+            $this->_helper->redirector('imm');                 
         }
-        $this->_adminModel->insertNewZonePlan($info);
-        $this->_helper->redirector('imm');
+        else{
+            $this->_insertzoneform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->_helper->redirector('editzone','admin');
+        }
     }
     
     // Esegue l'aggiornamento della zona dopo aver premuto su 'modifica' nella form della zona
@@ -350,6 +366,10 @@ class AdminController extends Zend_Controller_Action
                     );
             $this->_adminModel->updateZone($info, $data['Immobile'], $data['Id_piano'], $data['Zona']);
             $this->_helper->redirector('imm');
+        }
+        else{
+            $this->_zoneform->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->_helper->redirector('editzone','admin');
         }
     }
     
