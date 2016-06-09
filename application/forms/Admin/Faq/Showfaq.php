@@ -12,14 +12,6 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
         $this->setAction('');
 		
 		$this->addElement('hidden', 'ID');
-		/*$this->addElement('textarea', 'ID', array(
-                'label' => 'Question',
-                'cols' => '60', 'rows' => '2',
-                'filters' => array('StringTrim'),
-                'required' => true,
-                'validators' => array(array('StringLength',true, array(1,2500))),
-                'decorators' => $this->elementDecorators,
-            ));*/
         $this->addElement('textarea', 'Question', array(
                 'label' => 'Question',
                 'cols' => '60', 'rows' => '2',
