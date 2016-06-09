@@ -4,9 +4,16 @@
 
 
 <div id="staff" class="container">
+    
+    <?php
+    if($this->z)
+        echo '<b>Modifica della zona '. $this->z .' del piano '. $this->fl .' dell immobile '. $this->i. '</b>';
+    else {
+        echo '<b>Inserimento di una nuova zona del piano '. $this->fl .' nell immobile '. $this->i .'</b>';
+    }
+    echo '<br>';
+    echo $this->f;
+    ?>
 
-    <b>Modifica della zona <?= $this->z ?> del piano <?= $this->fl ?> dell'immobile <?= $this->i?></b>
-
-    <?php echo $this->f?>
 
 </div>

@@ -19,14 +19,14 @@ class Application_Form_Admin_Buildings_Showbuildings extends App_Form_Abstract
         $radio = new Zend_Form_Element_Radio('imms');
             // Cicla sulla lista di immobili e aggiunge l'opzione relativa al radioButton
         foreach($valuearr as $imm){
-            $radio->addMultiOption($imm['Immobile'], 'Immobile '.$imm['Immobile']);
+            $radio->addMultiOption($imm['Id'], 'Immobile '.$imm['Id']);
         }
         $radio->setValue($valuearr[0]);
         $radio->setRequired();
             // Aggiunge il radioButton finale alla form
         $this->addElement($radio);
         
-        $this->addElement('submit','inserisci', array(
+        $this->addElement('submit','aggiungi', array(
             'label' => 'aggiungi',
             'decorators' => $this->buttonDecorators,
         ));        

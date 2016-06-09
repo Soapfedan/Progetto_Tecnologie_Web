@@ -88,6 +88,22 @@ class Application_Resource_RegistroPosizione extends Zend_Db_Table_Abstract
         $this->delete($where);     
         
     }
+      
+    public function deleteBuildingPositionTable($imm){
+        $where = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
+        $this->delete($where);
+    }
+    public function deleteFloorPositionTable($imm, $fl){
+        $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
+        $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $fl);
+        $this->delete($where);
+    }
+    public function deleteZonePositionTable($imm, $fl, $z){
+        $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
+        $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $fl);
+        $where[] = $this->getAdapter()->quoteInto('Zona = ?', $z);
+        $this->delete($where);
+    }
     
 }
 

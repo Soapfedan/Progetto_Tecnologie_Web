@@ -1,12 +1,22 @@
 <div id="staff" class="container">
 
-    <b>Modifica del piano <?= $this->fl ?> dell'immobile <?= $this->imm ?></b>
-    
-    <?php echo $this->ff ?>
-    
-    <hr>
-    
-    <b>Modifica delle zone del piano <?= $this->fl ?> dell'immobile <?= $this->imm ?></b>
-    <?php echo $this->eff ?>
-    
+    <?php
+    if($this->fl)
+        echo '<b>Modifica del piano '. $this->fl .' dell immobile '. $this->imm. '</b>';
+    else {
+        echo '<b>Inserimento di un nuovo piano nell immobile '. $this->imm .'</b>';
+    }
+    echo '<br>';
+    echo $this->ff;
+    ?>
+
+
+    <?php
+    if($this->fl){
+        echo '<hr>';
+        echo '<b>Modifica delle zone del piano '. $this->fl .' dell immobile '. $this->imm. '</b>';
+        echo $this->eff;
+    }
+    ?>
+
 </div>

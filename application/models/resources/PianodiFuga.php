@@ -67,7 +67,7 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
                         ->where('Id_piano =?',$floor)
                         ->where('Zona =?', $zone);
                         
-       return $this->fetchAll($select);
+       return $this->fetchRow($select);
     }
     
     //settta il piano alternativo e se non è passato niente al parametro $plan lo setta a null
@@ -82,27 +82,46 @@ class Application_Resource_PianodiFuga extends Zend_Db_Table_Abstract
     }
     
     //inserisce una nuova zona con un nuovo piano di fuga
-    public function insertNewZonePlan($zonedata){
-         $this->insert($zonedata);
+    public function insertNewZonePlan($data){
+        $maxid = $this -> select()
+                       -> from('piano_di_fuga', array("id" => "MAX(Zona)"))
+                       -> where('Immobile = ? ', $data['Immobile'])
+                       -> where('Id_piano = ? ', $data['Id_piano']);
+        $result = $this->fetchRow($maxid);
+        
+        $data['Zona']= $result['id'] + 1;
+        $this->insert($data);
     }
    
    //modifica una zona
-    public function updateZone($data){
-        $where []= $this->getAdapter()->quoteInto('Immobile = ?', $data['Immobile']);        
-        $where []= $this->getAdapter()->quoteInto('Id_piano = ?', $data['Id_piano']);
-        $where []= $this->getAdapter()->quoteInto('Zona = ?', $data['Zona']);
+    public function updateZone($data, $imm, $f, $z){
+        $where []= $this->getAdapter()->quoteInto('Immobile = ?', $imm);//$data['Immobile']);        
+        $where []= $this->getAdapter()->quoteInto('Id_piano = ?', $f); //$data['Id_piano']);
+        $where []= $this->getAdapter()->quoteInto('Zona = ?', $z); //$data['Zona']);
         
         $this->update($data,$where);
     }
    
    //elimina un percorso di fuga per zona
-    public function deletePlanbyZone($zone)
+    public function deletePlanbyZone($imm, $floor, $zone)
     {
-        $where = $this->getAdapter()->quoteInto('Zona = ?', $zone);
+        $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
+        $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
+        $where[] = $this->getAdapter()->quoteInto('Zona = ?', $zone);
         $this->delete($where);
     }
 
-
+    public function deleteFloor($floor, $imm){
+        $where[] = $this->getAdapter()->quoteInto('Id_piano = ?', $floor);
+        $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
+        $this->delete($where);
+    }
+    
+    public function deleteBuilding($imm){
+        $where[] = $this->getAdapter()->quoteInto('Immobile = ?', $imm);
+        $this->delete($where);
+    }
+    
     //elimina un percorso di fuga per piano
     public function deletePlanbyFloor($floor)
     {

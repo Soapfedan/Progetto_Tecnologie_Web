@@ -64,14 +64,17 @@ class Application_Model_Admin extends App_Model_Abstract
     }
 
     //aggiorna una zona
-    public function updateZone($data){
-        return $this->getResource('PianodiFuga')->updateZone($data);
+    public function updateZone($data, $i, $f, $z){
+        return $this->getResource('PianodiFuga')->updateZone($data, $i, $f, $z);
     }
    
    //elimina un percorso di fuga per zona
-    public function deletePlanbyZone($zone)
+    public function deleteZone($imm, $fl, $zone)
     {
-        return $this->getResource('PianodiFuga')->deletePlanbyZone($zone);
+        return $this->getResource('PianodiFuga')->deletePlanbyZone($imm, $fl, $zone);
+    }
+    public function deleteZonePositionTable($imm, $fl, $z){
+        return $this->getResource('RegistroPosizione')->deleteZonePositionTable($imm, $fl, $z);
     }
 
 
@@ -93,6 +96,12 @@ class Application_Model_Admin extends App_Model_Abstract
      public function updateBuilding($data){
          return $this->getResource('Immobile')->updateBuilding($data);
      }
+     
+     // inserisce un immobile
+     public function insertBuilding($data){
+         return $this->getResource('Immobile')->insertBuilding($data);
+     }
+     
     /*
      * ---------------------PIANO DELL'IMMOBILE-------------------
      */
@@ -111,8 +120,13 @@ class Application_Model_Admin extends App_Model_Abstract
     
     //elimina un piano
     public function deleteFloor($floor,$imm){
-       
        return $this->getResource('PianoImmobile')->deleteFloor($floor,$imm);
+    }
+    public function deleteFloorSecond($floor, $imm){
+        return $this->getResource('PianodiFuga')->deleteFloor($floor, $imm);
+    }
+    public function deleteFloorPositionTable($imm, $fl){
+        return $this->getResource('RegistroPosizione')->deleteFloorPositionTable($imm, $fl);
     }
     
     
@@ -134,13 +148,25 @@ class Application_Model_Admin extends App_Model_Abstract
     
     // Restituisce tutti gli immobili
     public function getAllBuildings(){
-        return $this->getResource('PianoImmobile')->getallImms();
+        //return $this->getResource('PianoImmobile')->getallImms();
+        return $this->getResource('Immobile')->getAllBuildings();
     }
     
-    // Elimina un immobile
+    // Elimina un immobile da tutte le tabelle in cui compare l'id
     public function deleteBuilding($id){
+        return $this->getResource('Immobile')->deleteBuilding($id);
+    }
+    public function deleteBuildingSecond($id){
         return $this->getResource('PianoImmobile')->deleteBuilding($id);
     }
+    public function deleteBuildingThird($id){
+        return $this->getResource('PianodiFuga')->deleteBuilding($id);
+    }
+    public function deleteBuildingPositionTable($id){
+        return $this->getResource('RegistroPosizione')->deleteBuildingPositionTable($id);
+    }
+    
+   
     /*
      * ---------------------------REGISTRO DELLE POSIZIONI--------------------
      */

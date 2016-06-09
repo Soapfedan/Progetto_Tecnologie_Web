@@ -14,10 +14,13 @@ class AdminController extends Zend_Controller_Action
     
     protected $_building;    
     protected $_buildingsform;
+    protected $_insertbuildingform;
     protected $_editbuildingparamform;
     protected $_editbuildingsform;
+    protected $_insertfloorform;
     protected $_floorform;
     protected $_editfloorform;
+    protected $_insertzoneform;
     protected $_zoneform;
        	
     public function init(){
@@ -34,15 +37,19 @@ class AdminController extends Zend_Controller_Action
         
         $this->_building = $this->_getParam('building') == null ? null : $this->_getParam('building');
         $this->_buildingsform = $this->getShowBuildingsForm();
+        $this->_insertbuildingform = $this->getInsertBuildingForm();
         $this->_editbuildingparamform = $this->getEditBuildingParamForm($this->_getParam('imms') == null ? null : $this->_getParam('imms'));
         $this->_editbuildingsform = $this->getEditBuildingForm($this->_getParam('imms') == null ? null : $this->_getParam('imms'));
+        $this->_insertfloorform = $this->getInsertFloorForm($this->_getParam('building') == null ? null : $this->_getParam('building'));
         $this->_floorform = $this->getFloorForm($this->_getParam('building') == null ? null : $this->_getParam('building'), 
                                                 $this->_getParam('floors') == null ? null : $this->_getParam('floors'));
         $this->_editfloorform = $this->getEditFloorForm($this->_getParam('building') == null ? null : $this->_getParam('building'), 
                                                         $this->_getParam('floors') == null ? null : $this->_getParam('floors'));
+        $this->_insertzoneform = $this->getInsertZoneForm($this->_getParam('building') == null ? null : $this->_getParam('building'), 
+                                                          $this->_getParam('floor') == null ? null : $this->_getParam('floor'));
         $this->_zoneform = $this->getEditZoneForm($this->_getParam('building') == null ? null : $this->_getParam('building'), 
                                                   $this->_getParam('floor') == null ? null : $this->_getParam('floor'),
-                                                  $this->_getParam('zones') == null ? null : $this->_getParam('zones'));
+                                                  $this->_getParam('zone') == null ? null : $this->_getParam('zone'));
     }
     
     public function indexAction(){
@@ -160,6 +167,9 @@ class AdminController extends Zend_Controller_Action
         if($this->_getParam('elimina')){
             $imm = $this->_getParam('imms');
             $this->_adminModel->deleteBuilding($imm);
+            $this->_adminModel->deleteBuildingSecond($imm);
+            $this->_adminModel->deleteBuildingThird($imm);
+            $this->_adminModel->deleteBuildingPositionTable($imm);
             $this->_helper->redirector('imm','admin');
         }   // Se si è premuto su 'modifica'
         if($this->_getParam('modifica')){
@@ -167,6 +177,26 @@ class AdminController extends Zend_Controller_Action
             $this->view->pbuild = $this->_editbuildingparamform;
             $this->view->ebuild = $this->_editbuildingsform;
         }
+         if($this->_getParam('aggiungi')){
+            $this->view->pbuild = $this->_insertbuildingform;
+        }
+    }
+    
+    // action chiamata quando si preme su 'aggiungi' dopo aver completato la form di inserimento immobile
+    public function insertbuildingAction(){
+        if (!$this->getRequest()->isPost()) {
+             $this->_helper->redirector('imm');
+        } 
+        if ($this->_insertbuildingform->isValid($_POST)){
+            $values = $this->_insertbuildingform->getValues();
+            $info = array('Nome'      => $values['Nome'],
+                          'Citta'     => $values['Citta'],
+                          'Provincia' => $values['Provincia'],
+                          'Via'       => $values['Via'],
+                          'Societa'   => $values['Societa']);
+        }
+        $this->_adminModel->insertBuilding($info);
+        $this->_helper->redirector('imm');
     }
     
     // Action chiamata quando si modificano i parametri di un immobile (Nome, via ecc...)
@@ -174,18 +204,23 @@ class AdminController extends Zend_Controller_Action
         if (!$this->getRequest()->isPost()) {
              $this->_helper->redirector('imm');
         }  
-        $values = $this->_editbuildingparamform->getValues();
-        $info = array('Id'        => $this->_building,
-                      'Nome'      => $values['Nome'],
-                      'Citta'     => $values['Citta'],
-                      'Provincia' => $values['Provincia'],
-                      'Via'       => $values['Via']);
-        $this->_adminModel->updateBuilding($info);
-        $this->_helper->redirector('imm');
+        if ($this->_editbuildingparamform->isValid($_POST)){
+            $values = $this->_editbuildingparamform->getValues();
+            $info = array('Id'        => $this->_building,
+                          'Nome'      => $values['Nome'],
+                          'Citta'     => $values['Citta'],
+                          'Provincia' => $values['Provincia'],
+                          'Via'       => $values['Via'],
+                          'Societa'   => $values['Societa']);
+            $this->_adminModel->updateBuilding($info);
+            $this->_helper->redirector('imm');
+        }
     }
+    
      /* Dopo aver selezionato un piano di un immobile, la action gestisce la cancellazione del piano
       * oppure se si è premuto su modifica porta ad una vista dove si può cambiare la mappa del piano e 
-      * gestire le zone del piano
+      * gestire le zone del piano. Se invece si è premuto su aggiungi, si arriverà ad una form per 
+      * l'inserimento del piano.
       */   
     public function editfloorAction(){
         if (!$this->getRequest()->isPost()) {
@@ -196,6 +231,8 @@ class AdminController extends Zend_Controller_Action
             $fl = $this->_getParam('floors');
             $bu = $this->_getParam('building');
             $this->_adminModel->deleteFloor($fl, $bu);
+            $this->_adminModel->deleteFloorSecond($fl, $bu);
+            $this->_adminModel->deleteFloorPositionTable($bu, $fl);
             $this->_helper->redirector('imm','admin');
         }
         if($this->_getParam('modifica')){
@@ -204,6 +241,26 @@ class AdminController extends Zend_Controller_Action
             $this->view->ff = $this->_floorform;
             $this->view->eff = $this->_editfloorform;
         }
+        if($this->_getParam('aggiungi')){
+            $this->view->imm = $this->_getParam('building');
+            $this->view->ff = $this->_insertfloorform;
+        }
+    }
+    
+    // action chiamata quando si preme su 'aggiungi' dopo aver completato la form di inserimento immobile
+    public function insertfloorAction(){
+        if (!$this->getRequest()->isPost()) {
+             $this->_helper->redirector('imm');
+        } 
+        if ($this->_insertfloorform->isValid($_POST)){
+            $values = $this->_insertfloorform->getValues();
+            $b = $this->_adminModel->getBuilding($this->_getParam('building'));
+            $info = array('Mappa'    => $values['map'],
+                          'Immobile' => $this->_getParam('building'),
+                          'Societa'  => $b['Societa']);
+        }
+        $this->_adminModel->insertFloor($info);
+        $this->_helper->redirector('imm');
     }
     
     // Action che si attiva quando si modifica la mappa di un piano.
@@ -226,15 +283,50 @@ class AdminController extends Zend_Controller_Action
         }
     }
 
-    // Mostra una form per modificare i campi di una zona, dopo aver cliccato su 'modifica' dalla modifica del piano.
+    /* Dopo aver selezionato una zona di un piano di un immobile, la action gestisce la cancellazione della zona
+      * oppure se si è premuto su modifica porta ad una vista dove si possono cambiare attributi della zona.
+      * Se invece si è premuto su aggiungi, si arriverà ad una form per l'inserimento della zona.
+      */
     public function editzoneAction(){
         if (!$this->getRequest()->isPost()) {
              $this->_helper->redirector('imm');
         }
-        $this->view->i = $this->_getParam('building');
-        $this->view->fl = $this->_getParam('floor');
-        $this->view->z = $this->_getParam('zones');
-        $this->view->f = $this->_zoneform;
+        if($this->_getParam('aggiungi')){
+            $this->view->i = $this->_getParam('building');
+            $this->view->fl = $this->_getParam('floor');
+            $this->view->f = $this->_insertzoneform;
+        }
+        if($this->_getParam('elimina')){
+            $i = $this->_getParam('building');
+            $fl = $this->_getParam('floor');
+            $z = $this->_getParam('zone');
+            $this->_adminModel->deleteZone($i, $fl, $z);
+            $this->_adminModel->deleteZonePositionTable($i, $fl, $z);
+            $this->_helper->redirector('imm','admin');
+        }
+        if($this->_getParam('modifica')){
+            $this->view->i = $this->_getParam('building');
+            $this->view->fl = $this->_getParam('floor');
+            $this->view->z = $this->_getParam('zone');
+            $this->view->f = $this->_zoneform;
+        }
+    }
+    
+    // action chiamata quando si preme su 'aggiungi' dopo aver completato la form di inserimento immobile
+    public function insertzoneAction(){
+        if (!$this->getRequest()->isPost()) {
+             $this->_helper->redirector('imm');
+        } 
+        if ($this->_insertzoneform->isValid($_POST)){
+            $values = $this->_insertzoneform->getValues();
+            $info = array('Immobile'                  => $this->_getParam('building'),
+                          'Id_piano'                  => $this->_getParam('floor'),
+                          'Piano_di_fuga'             => $values['escape_plan'],
+                          'Piano_di_fuga_alternativo' => null,
+                          'Mappatura_zona'            => 'shape='.$values['Shape'].' '.'coords='.$values['Coordinate']);
+        }
+        $this->_adminModel->insertNewZonePlan($info);
+        $this->_helper->redirector('imm');
     }
     
     // Esegue l'aggiornamento della zona dopo aver premuto su 'modifica' nella form della zona
@@ -242,19 +334,20 @@ class AdminController extends Zend_Controller_Action
         if (!$this->getRequest()->isPost()) {
              $this->_helper->redirector('imm');
         }
-        $values = $this->_zoneform->getValues();
-        if($values){
+        if ($this->_zoneform->isValid($_POST)){
+            $values = $this->_zoneform->getValues();
             $data = $this->_adminModel->getSingleZone($this->_getParam('building'), 
                                                       $this->_getParam('floor'),
                                                       $this->_getParam('zone'));
             $info = array('Immobile'                  => $data['Immobile'],
                           'Id_piano'                  => $data['Id_piano'],
                           'Zona'                      => $data['Zona'],
-                          'Piano_di_fuga'             => $values['escape_plan'],
+                          'Piano_di_fuga'             => $values['escape_plan'] == null ? $data['Piano_di_fuga'] : 
+                                                                                          $values['escape_plan'],
                           'Piano_di_fuga_alternativo' => $data['Piano_di_fuga_alternativo'],
                           'Mappatura_zona'            => 'shape='.$values['Shape'].' '.'coords='.$values['Coordinate']
                     );
-            $this->_adminModel->updateZone($info);
+            $this->_adminModel->updateZone($info, $data['Immobile'], $data['Id_piano'], $data['Zona']);
             $this->_helper->redirector('imm');
         }
     }
@@ -322,6 +415,19 @@ class AdminController extends Zend_Controller_Action
         return $f;
     } 
     
+    private function getInsertBuildingForm(){
+        $urlHelper = $this->_helper->getHelper('url');
+        $f = new Application_Form_Admin_Buildings_Buildingparam();
+        $f->createForm();
+        $f->setAction($urlHelper->url(array(
+            'controller' => 'admin',
+            'action'     => 'insertbuilding',
+            ), 
+            'default',true
+        ));
+        return $f;
+    }
+    
     private function getEditBuildingParamForm($imm){
         $urlHelper = $this->_helper->getHelper('url');
         $f = new Application_Form_Admin_Buildings_Buildingparam();
@@ -344,6 +450,20 @@ class AdminController extends Zend_Controller_Action
             'controller' => 'admin',
             'action'     => 'editfloor',
             'building'   => $imm
+            ), 
+            'default',true
+        ));
+        return $f;
+    }
+    
+    private function getInsertFloorForm($building){
+        $urlHelper = $this->_helper->getHelper('url');
+        $f = new Application_Form_Admin_Buildings_Editfloormap();
+        $f->createForm($building);
+        $f->setAction($urlHelper->url(array(
+            'controller' => 'admin',
+            'action'     => 'insertfloor',
+            'building'   => $building
             ), 
             'default',true
         ));
@@ -374,6 +494,21 @@ class AdminController extends Zend_Controller_Action
             'action'     => 'editzone',
             'building'   => $building,
             'floor'      => $floor,
+            ), 
+            'default',true
+        ));
+        return $f;
+    }
+    
+    private function getInsertZoneForm($bu, $fl){
+        $urlHelper = $this->_helper->getHelper('url');
+        $f = new Application_Form_Admin_Buildings_Editzone();
+        $f->createForm($bu, $fl);
+        $f->setAction($urlHelper->url(array(
+            'controller' => 'admin',
+            'action'     => 'insertzone',
+            'building'   => $bu,
+            'floor'      => $fl,
             ), 
             'default',true
         ));

@@ -17,28 +17,31 @@ class Application_Form_Admin_Buildings_Editfloor extends App_Form_Abstract
             $values = $this->_adminModel->getAllZones($imm, $fl);
             $valuearr = $values->toArray();
                 // Crea un radioButton
-            $radio = new Zend_Form_Element_Radio('zones');
+            $radio = new Zend_Form_Element_Radio('zone');
                 // Cicla sulla lista di piani e aggiunge l'opzione relativa al radioButton
             foreach($valuearr as $zone){
                 $radio->addMultiOption($zone['Zona'], 'Zona '.$zone['Zona']);
             }
-            $radio->setValue($valuearr[0]);
+            if($valuearr)
+                $radio->setValue($valuearr[0]);
             $radio->setRequired();
                 // Aggiunge il radioButton finale alla form
             $this->addElement($radio);
             
-            $this->addElement('submit','inserisci', array(
+            $this->addElement('submit','aggiungi', array(
                 'label' => 'aggiungi',
                 'decorators' => $this->buttonDecorators,
-            ));        
-            $this->addElement('submit','modifica', array(
-                'label' => 'modifica',
-                'decorators' => $this->buttonDecorators,
-            ));
-            $this->addElement('submit','elimina', array(
-                'label' => 'elimina',
-                'decorators' => $this->buttonDecorators,
-            )); 
+            ));  
+            if($valuearr){      
+                $this->addElement('submit','modifica', array(
+                    'label' => 'modifica',
+                    'decorators' => $this->buttonDecorators,
+                ));
+                $this->addElement('submit','elimina', array(
+                    'label' => 'elimina',
+                    'decorators' => $this->buttonDecorators,
+                )); 
+            }
         }
     }
 
