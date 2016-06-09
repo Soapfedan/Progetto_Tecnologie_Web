@@ -181,7 +181,13 @@ class UserController extends Zend_Controller_Action
     public function updateprofileAction(){
         $identity = $this->_authService->getIdentity();
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('welcome','user');
+            if($this->_authService->getIdentity()->Categoria==1)
+            $this->_helper->redirector('welcome','user'); 
+            else if($this->_authService->getIdentity()->Categoria==2){
+             $this->_helper->redirector('welcome','staff'); 
+              }else if($this->_authService->getIdentity()->Categoria==3){
+             $this->_helper->redirector('welcome','admin'); 
+            }
         }   
         $form= $this->_editform;
         $this->view->profileForm= $form;
@@ -202,6 +208,8 @@ class UserController extends Zend_Controller_Action
             $this->_helper->redirector('welcome','user'); 
         else if($this->_authService->getIdentity()->Categoria==2){
              $this->_helper->redirector('welcome','staff'); 
+        }else if($this->_authService->getIdentity()->Categoria==3){
+             $this->_helper->redirector('welcome','admin'); 
         }
    }
       
