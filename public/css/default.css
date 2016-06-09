@@ -268,7 +268,7 @@ ul.contact li a.icon-rss:before
     width:30%;
     height:500px;
     background-color:transparent;
-    font-family: "Comic Sans MS";
+    font-family: 'Source Sans Pro', sans-serif;
     
     
 }
@@ -277,8 +277,13 @@ ul.contact li a.icon-rss:before
 	color:#FFFFFF;
 	text-decoration: none;
 	text-align:center;
-	background: url(../images/menuback.png) no-repeat center;
+	background-image: url(../images/menuback.png) ;
+	 background-size: 165px 20px;
+	 background-repeat : no-repeat;
+	 background-position : center;
 	padding:0px 30px;
+	border-radius: 5px;
+	
 	
 }
 
@@ -306,7 +311,7 @@ ul.contact li a.icon-rss:before
 	height:500px;
 	background:transparent;
 	padding: 0.5em;
-	font-family: "Comic Sans MS";
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 #wrapper-content a{
