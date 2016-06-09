@@ -22,23 +22,28 @@ class Application_Form_Admin_Buildings_Editbuilding extends App_Form_Abstract
             foreach($valuearr as $floor){
                 $radio->addMultiOption($floor['Id_piano'], 'Piano '.$floor['Id_piano']);
             }
-            $radio->setValue($valuearr[0]);
+            // Se l'immobile non ha piani
+            if($valuearr)
+                $radio->setValue($valuearr[0]);
             $radio->setRequired();
                 // Aggiunge il radioButton finale alla form
             $this->addElement($radio);
             
-            $this->addElement('submit','inserisci', array(
+            $this->addElement('submit','aggiungi', array(
                 'label' => 'aggiungi',
                 'decorators' => $this->buttonDecorators,
-            ));        
-            $this->addElement('submit','modifica', array(
-                'label' => 'modifica',
-                'decorators' => $this->buttonDecorators,
-            ));
-            $this->addElement('submit','elimina', array(
-                'label' => 'elimina',
-                'decorators' => $this->buttonDecorators,
-            )); 
+            ));  
+            // Non crea i pulsanti modifica ed elimina se l'immobile non ha ancora alcun piano
+            if($valuearr){      
+                $this->addElement('submit','modifica', array(
+                    'label' => 'modifica',
+                    'decorators' => $this->buttonDecorators,
+                ));
+                $this->addElement('submit','elimina', array(
+                    'label' => 'elimina',
+                    'decorators' => $this->buttonDecorators,
+                )); 
+            }
         }  
     }
 

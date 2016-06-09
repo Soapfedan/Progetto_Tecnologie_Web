@@ -53,6 +53,18 @@ $(document).ready(function(){
                                 element.addClass('has-error');
                             }
                             break;
+                        case 'Coordinate':
+                        	var pattern = /^\"(\d)+(\,\d+)+\"$/
+                        	if (!pattern.test(element.val())) {
+                                element.addClass('has-error');
+                            }
+                            break;
+                        case 'Shape':
+                        	var pattern = /^\"(poly|circle|rect)\"$/
+                            if (!pattern.test(element.val())) {
+                                element.addClass('has-error');
+                            }
+                            break;
                     };
                 });
 

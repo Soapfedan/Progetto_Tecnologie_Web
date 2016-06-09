@@ -126,6 +126,15 @@ class Application_Resource_PianoImmobile extends Zend_Db_Table_Abstract
     
     //inserisce un nuovo piano
     public function insertFloor($floordata){
+        // devo estrarre il numero di elementi della tabella e
+        // genero l'id aumentandolo di uno
+        $maxid = $this -> select()
+                       -> from('piano_immobile', array("id" => "MAX(Id_piano)"))
+                       -> where('Immobile = ? ', $floordata['Immobile']);
+        $result = $this->fetchRow($maxid);
+        
+        $floordata['Id_piano']= $result['id'] + 1;
+        $floordata['Evacuazione'] = 0;
         $this->insert($floordata);
     }
     

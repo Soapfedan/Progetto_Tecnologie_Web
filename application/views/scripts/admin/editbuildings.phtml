@@ -1,11 +1,22 @@
 <div id="staff" class="container">
-
-    <b>Modifica dell'immobile <?= $this->imm ?></b>
-
-    <?php echo $this->pbuild ?>
-    <hr>
     
-    <b>Modifica dei piani dell'immobile <?= $this->imm ?></b>
-    <?php echo $this->ebuild ?>
+    <?php
+    if($this->imm)
+        echo '<b>Modifica dell immobile '. $this->imm. '</b>';
+    else {
+        echo '<b>Inserisci un nuovo immobile</b>';
+    }
+    echo '<br>';
+    echo $this->pbuild;
+    ?>
+    
+    
+    <?php
+    if($this->imm){
+        echo '<hr>';
+        echo '<b>Modifica dei piani dell immobile '. $this->imm. '</b>';
+        echo $this->ebuild;
+    }
+    ?>
     
 </div>
