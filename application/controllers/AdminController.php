@@ -151,7 +151,7 @@ class AdminController extends Zend_Controller_Action
     
     // Visualizza gli immobili presenti nel db e permette di modificarli, eliminarli o inserirne altri.
     public function immAction(){
-        $this->view->msg='imm'; 
+        $this->view->msg='Gestione degli Immobili'; 
         $this->view->buildings = $this->_buildingsform; 
     }
     

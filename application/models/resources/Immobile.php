@@ -13,7 +13,7 @@ class Application_Resource_Immobile extends Zend_Db_Table_Abstract
     public function getAllBuildings(){
         $select = $this->select()
                        ->from(array('p' => 'immobile'),
-                              array('Id'));
+                              array('Id', 'Nome'));
         return $this->fetchAll($select);
     }
     
