@@ -35,6 +35,7 @@ class Application_Form_Admin_Faq_Showfaq extends App_Form_Abstract
         $this->setAction($this->getView()->url(array(
                     'controller' => 'admin',
                     'action'     => 'editfaq',
+                    'idfaq'      => $faq['ID']
                     ), 
                     'default',true
                 ));

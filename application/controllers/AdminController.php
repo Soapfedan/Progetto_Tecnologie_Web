@@ -107,14 +107,15 @@ class AdminController extends Zend_Controller_Action
     
     /* Action chiamata quando si preme il bottone relativo alla form di Modifica Faq */
     public function editfaqAction(){
-        $values = $this->_faqform->getValues();
-        $result =array('ID'        => $values['ID'],
+    	if ($this->_faqform->isValid($_POST)) {
+        	$values = $this->_faqform->getValues();
+        	$result =array('ID'        => $values['ID'],
                        'Question'  => $values['Question'],
                        'Answer'    => $values['Answer']
                              );
-        $this->_adminModel->modifyfaq($result);
-        $this->_helper->redirector('welcome','admin');
-		     
+        	$this->_adminModel->modifyfaq($result);
+        	$this->_helper->redirector('showfaq','admin');
+        }		     
     }
     
     /* Action chiamata quando si preme il bottone relativo alla form di Elimina Faq */
