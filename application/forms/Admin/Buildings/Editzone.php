@@ -24,13 +24,13 @@ class Application_Form_Admin_Buildings_Editzone extends App_Form_Abstract
         ));
         
         $this->addElement('text', 'Shape', array(
-            'label' => 'Forma della mappatura',
+            'label' => 'Forma della mappatura (tra " ")',
             'filters' => array('StringTrim'),
             'required' => true,
             'decorators' => $this->elementDecorators,
         ));
         $this->addElement('text', 'Coordinate', array(
-            'label' => 'Coordinate della mappatura',
+            'label' => 'Coordinate della mappatura (tra " ")',
             'filters' => array('StringTrim'),
             'required' => true,
             'decorators' => $this->elementDecorators,

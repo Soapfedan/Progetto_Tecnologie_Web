@@ -454,7 +454,7 @@ margin-right: 20px;
 
 #staff {
 	padding: 5em 0em;
-	text-align: center;
+	text-align: left;
 }
 
 /*********************************************************************************/
@@ -621,26 +621,14 @@ ul.style4 .first {
 
 .tablefaq #answer {
 	color: #000000;
-	
-}
-div.tablefaq>div>table>tbody>tr>td{
-		border-width: 1px;
-	border-collapse: collapse;
-	border-style: solid;
-	border-color: black;
-	width : 100px;
-}
-
-div.tablefaq>div>table>tbody>tr>th,div.tablefaq>div>table>tbody>tr,div.tablefaq>div>table{
-		border-width: 1px;
-	border-collapse: collapse;
-	border-style: solid;
-	border-color: black;
-	
 }
 
 .tablefaq h4 {
 	color: #6F6F6F;
+}
+
+#panel h4 {
+	text-align: left;
 }
 
 /*********************************************************************************/
@@ -694,14 +682,24 @@ div.tablefaq>div>table>tbody>tr>th,div.tablefaq>div>table>tbody>tr,div.tablefaq>
 }
 
 div#panel>table,div#panel>table>tbody>tr>td ,div#panel>table>thead>tr>th{
-	border-width: 1px;
-	border-collapse: collapse;
-	border-style: solid;
-	border-color: black;
-}
-
-b {
-	text-align:left;
+    border-width: 1px;
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: black;
 }
 
 
+div.tablefaq>div>table>tbody>tr>td{
+    border-width: 1px;
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: black;
+    width : 100px;
+}
+
+div.tablefaq>div>table>tbody>tr>th,div.tablefaq>div>table>tbody>tr,div.tablefaq>div>table{
+    border-width: 1px;
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: black;
+}
