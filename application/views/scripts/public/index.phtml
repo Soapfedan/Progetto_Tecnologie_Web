@@ -4,8 +4,7 @@
             <h2>Sito per la gestione dei locali chiusi</h2>
             
         </div>
-    <div id="page" class="container">
-        
+
     <div id="welcome" class="container">
         <div class="title">
             <h2>Benvenuti nel nostro sito</h2>
@@ -23,6 +22,6 @@
         
         <div class="boxC"> <?php echo $this->imgRenderer('pic03.jpg',array('width'=>'300','height'=>'450'));?> </div>
         <div>
-        <strong>Relazione del progetto </strong><a href="<?php $this->baseUrl('relazione/relazioneprogetto.pdf')?>">Link alla relazione </a>
+        <strong>Relazione del progetto </strong><a href="<?php echo $this->docRenderer('Relazione.pdf');?>" target="_blank">Link alla relazione </a>
         </div>
     </div>
