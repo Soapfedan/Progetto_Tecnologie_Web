@@ -64,7 +64,7 @@ class AdminController extends Zend_Controller_Action
     }
     
     public function beforeinsertfaqAction(){
-        $this->view ->msg ='insertfaq'; 
+        $this->view ->msg ='Inserisci una nuova faq'; 
         $this->view->insertfaq = $this->_insertfaqform;       
     }
     
@@ -128,13 +128,11 @@ class AdminController extends Zend_Controller_Action
     }
     
     public function getuserAction(){
-        $this->view->msg='user'; 
+        $this->view->msg='Ecco tutti gli utenti che sono registrati alla nostra applicazione'; 
         $usr = $this->_adminModel->getAllUsers();
         $this->view->users = $usr;
     }
     
-    public function insertuserAction(){     
-    }
     
     public function showusersAction(){
         $this->view->assign(array('users' => $this->_usersform));      

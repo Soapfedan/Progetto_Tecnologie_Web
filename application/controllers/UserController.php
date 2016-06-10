@@ -162,12 +162,12 @@ class UserController extends Zend_Controller_Action
    
     
     public function editprofileAction(){
-        $this->view->msg = 'editProfile';
+        $this->view->msg = 'Modifica il tuo profilo';
         $this->view->profileForm= $this->_editform;
     }
      
     public function viewescapeplanAction(){
-        $this->view->msg = 'viewEscapePlan';
+        $this->view->msg = 'Ecco il tuo piano di fuga, dirigiti verso l'."'".'uscita di emergenza';
         $pos = $this->_userModel->getPosition($this->_authService->getIdentity()->Username);
         if($pos==null){
             $this->_helper->redirector('changeposition','user');
@@ -214,6 +214,7 @@ class UserController extends Zend_Controller_Action
    }
       
    public function insertuserAction(){
+       $this->view->msg="Qui puoi inserire un utente";
         $this->view->insertForm = $this->_insertprofileform;
    }
       

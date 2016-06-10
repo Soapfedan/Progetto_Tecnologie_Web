@@ -1,4 +1,6 @@
+
 <br/> 
+<div id="panel">
   <h3><?php echo $this->msg; ?></h3>
   <h4>Ecco il numero di persone presenti nei suoi immobili</h4>
     <table>
@@ -11,11 +13,13 @@
         </tr>
       </thead>
       <?php foreach ($this->imms as $info){
+          if($info['Immobile']!=null){
             echo "<tr>";
             echo "<td>". $info['Immobile']  ."</td>";
             echo "<td>". $info['Id_piano']  ."</td>";
             echo "<td>". $info['Num']       ."</td>";
-            echo "</tr>";      
+            echo "</tr>";
+          }        
         } 
        ?>
   </table>
@@ -113,4 +117,4 @@
         } 
         ?>
   </table>
-  
+  </div>

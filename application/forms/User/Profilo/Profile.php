@@ -38,14 +38,14 @@ class Application_Form_User_Profilo_Profile extends App_Form_Abstract
             'decorators' => $this->elementDecorators,
         )); 
         $this->addElement('password', 'Password1', array(
-            'label' => 'Nuova password',
+            'label' => 'Nuova password (almeno 5 caratteri)',
             'filters' => array('StringTrim'),
             'required' => false,
             'validators' => array(array('StringLength',true, array(5,30))),
             'decorators' => $this->elementDecorators,
         ));
         $this->addElement('password', 'Password', array(
-            'label' => 'Ripeti password',
+            'label' => 'Ripeti password (almeno 5 caratteri)',
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength',true, array(5,30))),

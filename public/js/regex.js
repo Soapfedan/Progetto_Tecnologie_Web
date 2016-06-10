@@ -10,7 +10,7 @@ $(document).ready(function(){
                             }
                             break;
                         case 'Password':
-                            if (element.val().length < 6) {
+                            if (element.val().length < 5) {
                                 element.addClass('has-error');
                             }
                             break;
