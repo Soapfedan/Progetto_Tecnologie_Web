@@ -1,11 +1,8 @@
-
-html, body
-{
+html, body {
 	height: 100%;
 }
 
-body
-{
+body {
 	margin: 0px;
 	padding: 0px;
 	background: #CC0000;
@@ -15,46 +12,36 @@ body
 	color: #000000;
 }
 
-h1, h2, h3
-{
+h1, h2, h3 {
 	margin: 0;
 	padding: 0;
 }
 
-
-
-p, ol, ul
-{
+p, ol, ul {
 	margin-top: 0;
 }
 
-ol, ul
-{
+ol, ul {
 	padding: 0;
 	list-style: none;
 }
 
-p
-{
+p {
 	line-height: 180%;
 }
 
-strong
-{
+strong {
 }
 
-a
-{
+a {
 	color: #CC0000;
 }
 
-a:hover
-{
+a:hover {
 	text-decoration: none;
 }
 
-.container
-{
+.container {
 	overflow: hidden;
 	margin: 0em auto;
 	width: 1000px;
@@ -64,38 +51,32 @@ a:hover
 /* Image Style                                                                   */
 /*********************************************************************************/
 
-	.image
-{
+.image {
 	display: inline-block;
 }
 
-.image img
-{
+.image img {
 	display: block;
 	width: 100%;
 }
 
-.image-full
-{
+.image-full {
 	display: block;
 	width: 100%;
 	margin: 0 0 2em 0;
 }
 
-.image-left
-{
+.image-left {
 	float: left;
 	margin: 0 2em 2em 0;
 }
 
-.image-centered
-{
+.image-centered {
 	display: block;
 	margin: 0 0 2em 0;
 }
 
-.image-centered img
-{
+.image-centered img {
 	margin: 0 auto;
 	width: auto;
 }
@@ -104,42 +85,36 @@ a:hover
 /* List Styles                                                                   */
 /*********************************************************************************/
 
-	ul.style1
-{
+ul.style1 {
 }
 
 /*********************************************************************************/
 /* Social Icon Styles                                                            */
 /*********************************************************************************/
 
-	ul.contact
-{
+ul.contact {
 	margin: 0;
 	padding: 2em 0em 0em 0em;
 	list-style: none;
 }
 
-ul.contact li
-{
+ul.contact li {
 	display: inline-block;
 	padding: 0em 0.30em;
 	font-size: 1em;
 }
 
-ul.contact li span
-{
+ul.contact li span {
 	display: none;
 	margin: 0;
 	padding: 0;
 }
 
-ul.contact li a
-{
+ul.contact li a {
 	color: #FFF;
 }
 
-ul.contact li a:before
-{
+ul.contact li a:before {
 	display: inline-block;
 	background: #3f3f3f;
 	width: 40px;
@@ -150,28 +125,23 @@ ul.contact li a:before
 	color: #FFFFFF;
 }
 
-ul.contact li a.icon-twitter:before
-{
+ul.contact li a.icon-twitter:before {
 	background: #2DAAE4;
 }
 
-ul.contact li a.icon-facebook:before
-{
+ul.contact li a.icon-facebook:before {
 	background: #39599F;
 }
 
-ul.contact li a.icon-dribbble:before
-{
+ul.contact li a.icon-dribbble:before {
 	background: #C4376B;
 }
 
-ul.contact li a.icon-tumblr:before
-{
+ul.contact li a.icon-tumblr:before {
 	background: #31516A;
 }
 
-ul.contact li a.icon-rss:before
-{
+ul.contact li a.icon-rss:before {
 	background: #F2600B;
 }
 
@@ -179,8 +149,7 @@ ul.contact li a.icon-rss:before
 /* Button Style                                                                  */
 /*********************************************************************************/
 
-	.button
-{
+.button {
 	display: inline-block;
 	padding: 1em 3em 1em 2em;
 	letter-spacing: 0.20em;
@@ -191,8 +160,7 @@ ul.contact li a.icon-rss:before
 	color: #FFF;
 }
 
-.button:before
-{
+.button:before {
 	display: inline-block;
 	background: #FFC31F;
 	margin-right: 1em;
@@ -208,17 +176,15 @@ ul.contact li a.icon-rss:before
 /* 4-column                                                                      */
 /*********************************************************************************/
 
-	.box1,  .box2,  .box3,  .box4
-{
+.box1, .box2, .box3, .box4 {
 	width: 235px;
 }
- .box1,  .box2,  .box3, {
- float: left;
- margin-right: 20px;
+.box1,  .box2,  .box3, {
+float: left;
+margin-right: 20px;
 }
 
-.box4
-{
+.box4 {
 	float: right;
 }
 
@@ -226,19 +192,16 @@ ul.contact li a.icon-rss:before
 /* 3-column                                                                      */
 /*********************************************************************************/
 
-	.boxA,  .boxB,  .boxC
-{
+.boxA, .boxB, .boxC {
 	width: 300px;
 }
 
-.boxA,  .boxB
-{
+.boxA, .boxB {
 	float: left;
 	margin-right: 50px;
 }
 
-.boxC
-{
+.boxC {
 	float: right;
 }
 
@@ -246,80 +209,71 @@ ul.contact li a.icon-rss:before
 /* 2-column                                                                      */
 /*********************************************************************************/
 
-	.tbox1,  .tbox2
-{
+.tbox1, .tbox2 {
 	width: 575px;
 }
 
-.tbox1
-{
+.tbox1 {
 	float: left;
 }
 
-.tbox2
-{
+.tbox2 {
 	float: right;
 }
 
-#usermenu{
-    padding: 0.5em;
-    float: left;
-    margin-left: -15em;
-    width:30%;
-    height:500px;
-    background-color:transparent;
-    font-family: 'Source Sans Pro', sans-serif;
-    
-    
+#usermenu {
+	padding: 0.5em;
+	float: left;
+	margin-left: -15em;
+	width: 30%;
+	height: 500px;
+	background-color: transparent;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
-#usermenu .menu a{
-	color:#FFFFFF;
+#usermenu .menu a {
+	color: #FFFFFF;
 	text-decoration: none;
-	text-align:center;
-	background-image: url(../images/menuback.png) ;
-	 background-size: 165px 20px;
-	 background-repeat : no-repeat;
-	 background-position : center;
-	padding:0px 30px;
+	text-align: center;
+	background-image: url(../images/menuback.png);
+	background-size: 165px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+	padding: 0px 30px;
 	border-radius: 5px;
-	
-	
 }
 
-#wrapper-content{
+#wrapper-content {
 	color: black;
 	background-color: transparent;
-	
 }
-.container h3{
-	text-align:left;
+.container h3 {
+	text-align: left;
 }
-.container{
+.container {
 	text-align: center;
 }
 
-#wrapper{
-	background:#FFFFFF;
-	width:90%;
-	margin:0 auto;
+#wrapper {
+	background: #FFFFFF;
+	width: 90%;
+	margin: 0 auto;
 }
 
-#wrapper-arear
-{
+#wrapper-arear {
 	margin-left: 15em;
-	height:500px;
-	background:transparent;
+	height: 500px;
+	background: transparent;
 	padding: 0.5em;
 	font-family: 'Source Sans Pro', sans-serif;
 }
 
-#wrapper-content a{
-	color:#000000;
+#wrapper-content a {
+	color: #000000;
 }
 
-.reduced{
-	
+.reduced {
+
 	height: 800px;
 	background: url(../images/login-back.jpg) no-repeat center;
 }
@@ -328,15 +282,13 @@ ul.contact li a.icon-rss:before
 /* Header                                                                        */
 /*********************************************************************************/
 
-	#header-wrapper
-{
+#header-wrapper {
 	background: url(../images/banner.jpg) no-repeat center;
 	background-size: cover;
 	border-top: 10px solid #CC0000;
 }
 
-#header
-{
+#header {
 	position: relative;
 	padding: 5em 0em;
 }
@@ -345,12 +297,10 @@ ul.contact li a.icon-rss:before
 /* Logo                                                                          */
 /*********************************************************************************/
 
-	#logo
-{
+#logo {
 }
 
-#logo h1
-{
+#logo h1 {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -359,8 +309,7 @@ ul.contact li a.icon-rss:before
 	border-radius: 0px 0px 5px 5px;
 }
 
-#logo a
-{
+#logo a {
 	text-decoration: none;
 	color: #FFF;
 }
@@ -369,27 +318,23 @@ ul.contact li a.icon-rss:before
 /* Menu                                                                          */
 /*********************************************************************************/
 
-	#menu
-{
+#menu {
 	position: absolute;
 	top: 4em;
 	right: 0;
 }
 
-#menu ul
-{
+#menu ul {
 	display: inline-block;
 }
 
-#menu li
-{
+#menu li {
 	display: block;
 	float: left;
 	text-align: center;
 }
 
-#menu li a, #menu li span
-{
+#menu li a, #menu li span {
 	padding: 1em 1.5em;
 	letter-spacing: 1px;
 	text-decoration: none;
@@ -399,31 +344,26 @@ ul.contact li a.icon-rss:before
 	color: #FFF;
 }
 
-#menu li:hover a, #menu li.active a, #menu li.active span
-{
+#menu li:hover a, #menu li.active a, #menu li.active span {
 	background: #CC0000;
 	border-radius: 5px;
 }
 
-#menu .current_page_item a
-{
+#menu .current_page_item a {
 }
 
-#menu .icon
-{
+#menu .icon {
 }
 
 /*********************************************************************************/
 /* Banner                                                                        */
 /*********************************************************************************/
 
-	#banner
-{
+#banner {
 	padding: 10em 0em;
 }
 
-#banner span
-{
+#banner span {
 	display: block;
 	text-transform: uppercase;
 	text-align: center;
@@ -436,54 +376,47 @@ ul.contact li a.icon-rss:before
 /* Page                                                                          */
 /*********************************************************************************/
 
-	#page
-	{
-		padding-bottom: 5em;
-	}
-	
-	#page h2
-	{
-		padding-bottom: 1.5em;
-		text-transform: uppercase;
-		font-size: 1.5em;
-	}
+#page {
+	padding-bottom: 5em;
+}
+
+#page h2 {
+	padding-bottom: 1.5em;
+	text-transform: uppercase;
+	font-size: 1.5em;
+}
 
 /*********************************************************************************/
 /* Content                                                                       */
 /*********************************************************************************/
 
-	#content
-{
+#content {
 }
 
 /*********************************************************************************/
 /* Sidebar                                                                       */
 /*********************************************************************************/
 
-	#sidebar
-{
+#sidebar {
 }
 
 /*********************************************************************************/
 /* Footer                                                                        */
 /*********************************************************************************/
 
-	#footer
-{
+#footer {
 }
 
 /*********************************************************************************/
 /* Copyright                                                                     */
 /*********************************************************************************/
 
-	#copyright
-{
+#copyright {
 	overflow: hidden;
 	padding: 5em 0em;
 }
 
-#copyright p
-{
+#copyright p {
 	letter-spacing: 0.20em;
 	text-align: center;
 	text-transform: uppercase;
@@ -491,8 +424,7 @@ ul.contact li a.icon-rss:before
 	color: rgba(255,255,255,0.6);
 }
 
-#copyright a
-{
+#copyright a {
 	text-decoration: none;
 	color: rgba(255,255,255,0.9);
 }
@@ -501,20 +433,17 @@ ul.contact li a.icon-rss:before
 /* Heading Titles                                                                */
 /*********************************************************************************/
 
-	.title
-{
+.title {
 	margin-bottom: 3em;
 	text-transform: uppercase;
 }
 
-.title h2
-{
+.title h2 {
 	font-size: 2.8em;
 	font-weight: 700;
 }
 
-.title .byline
-{
+.title .byline {
 	font-size: 1.1em;
 	color: #6F6F6F;
 }
@@ -523,8 +452,7 @@ ul.contact li a.icon-rss:before
 /* Staff                                                                         */
 /*********************************************************************************/
 
-	#staff
-{
+#staff {
 	padding: 5em 0em;
 	text-align: center;
 }
@@ -533,15 +461,13 @@ ul.contact li a.icon-rss:before
 /* Welcome                                                                       */
 /*********************************************************************************/
 
-#welcome
-{
+#welcome {
 	padding: 5em 0em 5em 0em;
 	border-top: 1px solid rgba(0,0,0,.1);
 	text-align: center;
 }
 
-ul.style3
-{
+ul.style3 {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
@@ -549,45 +475,38 @@ ul.style3
 	color: #6c6c6c
 }
 
-ul.style3 li
-{
+ul.style3 li {
 	padding: 1.6em 0em 0em 0em;
 	margin: 0 0 1em 0;
 }
 
-ul.style3 p
-{
+ul.style3 p {
 	margin: 0;
 }
 
-ul.style3 a
-{
+ul.style3 a {
 	display: block;
 	text-decoration: none;
 	color: #2D2D2D;
 }
 
-ul.style3 a:hover
-{
+ul.style3 a:hover {
 	text-decoration: underline;
 }
 
-ul.style3 h3
-{
+ul.style3 h3 {
 	padding: 1em 0em 5px 0em;
 	text-transform: uppercase;
 	font-size: 1em;
 	font-weight: 300;
 }
 
-ul.style3 .first
-{
+ul.style3 .first {
 	padding-top: 0;
 	background: none;
 }
 
-ul.style3 .date
-{
+ul.style3 .date {
 	float: left;
 	position: relative;
 	width: 80px;
@@ -606,8 +525,7 @@ ul.style3 .date
 	color: #FFF;
 }
 
-ul.style3 .date:after
-{
+ul.style3 .date:after {
 	content: '';
 	display: block;
 	position: absolute;
@@ -618,8 +536,7 @@ ul.style3 .date:after
 	border-radius: 6px;
 }
 
-ul.style3 .date b
-{
+ul.style3 .date b {
 	margin: 0;
 	padding: 0;
 	display: block;
@@ -629,146 +546,134 @@ ul.style3 .date b
 	color: #FFFFFF;
 }
 
-ul.style3 .date a
-{
+ul.style3 .date a {
 	color: #FFFFFF !important;
 }
 
-ul.style3 .date a:hover
-{
+ul.style3 .date a:hover {
 	text-decoration: none;
 }
 
-ul.style4
-{
+ul.style4 {
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
 }
 
-ul.style4 li
-{
+ul.style4 li {
 	border-top: 1px solid rgba(0,0,0,0.1);
 	line-height: 3em;
 }
 
-ul.style4 a
-{
+ul.style4 a {
 	color: #2D2D2D;
 }
 
-ul.style4 .first
-{
+ul.style4 .first {
 	padding-top: 0px;
 	border-top: none;
 }
 
-#alert{
+#alert {
 	text-align: left;
 }
 
-#login-content{
+#login-content {
 	background: url(../images/login-back.jpg) no-repeat center;
 }
 
-#login-content #staff{
+#login-content #staff {
 	padding: 0% 30%;
-	text-align:left;
+	text-align: left;
 }
 
-#signupref{
-	color:#2D2D2D;
+#signupref {
+	color: #2D2D2D;
 }
 
 /*********************************************************************************/
 /* Faq                                                                         */
 /*********************************************************************************/
 
-#faq{
-	color:#CC0000;
+#faq {
+	color: #CC0000;
 }
 
-#answer{
-	color:#6F6F6F
+#answer {
+	color: #6F6F6F
 }
 
 /*********************************************************************************/
 /* Tabella Utenti                                                                         */
 /*********************************************************************************/
 
-#tableusers{
+#tableusers {
 	/*font-size: 60%;*/
 }
-
 
 /*********************************************************************************/
 /* Tabella FAQ                                                                         */
 /*********************************************************************************/
 
-.tablefaq{
+.tablefaq {
 	text-align: left;
-	
 }
 
 .tablefaq #answer {
-	color:#000000;
+	color: #000000;
 }
 
-.tablefaq h4{
-	color:#6F6F6F;
+.tablefaq h4 {
+	color: #6F6F6F;
 }
-
 
 /*********************************************************************************/
 /* Menu vari                                                                       */
 /*********************************************************************************/
 
-.show a{
-	color:#000000;
+.show a {
+	color: #000000;
 	background: url(../images/buttonbackground.png) no-repeat center;
-	padding:0px 50px;
-	
-	
+	padding: 0px 50px;
 }
 
-.widimg{
-	width:200px;
-	height:200px;
+.widimg {
+	width: 200px;
+	height: 200px;
 }
 
 .has-success {
-    background:green;
+	background: green;
 }
 .has-error {
-    background:red;
+	background: red;
 }
 
-#signup{
+#signup {
 	padding: 0% 30%;
 }
 /*********************************************************************************/
 /* Div void                                                                        */
 /*********************************************************************************/
 
-#void{
-	height:50px;
-	background-color:transparent;
+#void {
+	height: 50px;
+	background-color: transparent;
 }
 /*
  *  Varie
  */
-.wrong{
+.wrong {
 	background-color: #f3e4e4;
-    border: solid 2px #ff0000;
+	border: solid 2px #ff0000;
 }
 
+._error {
+	background-color: #f3e4e4;
+	border: solid 2px #ff0000;
+}
 
- ._error {
-                background-color: #f3e4e4;
-                border: solid 2px #ff0000;
-            }
-            
 #changeposition {
-	color:black;
-}            
+	color: black;
+}
 
