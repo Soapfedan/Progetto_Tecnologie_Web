@@ -703,3 +703,12 @@ div.tablefaq>div>table>tbody>tr>th,div.tablefaq>div>table>tbody>tr,div.tablefaq>
     border-style: solid;
     border-color: black;
 }
+
+#tableusers>tbody>tr>td{
+    border-width: 1px;
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: black;
+    width : 100px;
+}
+
